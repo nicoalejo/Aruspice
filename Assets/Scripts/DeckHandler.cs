@@ -9,9 +9,11 @@ public class DeckHandler : MonoBehaviour
 
     private void Start()
     {
+        handHandler.Init();
+        
         InitializeDeck();
         ShuffleDeck();
-        DealCards(10);
+        DealCards(3);
     }
 
     private void InitializeDeck()

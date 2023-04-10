@@ -11,7 +11,7 @@ public enum CardSuit
     Sol
 }
 
-public class Card : MonoBehaviour
+public class Card
 { 
     public CardSuit Suit { get; private set; }
     public int Value { get; private set; }

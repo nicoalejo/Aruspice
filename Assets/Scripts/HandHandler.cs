@@ -6,6 +6,7 @@ public class HandHandler : MonoBehaviour
 {
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private int maxCards = 10;
+    [SerializeField] private GameObject handUIContainer;
     [SerializeField] private Transform[] dropZones;
     
     [HideInInspector]
@@ -15,7 +16,7 @@ public class HandHandler : MonoBehaviour
     {
         if (cardsInHand.Count <= maxCards)
         {
-            GameObject newCard = Instantiate(cardPrefab, transform);
+            GameObject newCard = Instantiate(cardPrefab, handUIContainer.transform);
             CardHandler cardHandler = newCard.GetComponent<CardHandler>();
             cardHandler.SetCanvas(GetComponentInParent<Canvas>());
             cardHandler.Initialize(card);
@@ -24,6 +25,25 @@ public class HandHandler : MonoBehaviour
         else
         {
             Debug.LogWarning("Hand is full!");
+        }
+    }
+
+    public void Init()
+    {
+        ClearHand(false);
+    }
+    
+    public void ClearHand(bool discard)
+    {
+        //Moves all cards to discard pile previous destroying them from hand
+        if (discard)
+        {
+            
+        }
+        //Deletes all current items int hand
+        foreach (Transform item in handUIContainer.transform)
+        {
+            Destroy(item.gameObject);
         }
     }
 }
