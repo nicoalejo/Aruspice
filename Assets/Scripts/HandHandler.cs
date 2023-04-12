@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HandHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private CardHandler cardPrefab;
     [SerializeField] private int maxCards = 10;
     [SerializeField] private GameObject handUIContainer;
     [SerializeField] private Transform[] dropZones;
@@ -16,11 +16,10 @@ public class HandHandler : MonoBehaviour
     {
         if (cardsInHand.Count <= maxCards)
         {
-            GameObject newCard = Instantiate(cardPrefab, handUIContainer.transform);
-            CardHandler cardHandler = newCard.GetComponent<CardHandler>();
-            cardHandler.SetCanvas(GetComponentInParent<Canvas>());
-            cardHandler.Initialize(card);
-            cardsInHand.Add(cardHandler);
+            CardHandler newCard = Instantiate(cardPrefab, handUIContainer.transform);
+            newCard.SetCanvas(GetComponentInParent<Canvas>());
+            newCard.Initialize(card);
+            cardsInHand.Add(newCard);
         }
         else
         {

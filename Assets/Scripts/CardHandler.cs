@@ -3,12 +3,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using TMPro;
 
 public class CardHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private Canvas canvas;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
+    //TODO: Remove when img is added instead of text of prototype
+    [SerializeField] private TextMeshProUGUI suitUI;
+    [SerializeField] private TextMeshProUGUI valueUI;
     public Card CardData { get; private set; }
 
     private void Awake()
@@ -21,6 +25,9 @@ public class CardHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     {
         CardData = card;
         // Update the card's appearance based on the suit and value (e.g., change the sprite or text)
+        //TODO: Remove when img is added instead of text of prototype
+        suitUI.text = CardData.Suit.ToString();
+        valueUI.text = CardData.Value.ToString();
     }
 
     public void OnBeginDrag(PointerEventData eventData)

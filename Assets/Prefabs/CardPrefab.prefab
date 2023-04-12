@@ -189,6 +189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5317475acf5cf4d8f21d4edfd8d765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  suitUI: {fileID: 1729153784}
+  valueUI: {fileID: 5430156530701045412}
 --- !u!222 &8240659040906161354
 CanvasRenderer:
   m_ObjectHideFlags: 0
