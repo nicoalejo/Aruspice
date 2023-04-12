@@ -28,7 +28,7 @@ public class DeckHandler : MonoBehaviour
         }
     }
 
-    private void ShuffleDeck()
+    public void ShuffleDeck()
     {
         int n = deck.Count;
         for (int i = 0; i < n - 1; i++)
@@ -40,7 +40,7 @@ public class DeckHandler : MonoBehaviour
         }
     }
 
-    private void DealCards(int count)
+    public void DealCards(int count)
     {
         for (int i = 0; i < count; i++)
         {
