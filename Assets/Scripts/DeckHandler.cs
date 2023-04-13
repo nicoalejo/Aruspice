@@ -13,6 +13,7 @@ public class DeckHandler : MonoBehaviour
         
         InitializeDeck();
         ShuffleDeck();
+        PrintDeckConsole();
         DealCards(3);
     }
 
@@ -72,9 +73,30 @@ public class DeckHandler : MonoBehaviour
         {
             Card card = deck[0];
             returnCards.Add(card);
-            deck.RemoveAt(0);    
+            deck.RemoveAt(0);
+            
         }
 
         return returnCards;
+    }
+
+    public void InsertCardAtTopDeck(Card card)
+    {
+        deck.Insert(0, card);
+    }
+    public void InsertCardsAtTopDeck(List<Card> cards)
+    {
+        foreach (var card in cards)
+        {
+            deck.Insert(0, card);
+        }
+    }
+
+    public void PrintDeckConsole()
+    {
+        foreach (var card in deck)
+        {
+            Debug.Log(card.ToString());    
+        }
     }
 }

@@ -21,4 +21,9 @@ public class Card
         Suit = suit;
         Value = value;
     }
+
+    public override string ToString()
+    {
+        return "Suit: " + Suit.ToString() + ". Value: " + Value.ToString();
+    }
 }
