@@ -57,4 +57,24 @@ public class DeckHandler : MonoBehaviour
             }
         }
     }
+
+    public List<Card> GetCards(int numCards)
+    {
+        if (numCards < 1)
+        {
+            Debug.LogWarning("Asking for < 1 cards");
+            return null;
+        }
+
+        List<Card> returnCards = new List<Card>();
+
+        for (int i = 0; i < numCards; i++)
+        {
+            Card card = deck[0];
+            returnCards.Add(card);
+            deck.RemoveAt(0);    
+        }
+
+        return returnCards;
+    }
 }
