@@ -6,10 +6,12 @@ using UnityEngine.UI;
 
 public class DiscardCardHandler : MonoBehaviour
 {
+    //Delegates that sends the card selected and if it was selected or diselected
     public delegate void OnDiscardCardSelected(Card cardSelected, bool isSelected);
 
     public static event OnDiscardCardSelected onDiscardCardSelected;
     
+    //Delegate that sends how many cards are currently selected 
     public delegate void OnDiscardCard(int countDiscardSelected);
 
     public static event OnDiscardCard onDiscardCard;
@@ -35,6 +37,7 @@ public class DiscardCardHandler : MonoBehaviour
             hasBeenSelected = !hasBeenSelected;
             cardsSelected++;
             onDiscardCardSelected?.Invoke(cardHandler.CardData, hasBeenSelected);
+            onDiscardCard?.Invoke(cardsSelected);
         }
         else if(hasBeenSelected)
         {
@@ -42,6 +45,7 @@ public class DiscardCardHandler : MonoBehaviour
             hasBeenSelected = !hasBeenSelected;
             cardsSelected--;
             onDiscardCardSelected?.Invoke(cardHandler.CardData, hasBeenSelected);
+            onDiscardCard?.Invoke(cardsSelected);
         }
     }
 }

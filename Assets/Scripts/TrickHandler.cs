@@ -12,7 +12,7 @@ public class TrickHandler : MonoBehaviour
     public delegate void OnDiscardShowDeck(List<Card> deck);
     public static event OnDiscardShowDeck onDiscardshowDeck;
 
-    public static Action OnDiscard4; 
+    public static Action onDiscard4; 
     
     [SerializeField] private DeckHandler deckHandler;
     [SerializeField] private GameObject cardContainerUI;
@@ -101,6 +101,6 @@ public class TrickHandler : MonoBehaviour
     {
         deckHandler.RemoveCards(discard4List);
         DiscardCardHandler.cardsSelected = 0;
-        OnDiscard4?.Invoke();
+        onDiscard4?.Invoke();
     }
 }

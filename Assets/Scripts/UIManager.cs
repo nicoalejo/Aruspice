@@ -21,14 +21,15 @@ public class UIManager : MonoBehaviour
     {
         TrickHandler.top10CardsSuits += PopulateCardsPanelUI;
         TrickHandler.onDiscardshowDeck += PopulateCardContainerDiscard4;
-        TrickHandler.OnDiscard4 += CloseTrickPanel;
+        TrickHandler.onDiscard4 += CloseTrickPanel;
+        DiscardCardHandler.onDiscardCard += ActivateDeactivateTrick4SelectButton;
     }
 
     private void OnDisable()
     {
         TrickHandler.top10CardsSuits -= PopulateCardsPanelUI;
         TrickHandler.onDiscardshowDeck -= PopulateCardContainerDiscard4;
-        TrickHandler.OnDiscard4 -= CloseTrickPanel;
+        TrickHandler.onDiscard4 -= CloseTrickPanel;
     }
     
     //Activates the UI for the Trick Top 10 Suit
@@ -66,20 +67,29 @@ public class UIManager : MonoBehaviour
         buttonTrickDiscard4UI.SetActive(false);
         trickPanelUI.SetActive(true);
         trickTop10SuitUI.SetActive(true);
+        closePanelButtonUI.SetActive(true);
         ClearCardContainer();
     }
+    
+    //Populates the container with the whole Deck when using the discard 4 Trick
     private void PopulateCardContainerDiscard4(List<Card> deck)
     {
         buttonTrickDiscard4ShowDeckUI.SetActive(false);
         buttonTrickDiscard4UI.SetActive(true);
+        buttonTrickDiscard4UI.GetComponent<Button>().interactable = false;
+        closePanelButtonUI.SetActive(false);
 
         foreach (Card cardInDeck in deck)
         {
             CardHandler cardInContainer = Instantiate(cardPrefabDiscard, cardContainerUI.transform);
             cardInContainer.SetCanvas(GetComponentInParent<Canvas>());
             cardInContainer.Initialize(cardInDeck);
-            
         }
+    }
+    
+    private void ActivateDeactivateTrick4SelectButton(int totalCardsSelected)
+    {
+        buttonTrickDiscard4UI.GetComponent<Button>().interactable = totalCardsSelected > 0;
     }
     private void PopulateDropdownValue()
     {
@@ -135,6 +145,7 @@ public class UIManager : MonoBehaviour
     {
         trickTop10SuitUI.SetActive(false);
     }
+
     
     
 }
