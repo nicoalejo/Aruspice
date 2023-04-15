@@ -20,13 +20,15 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         TrickHandler.top10CardsSuits += PopulateCardsPanelUI;
-        TrickHandler.discardDeck += PopulateCardContainerDiscard4;
+        TrickHandler.onDiscardshowDeck += PopulateCardContainerDiscard4;
+        TrickHandler.OnDiscard4 += CloseTrickPanel;
     }
 
     private void OnDisable()
     {
         TrickHandler.top10CardsSuits -= PopulateCardsPanelUI;
-        TrickHandler.discardDeck -= PopulateCardContainerDiscard4;
+        TrickHandler.onDiscardshowDeck -= PopulateCardContainerDiscard4;
+        TrickHandler.OnDiscard4 -= CloseTrickPanel;
     }
     
     //Activates the UI for the Trick Top 10 Suit
@@ -66,22 +68,18 @@ public class UIManager : MonoBehaviour
         trickTop10SuitUI.SetActive(true);
         ClearCardContainer();
     }
-    private List<GameObject> PopulateCardContainerDiscard4(List<Card> deck)
+    private void PopulateCardContainerDiscard4(List<Card> deck)
     {
         buttonTrickDiscard4ShowDeckUI.SetActive(false);
         buttonTrickDiscard4UI.SetActive(true);
 
-        List<GameObject> showingDeck = new List<GameObject>();
-        
         foreach (Card cardInDeck in deck)
         {
             CardHandler cardInContainer = Instantiate(cardPrefabDiscard, cardContainerUI.transform);
             cardInContainer.SetCanvas(GetComponentInParent<Canvas>());
             cardInContainer.Initialize(cardInDeck);
-            showingDeck.Add(cardInContainer.gameObject);
+            
         }
-
-        return showingDeck;
     }
     private void PopulateDropdownValue()
     {

@@ -6,16 +6,29 @@ using UnityEngine.UI;
 
 public class TrickHandler : MonoBehaviour
 {
-    [SerializeField] private DeckHandler deckHandler;
-    
-    [SerializeField] private GameObject cardContainerUI;
-    [SerializeField] private Dropdown dropdownTop10;
-
     public delegate void Top10CardsSuits(List<Tuple<Card, bool>> top10CardsList);
     public static event Top10CardsSuits top10CardsSuits;
     
-    public delegate List<GameObject> DiscardDeck(List<Card> deck);
-    public static event DiscardDeck discardDeck;
+    public delegate void OnDiscardShowDeck(List<Card> deck);
+    public static event OnDiscardShowDeck onDiscardshowDeck;
+
+    public static Action OnDiscard4; 
+    
+    [SerializeField] private DeckHandler deckHandler;
+    [SerializeField] private GameObject cardContainerUI;
+    [SerializeField] private Dropdown dropdownTop10;
+
+    private List<Card> discard4List = new List<Card>();
+
+    private void OnEnable()
+    {
+        DiscardCardHandler.onDiscardCardSelected += DiscardCardSelected;
+    }
+
+    private void OnDisable()
+    {
+        DiscardCardHandler.onDiscardCardSelected -= DiscardCardSelected;
+    }
 
     public void Draw()
     {
@@ -69,12 +82,25 @@ public class TrickHandler : MonoBehaviour
 
     public void Discard4ShowDeck()
     {
-        List<GameObject> showingDeck = discardDeck?.Invoke(deckHandler.Deck);
-        
+        onDiscardshowDeck?.Invoke(deckHandler.Deck);
+    }
+
+    private void DiscardCardSelected(Card cardSelected, bool isSelected)
+    {
+        if (isSelected)
+        {
+            discard4List.Add(cardSelected);    
+        }
+        else
+        {
+            discard4List.Remove(cardSelected);
+        }
     }
     
     public void Discard4()
     {
-        
+        deckHandler.RemoveCards(discard4List);
+        DiscardCardHandler.cardsSelected = 0;
+        OnDiscard4?.Invoke();
     }
 }

@@ -97,6 +97,14 @@ public class DeckHandler : MonoBehaviour
         }
     }
 
+    public void RemoveCards(List<Card> cardsRemove)
+    {
+        foreach (Card cardRemove in cardsRemove)
+        {
+            Deck.Remove(cardRemove);
+        }
+    }
+
     public void PrintDeckConsole()
     {
         Debug.Log("The Deck order is:");
