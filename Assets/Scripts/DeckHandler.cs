@@ -63,8 +63,9 @@ public class DeckHandler : MonoBehaviour
             }
         }
     }
-
-    public List<Card> GetCards(int numCards)
+    
+    //Return a number of cards, removing them from the deck 
+    public List<Card> GetCards(int numCards, bool removeFromDeck)
     {
         if (numCards < 1)
         {
@@ -74,13 +75,23 @@ public class DeckHandler : MonoBehaviour
 
         List<Card> returnCards = new List<Card>();
 
-        for (int i = 0; i < numCards; i++)
+        if (removeFromDeck)
         {
-            Card card = Deck[0];
-            returnCards.Add(card);
-            Deck.RemoveAt(0);
-            
+            for (int i = 0; i < numCards; i++)
+            {
+                Card card = Deck[0];
+                returnCards.Add(card);
+                Deck.RemoveAt(0);
+            }    
         }
+        else
+        {
+            for (int i = 0; i < numCards; i++)
+            {
+                returnCards.Add(Deck[i]);
+            }
+        }
+        
 
         return returnCards;
     }

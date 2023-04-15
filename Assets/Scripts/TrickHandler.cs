@@ -11,6 +11,9 @@ public class TrickHandler : MonoBehaviour
     
     public delegate void OnDiscardShowDeck(List<Card> deck);
     public static event OnDiscardShowDeck onDiscardshowDeck;
+    
+    public delegate void OnTop5(List<Card> top5CardList);
+    public static event OnTop5 onTop5;
 
     public static Action onDiscard4; 
     
@@ -39,7 +42,7 @@ public class TrickHandler : MonoBehaviour
     //Called directly through the buttons using unity events
     public void Top10SuitValue(Button buttonPressed)
          {
-             List<Card> top10Cards = deckHandler.GetCards(10);
+             List<Card> top10Cards = deckHandler.GetCards(10, true);
              List<Card> cardsToAddDeck = new List<Card>();
              List<Tuple<Card, bool>> cardsKeepDiscard = new List<Tuple<Card, bool>>();
 
@@ -102,5 +105,16 @@ public class TrickHandler : MonoBehaviour
         deckHandler.RemoveCards(discard4List);
         DiscardCardHandler.cardsSelected = 0;
         onDiscard4?.Invoke();
+    }
+
+    public void ShuffleDeck()
+    {
+        deckHandler.ShuffleDeck();
+        Debug.Log("Deck Shuffled");
+    }
+
+    public void ShowTop5Cards()
+    {
+        onTop5?.Invoke(deckHandler.GetCards(5, false));
     }
 }

@@ -23,54 +23,24 @@ public class UIManager : MonoBehaviour
         TrickHandler.onDiscardshowDeck += PopulateCardContainerDiscard4;
         TrickHandler.onDiscard4 += CloseTrickPanel;
         DiscardCardHandler.onDiscardCard += ActivateDeactivateTrick4SelectButton;
+        TrickHandler.onTop5 += PopulateCardsContainerTop5;
     }
-
+    
     private void OnDisable()
     {
         TrickHandler.top10CardsSuits -= PopulateCardsPanelUI;
         TrickHandler.onDiscardshowDeck -= PopulateCardContainerDiscard4;
         TrickHandler.onDiscard4 -= CloseTrickPanel;
+        DiscardCardHandler.onDiscardCard -= ActivateDeactivateTrick4SelectButton;
     }
-    
-    //Activates the UI for the Trick Top 10 Suit
-    public void Top10TrickSuitUI()
-    {
-        ActivatePanelCards();
-        dropDownSuitValue.gameObject.SetActive(true);
-        
-        PopulateDropdownSuit();
-        buttonTrickTop10SuitUI.SetActive(true);
-    }
-    
-    //Activates the UI for the Trick Top 10 Value
-    public void Top10TrickValueUI()
-    {
-        ActivatePanelCards();
-        dropDownSuitValue.gameObject.SetActive(true);
-        
-        PopulateDropdownValue();
-        buttonTrickTop10ValueUI.SetActive(true);
-    }
-    
+
+    #region Trick Discard 4
     //Activates the UI for the Trick Discard 4
     public void Discard4()
     {
         ActivatePanelCards();
         buttonTrickDiscard4ShowDeckUI.SetActive(true);
     }
-
-    private void ActivatePanelCards()
-    {
-        dropDownSuitValue.gameObject.SetActive(false);
-        buttonTrickTop10SuitUI.SetActive(false);
-        buttonTrickTop10ValueUI.SetActive(false);
-        buttonTrickDiscard4UI.SetActive(false);
-        trickPanelUI.SetActive(true);
-        trickTop10SuitUI.SetActive(true);
-        closePanelButtonUI.SetActive(true);
-        ClearCardContainer();
-    }
-    
     //Populates the container with the whole Deck when using the discard 4 Trick
     private void PopulateCardContainerDiscard4(List<Card> deck)
     {
@@ -91,6 +61,30 @@ public class UIManager : MonoBehaviour
     {
         buttonTrickDiscard4UI.GetComponent<Button>().interactable = totalCardsSelected > 0;
     }
+
+    #endregion
+
+    #region Trick Top 10 Suit and Value
+
+    //Activates the UI for the Trick Top 10 Suit
+    public void Top10TrickSuitUI()
+    {
+        ActivatePanelCards();
+        dropDownSuitValue.gameObject.SetActive(true);
+        
+        PopulateDropdownSuit();
+        buttonTrickTop10SuitUI.SetActive(true);
+    }
+    
+    //Activates the UI for the Trick Top 10 Value
+    public void Top10TrickValueUI()
+    {
+        ActivatePanelCards();
+        dropDownSuitValue.gameObject.SetActive(true);
+        
+        PopulateDropdownValue();
+        buttonTrickTop10ValueUI.SetActive(true);
+    }
     private void PopulateDropdownValue()
     {
         dropDownSuitValue.ClearOptions();
@@ -109,20 +103,6 @@ public class UIManager : MonoBehaviour
         dropDownSuitValue.AddOptions(enumNames);
     }
     
-    private void ClearCardContainer()
-    {
-        //Deletes all items in the card container
-        foreach (Transform item in cardContainerUI.transform)
-        {
-            Destroy(item.gameObject);
-        }
-    }
-
-    public void CloseTrickPanel()
-    {
-        trickPanelUI.SetActive(false);
-    }
-
     public void PopulateCardsPanelUI(List<Tuple<Card, bool>> top10CardsList)
     {
         DeactivateTrickPanelButtonsUI();
@@ -140,12 +120,60 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+    #endregion
 
+    #region General Functions
+
+    private void ClearCardContainer()
+    {
+        //Deletes all items in the card container
+        foreach (Transform item in cardContainerUI.transform)
+        {
+            Destroy(item.gameObject);
+        }
+    }
+
+    public void CloseTrickPanel()
+    {
+        trickPanelUI.SetActive(false);
+    }
+    
     public void DeactivateTrickPanelButtonsUI()
     {
         trickTop10SuitUI.SetActive(false);
     }
+    
+    private void ActivatePanelCards()
+    {
+        dropDownSuitValue.gameObject.SetActive(false);
+        buttonTrickTop10SuitUI.SetActive(false);
+        buttonTrickTop10ValueUI.SetActive(false);
+        buttonTrickDiscard4UI.SetActive(false);
+        trickPanelUI.SetActive(true);
+        trickTop10SuitUI.SetActive(true);
+        closePanelButtonUI.SetActive(true);
+        ClearCardContainer();
+    }
 
+    #endregion
+
+    #region Trick Look Top 5
+    private void PopulateCardsContainerTop5(List<Card> top5cardlist)
+    {
+        foreach (Card card in top5cardlist)
+        {
+            CardHandler cardTop5 = Instantiate(cardPrefab, cardContainerUI.transform);
+            cardTop5.SetCanvas(GetComponentInParent<Canvas>());
+            cardTop5.Initialize(card);
+        }
+    }
+
+    public void TrickTop5UI()
+    {
+        ActivatePanelCards();
+    }
+
+    #endregion
     
     
 }
