@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -11,9 +12,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private CardHandler cardPrefab;
     [SerializeField] private GameObject cardContainerUI;
     [SerializeField] private GameObject trickPanelUI;
-    [SerializeField] private GameObject trickTop10UI;
-    [SerializeField] private Dropdown dropDownSuit;
-    [SerializeField] private Dropdown dropDownValue;
+    [SerializeField] private GameObject trickTop10SuitUI;
+    [SerializeField] private GameObject buttonTrickTop10SuitUI;
+    [SerializeField] private GameObject buttonTrickTop10ValueUI;
+    [SerializeField] private Dropdown dropDownSuitValue;
 
     private void OnEnable()
     {
@@ -24,24 +26,51 @@ public class UIManager : MonoBehaviour
     {
         TrickHandler.top10CardsSuits -= PopulateCardsPanelUI;
     }
-
+    
+    //Activates the UI for the Trick Top 10 Suit
     public void Top10TrickSuitUI()
     {
-        ActivatePanelTop10();
-        trickTop10UI.SetActive(true);
-        PopulateDropownSuit();
+        ActivatePanelCards();
+        dropDownSuitValue.gameObject.SetActive(true);
+        
+        PopulateDropdownSuit();
+        buttonTrickTop10SuitUI.SetActive(true);
+    }
+    
+    //Activates the UI for the Trick Top 10 Value
+    public void Top10TrickValueUI()
+    {
+        ActivatePanelCards();
+        dropDownSuitValue.gameObject.SetActive(true);
+        
+        PopulateDropdownValue();
+        buttonTrickTop10ValueUI.SetActive(true);
     }
 
-    private void PopulateDropownSuit()
+    private void PopulateDropdownValue()
     {
-        dropDownSuit.ClearOptions();
-        List<string> enumNames = new List<string>(Enum.GetNames(typeof(CardSuit)));
-        dropDownSuit.AddOptions(enumNames);
+        dropDownSuitValue.ClearOptions();
+        List<string> dropdownValues = new List<string>();
+        for (int i = 1; i <= DeckHandler.DeckMaxValue; i++)
+        {
+            dropdownValues.Add(i.ToString());
+        }
+        dropDownSuitValue.AddOptions(dropdownValues);
     }
-    private void ActivatePanelTop10()
+
+    private void PopulateDropdownSuit()
     {
+        dropDownSuitValue.ClearOptions();
+        List<string> enumNames = new List<string>(Enum.GetNames(typeof(CardSuit)));
+        dropDownSuitValue.AddOptions(enumNames);
+    }
+    private void ActivatePanelCards()
+    {
+        dropDownSuitValue.gameObject.SetActive(false);
+        buttonTrickTop10SuitUI.SetActive(false);
+        buttonTrickTop10ValueUI.SetActive(false);
         trickPanelUI.SetActive(true);
-        trickTop10UI.SetActive(false);
+        trickTop10SuitUI.SetActive(true);
         ClearCardContainer();
     }
 
@@ -54,23 +83,31 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void CloseTrickPanel()
+    public void CloseTrickPanel()
     {
         trickPanelUI.SetActive(false);
     }
 
     public void PopulateCardsPanelUI(List<Tuple<Card, bool>> top10CardsList)
     {
+        DeactivateTrickPanelButtonsUI();
+        
         foreach (var tuple in top10CardsList)
         {
+            CardHandler cardTop10 = Instantiate(cardPrefab, cardContainerUI.transform);
+            cardTop10.SetCanvas(GetComponentInParent<Canvas>());
+            cardTop10.Initialize(tuple.Item1);
+            Image cardImage = cardTop10.GetComponent<Image>();
+            
             if (tuple.Item2)
             {
-                CardHandler newCard = Instantiate(cardPrefab, cardContainerUI.transform);
-                newCard.SetCanvas(GetComponentInParent<Canvas>());
-                newCard.Initialize(tuple.Item1);
-                
+                cardImage.color = Color.red;
             }
-             
         }
+    }
+
+    public void DeactivateTrickPanelButtonsUI()
+    {
+        trickTop10SuitUI.SetActive(false);
     }
 }

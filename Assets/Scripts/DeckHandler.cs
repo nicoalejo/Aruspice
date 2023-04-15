@@ -1,11 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class DeckHandler : MonoBehaviour
 {
+    public const int DeckMaxValue = 13;
+    
     [SerializeField] private HandHandler handHandler;
     private List<Card> deck;
+    
 
     private void Start()
     {
@@ -22,7 +29,7 @@ public class DeckHandler : MonoBehaviour
         deck = new List<Card>();
         foreach (CardSuit suit in System.Enum.GetValues(typeof(CardSuit)))
         {
-            for (int value = 1; value <= 13; value++)
+            for (int value = 1; value <= DeckMaxValue; value++)
             {
                 deck.Add(new Card(suit, value));
             }
@@ -94,9 +101,10 @@ public class DeckHandler : MonoBehaviour
 
     public void PrintDeckConsole()
     {
+        Debug.Log("The Deck order is:");
         foreach (var card in deck)
         {
-            Debug.Log(card.ToString());    
+            Debug.Log(card);
         }
     }
 }
