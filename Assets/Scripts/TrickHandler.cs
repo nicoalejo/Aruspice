@@ -12,7 +12,10 @@ public class TrickHandler : MonoBehaviour
     [SerializeField] private Dropdown dropdownTop10;
 
     public delegate void Top10CardsSuits(List<Tuple<Card, bool>> top10CardsList);
-    public static event Top10CardsSuits top10CardsSuits; 
+    public static event Top10CardsSuits top10CardsSuits;
+    
+    public delegate List<GameObject> DiscardDeck(List<Card> deck);
+    public static event DiscardDeck discardDeck;
 
     public void Draw()
     {
@@ -63,4 +66,15 @@ public class TrickHandler : MonoBehaviour
 
              top10CardsSuits?.Invoke(cardsKeepDiscard);
          }
+
+    public void Discard4ShowDeck()
+    {
+        List<GameObject> showingDeck = discardDeck?.Invoke(deckHandler.Deck);
+        
+    }
+    
+    public void Discard4()
+    {
+        
+    }
 }
