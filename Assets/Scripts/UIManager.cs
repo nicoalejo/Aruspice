@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private CardHandler cardPrefabDiscard;
     [SerializeField] private GameObject cardContainerUI;            //Container for cards in hand
     [SerializeField] private GameObject cardAltarContainerUI;       //Container for cards in altar
+    [SerializeField] private TextMeshProUGUI altarValueTextUI;       //Altar value text
     [SerializeField] private GameObject trickPanelUI;
     [SerializeField] private GameObject trickTop10SuitUI;
     [SerializeField] private GameObject buttonTrickTop10SuitUI;
@@ -22,6 +24,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         ClearAltarContainer();
+        altarValueTextUI.text = "" + 0;
     }
 
     private void OnEnable()
@@ -169,10 +172,7 @@ public class UIManager : MonoBehaviour
         ClearCardContainer();
     }
     
-    public void ActivateConfirmationPanel(bool activate)
-    {
-        confirmationPanelUI.SetActive(activate);
-    }
+    
 
     #endregion
 
@@ -193,5 +193,17 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
-    
+    #region Altar
+
+    public void ActivateConfirmationPanel(bool activate)
+    {
+        confirmationPanelUI.SetActive(activate);
+    }
+
+    public void UpdateAltarValue(int altarValue)
+    {
+        altarValueTextUI.text = "" + altarValue;
+    }
+
+    #endregion
 }

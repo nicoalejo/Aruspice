@@ -20,7 +20,7 @@ public class DeckHandler : MonoBehaviour
         
         InitializeDeck();
         ShuffleDeck();
-        PrintDeckConsole();
+        //PrintDeckConsole();
         DealCards(3);
     }
 

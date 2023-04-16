@@ -29,6 +29,11 @@ public class HandHandler : MonoBehaviour
         }
     }
 
+    public void RemoveCard(CardHandler card)
+    {
+        cardsInHand.Remove(card);
+    }
+
     public void Init()
     {
         ClearHand(false);

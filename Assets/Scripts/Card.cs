@@ -8,13 +8,13 @@ public enum CardSuit
     Lamassu,
     Buho,
     Puertas,
-    Sol
+    Frutas
 }
 
 public class Card
 { 
     public CardSuit Suit { get; private set; }
-    public int Value { get; private set; }
+    public int Value { get; set; }
 
     public Card(CardSuit suit, int value)
     {

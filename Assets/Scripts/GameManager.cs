@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -8,9 +9,37 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UIManager uiManager;
     [SerializeField] private RectTransform handZoneUI;
     [SerializeField] private RectTransform altarZoneUI;
+    [SerializeField] private HandHandler handHandler;
 
     private CardDragHandler currentCardToDropAltar;
+    private List<Card> cardsInAltar = new List<Card>();
+    private int currentAltarValue = 0;
+
+    private Dictionary<CardSuit, CardSuit> cardMultiplicationDictionary = new Dictionary<CardSuit, CardSuit>();
+    private Dictionary<CardSuit, CardSuit> cardSubtractDictionary = new Dictionary<CardSuit, CardSuit>();
+
+    private void Start()
+    {
+        InitMultiplicationDictionary();
+        InitSubtractDictionary();
+    }
+
+    private void InitMultiplicationDictionary()
+    {
+        cardMultiplicationDictionary.Add(CardSuit.Puertas, CardSuit.Lamassu);
+        cardMultiplicationDictionary.Add(CardSuit.Buho, CardSuit.Puertas);
+        cardMultiplicationDictionary.Add(CardSuit.Frutas, CardSuit.Buho);
+        cardMultiplicationDictionary.Add(CardSuit.Lamassu, CardSuit.Frutas);
+    }
     
+    private void InitSubtractDictionary()
+    {
+        cardSubtractDictionary.Add(CardSuit.Puertas, CardSuit.Frutas);
+        cardSubtractDictionary.Add(CardSuit.Frutas, CardSuit.Puertas);
+        cardSubtractDictionary.Add(CardSuit.Buho, CardSuit.Puertas);
+        cardSubtractDictionary.Add(CardSuit.Puertas, CardSuit.Buho);
+    }
+
     private void OnEnable()
     {
         AltarDropZone.onCardDropOnAltar += CardDropOnAltar;
@@ -36,7 +65,47 @@ public class GameManager : MonoBehaviour
 
     public void AcceptDropAltar()
     {
-        Destroy(currentCardToDropAltar);
-        uiManager.ActivateConfirmationPanel(false);
+        CardHandler currentCardHandler = currentCardToDropAltar.GetComponent<CardHandler>();
+        handHandler.RemoveCard(currentCardHandler);     //Remove from hand
+        cardsInAltar.Add(currentCardHandler.CardData);  //Add to altar
+        Destroy(currentCardToDropAltar);                //Destroy script for dragging
+        uiManager.ActivateConfirmationPanel(false);     //Deactivate panel to confirm
+        CalculateAltarValue();                          //Recalculate current altar value
+        uiManager.UpdateAltarValue(currentAltarValue);  //Update UI for altar value
+    }
+
+    private void CalculateAltarValue()
+    {
+        List<Card> tempCalculationList = new List<Card>();
+        
+        //Add first card
+        tempCalculationList.Add(new Card(cardsInAltar[0].Suit, cardsInAltar[0].Value));
+        
+        //First we multiply
+        for (int i = 1; i < cardsInAltar.Count; i++)
+        {
+            Card tempCardHolder = new Card(cardsInAltar[i].Suit, cardsInAltar[i].Value);
+            cardMultiplicationDictionary.TryGetValue(tempCardHolder.Suit, out CardSuit previousCardSuit);
+            if (previousCardSuit == cardsInAltar[i-1].Suit)
+            {
+                Debug.Log("Multiplicación entre "+tempCardHolder.Suit+ " y " + cardsInAltar[i - 1].Suit);
+                tempCardHolder.Value *= 2;
+            }
+           
+            tempCalculationList.Add(tempCardHolder);
+        }
+
+        //Then we subtract
+        
+        
+        //Sum all values after calculations
+        currentAltarValue = 0;
+        
+        foreach (Card tempCard in tempCalculationList)
+        {
+            currentAltarValue += tempCard.Value;
+        }
+        
+        //cardsInAltar
     }
 }
