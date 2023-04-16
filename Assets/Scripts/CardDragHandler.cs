@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using UnityEditor.UIElements;
 
 public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    private RectTransform ghostCardContainer;
-    private RectTransform handZoneUI;
+    public RectTransform HandZoneUI { get; private set; }
     
+    private RectTransform ghostCardContainer;
+
     private Canvas canvas;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
@@ -21,7 +23,7 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void Initialize(RectTransform _ghostCard, RectTransform _handZoneUI, Canvas _canvas)
     {
         ghostCardContainer = _ghostCard;
-        handZoneUI = _handZoneUI;
+        HandZoneUI = _handZoneUI;
         canvas = _canvas;
     }
     
@@ -39,8 +41,30 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!(eventData.pointerEnter != null &&
+            eventData.pointerEnter.gameObject.TryGetComponent(out AltarDropZone altarDropZone2)))
+        {
+            rectTransform.SetParent(HandZoneUI);
+        }
+        
+        // if (eventData.pointerEnter == null)
+        // {
+        //     rectTransform.SetParent(HandZoneUI);
+        // }
+        // else if (!eventData.pointerEnter.gameObject.TryGetComponent(out AltarDropZone altarDropZone))
+        // {
+        //     rectTransform.SetParent(HandZoneUI);
+        // }
         canvasGroup.blocksRaycasts = true;
-        rectTransform.SetParent(handZoneUI);
+        
+
+        //Debug.Log(eventData.pointerEnter.TryGetComponent(out AltarDropZone altarDropZone));
+        
+        // if (!eventData.pointerEnter.gameObject.CompareTag("AltarZone"))
+        // {
+        //     canvasGroup.blocksRaycasts = true;
+        //     rectTransform.SetParent(HandZoneUI);    
+        // }
     }
 
     // public void OnPointerEnter(PointerEventData eventData)

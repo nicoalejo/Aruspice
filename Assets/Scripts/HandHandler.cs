@@ -8,7 +8,6 @@ public class HandHandler : MonoBehaviour
     [SerializeField] private CardHandler cardPrefab;
     [SerializeField] private int maxCards = 6;
     [SerializeField] private RectTransform handUIContainer;
-    [SerializeField] private Transform[] dropZones;
     [SerializeField] private RectTransform ghostCardHandler;
     [SerializeField] private Canvas canvas; 
     

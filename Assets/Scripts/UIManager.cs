@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject buttonTrickDiscard4ShowDeckUI;
     [SerializeField] private GameObject buttonTrickDiscard4UI;
     [SerializeField] private GameObject closePanelButtonUI;
+    [SerializeField] private GameObject confirmationPanelUI;
     [SerializeField] private Dropdown dropDownSuitValue;
 
     private void Start()
@@ -31,7 +32,7 @@ public class UIManager : MonoBehaviour
         DiscardCardHandler.onDiscardCard += ActivateDeactivateTrick4SelectButton;
         TrickHandler.onTop5 += PopulateCardsContainerTop5;
     }
-    
+
     private void OnDisable()
     {
         TrickHandler.top10CardsSuits -= PopulateCardsPanelUI;
@@ -167,6 +168,11 @@ public class UIManager : MonoBehaviour
         closePanelButtonUI.SetActive(true);
         ClearCardContainer();
     }
+    
+    public void ActivateConfirmationPanel(bool activate)
+    {
+        confirmationPanelUI.SetActive(activate);
+    }
 
     #endregion
 
@@ -186,6 +192,6 @@ public class UIManager : MonoBehaviour
     }
 
     #endregion
-    
+
     
 }

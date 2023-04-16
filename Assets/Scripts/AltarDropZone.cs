@@ -5,12 +5,16 @@ using UnityEngine.EventSystems;
 
 public class AltarDropZone : MonoBehaviour, IDropHandler
 {
+    public delegate void OnCardDropOnAltar(CardDragHandler cardDragHandler);
+
+    public static OnCardDropOnAltar onCardDropOnAltar;
+        
     public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag.TryGetComponent(out CardDragHandler cardDragHandler))
         {
-            cardDragHandler.GetComponent<RectTransform>().SetParent(transform);
-            Destroy(cardDragHandler);
+            onCardDropOnAltar?.Invoke(cardDragHandler);
         }
-    }
+    }          
+           
 }
