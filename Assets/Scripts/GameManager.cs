@@ -23,7 +23,8 @@ public class GameManager : MonoBehaviour
         InitMultiplicationDictionary();
         InitSubtractDictionary();
     }
-
+    
+    //Define multiplication interaction between suits
     private void InitMultiplicationDictionary()
     {
         cardMultiplicationDictionary.Add(CardSuit.Puertas, CardSuit.Lamassu);
@@ -32,12 +33,13 @@ public class GameManager : MonoBehaviour
         cardMultiplicationDictionary.Add(CardSuit.Lamassu, CardSuit.Frutas);
     }
     
+    //Define subtraction interaction between suits
     private void InitSubtractDictionary()
     {
         cardSubtractDictionary.Add(CardSuit.Puertas, CardSuit.Frutas);
         cardSubtractDictionary.Add(CardSuit.Frutas, CardSuit.Puertas);
-        cardSubtractDictionary.Add(CardSuit.Buho, CardSuit.Puertas);
-        cardSubtractDictionary.Add(CardSuit.Puertas, CardSuit.Buho);
+        cardSubtractDictionary.Add(CardSuit.Buho, CardSuit.Lamassu);
+        cardSubtractDictionary.Add(CardSuit.Lamassu, CardSuit.Buho);
     }
 
     private void OnEnable()
@@ -96,7 +98,17 @@ public class GameManager : MonoBehaviour
         }
 
         //Then we subtract
-        
+        for (int i = 0; i < tempCalculationList.Count-1; i++)
+        {
+            cardSubtractDictionary.TryGetValue(tempCalculationList[i].Suit, out CardSuit nextCardSuit);
+            if (nextCardSuit == tempCalculationList[i+1].Suit)
+            {
+                if (tempCalculationList[i].Value > 0)
+                    tempCalculationList[i].Value--;
+                if (tempCalculationList[i+1].Value > 0)
+                    tempCalculationList[i+1].Value--;
+            }
+        }
         
         //Sum all values after calculations
         currentAltarValue = 0;
