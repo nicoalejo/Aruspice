@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HandHandler : MonoBehaviour
 {
     [SerializeField] private CardHandler cardPrefab;
     [SerializeField] private int maxCards = 6;
-    [SerializeField] private GameObject handUIContainer;
+    [SerializeField] private Transform handUIContainer;
     [SerializeField] private Transform[] dropZones;
-    
+    [SerializeField] private Transform ghostCardHandler;
+
+
     [HideInInspector]
     public List<CardHandler> cardsInHand = new List<CardHandler>();
     
@@ -16,9 +19,10 @@ public class HandHandler : MonoBehaviour
     {
         if (cardsInHand.Count < maxCards)
         {
-            CardHandler newCard = Instantiate(cardPrefab, handUIContainer.transform);
+            CardHandler newCard = Instantiate(cardPrefab, handUIContainer);
             newCard.SetCanvas(GetComponentInParent<Canvas>());
             newCard.Initialize(card);
+            newCard.gameObject.GetComponent<CardDragHandler>().Initialize(ghostCardHandler, handUIContainer);
             cardsInHand.Add(newCard);
         }
         else

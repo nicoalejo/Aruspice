@@ -145,12 +145,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1656044704614181663}
   - component: {fileID: 5640400377455845312}
-  - component: {fileID: -2809170441444996368}
   - component: {fileID: 8240659040906161354}
   - component: {fileID: 7925138257814440178}
   - component: {fileID: 4667931244435348599}
   m_Layer: 0
-  m_Name: CardPrefab 1
+  m_Name: CardPrefabNoDrag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -192,18 +191,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   suitUI: {fileID: 1729153784}
   valueUI: {fileID: 5430156530701045412}
---- !u!114 &-2809170441444996368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 889866817218751121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b03cf547fb5cf544aa022b852b27ae9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &8240659040906161354
 CanvasRenderer:
   m_ObjectHideFlags: 0

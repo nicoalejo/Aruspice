@@ -7,7 +7,8 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private CardHandler cardPrefab;
     [SerializeField] private CardHandler cardPrefabDiscard;
-    [SerializeField] private GameObject cardContainerUI;
+    [SerializeField] private GameObject cardContainerUI;            //Container for cards in hand
+    [SerializeField] private GameObject cardAltarContainerUI;       //Container for cards in altar
     [SerializeField] private GameObject trickPanelUI;
     [SerializeField] private GameObject trickTop10SuitUI;
     [SerializeField] private GameObject buttonTrickTop10SuitUI;
@@ -16,6 +17,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject buttonTrickDiscard4UI;
     [SerializeField] private GameObject closePanelButtonUI;
     [SerializeField] private Dropdown dropDownSuitValue;
+
+    private void Start()
+    {
+        ClearAltarContainer();
+    }
 
     private void OnEnable()
     {
@@ -32,6 +38,7 @@ public class UIManager : MonoBehaviour
         TrickHandler.onDiscardshowDeck -= PopulateCardContainerDiscard4;
         TrickHandler.onDiscard4 -= CloseTrickPanel;
         DiscardCardHandler.onDiscardCard -= ActivateDeactivateTrick4SelectButton;
+        TrickHandler.onTop5 -= PopulateCardsContainerTop5;
     }
 
     #region Trick Discard 4
@@ -124,6 +131,14 @@ public class UIManager : MonoBehaviour
 
     #region General Functions
 
+    private void ClearAltarContainer()
+    {
+        //Deletes all items in the card container
+        foreach (Transform item in cardAltarContainerUI.transform)
+        {
+            Destroy(item.gameObject);
+        }
+    }
     private void ClearCardContainer()
     {
         //Deletes all items in the card container
@@ -158,9 +173,9 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region Trick Look Top 5
-    private void PopulateCardsContainerTop5(List<Card> top5cardlist)
+    private void PopulateCardsContainerTop5(List<Card> top5Cardlist)
     {
-        foreach (Card card in top5cardlist)
+        foreach (Card card in top5Cardlist)
         {
             CardHandler cardTop5 = Instantiate(cardPrefab, cardContainerUI.transform);
             cardTop5.SetCanvas(GetComponentInParent<Canvas>());
