@@ -7,11 +7,11 @@ public class HandHandler : MonoBehaviour
 {
     [SerializeField] private CardHandler cardPrefab;
     [SerializeField] private int maxCards = 6;
-    [SerializeField] private Transform handUIContainer;
+    [SerializeField] private RectTransform handUIContainer;
     [SerializeField] private Transform[] dropZones;
-    [SerializeField] private Transform ghostCardHandler;
-
-
+    [SerializeField] private RectTransform ghostCardHandler;
+    [SerializeField] private Canvas canvas; 
+    
     [HideInInspector]
     public List<CardHandler> cardsInHand = new List<CardHandler>();
     
@@ -20,9 +20,8 @@ public class HandHandler : MonoBehaviour
         if (cardsInHand.Count < maxCards)
         {
             CardHandler newCard = Instantiate(cardPrefab, handUIContainer);
-            newCard.SetCanvas(GetComponentInParent<Canvas>());
             newCard.Initialize(card);
-            newCard.gameObject.GetComponent<CardDragHandler>().Initialize(ghostCardHandler, handUIContainer);
+            newCard.gameObject.GetComponent<CardDragHandler>().Initialize(ghostCardHandler, handUIContainer, canvas);
             cardsInHand.Add(newCard);
         }
         else

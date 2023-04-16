@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
-public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    private Transform ghostCardContainer;
-    private Transform handZoneUI;
+    private RectTransform ghostCardContainer;
+    private RectTransform handZoneUI;
     
     private Canvas canvas;
     private RectTransform rectTransform;
@@ -18,38 +18,31 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         canvasGroup = GetComponent<CanvasGroup>();
     }
     
-    public void Initialize(Transform _ghostCard, Transform _handZoneUI)
+    public void Initialize(RectTransform _ghostCard, RectTransform _handZoneUI, Canvas _canvas)
     {
         ghostCardContainer = _ghostCard;
         handZoneUI = _handZoneUI;
+        canvas = _canvas;
     }
     
     public void OnBeginDrag(PointerEventData eventData)
     {
         canvasGroup.blocksRaycasts = false;
-        ghostCardContainer.transform.position = transform.position;
-        transform.SetParent(ghostCardContainer);
+        ghostCardContainer.anchoredPosition = rectTransform.anchoredPosition;
+        rectTransform.SetParent(ghostCardContainer);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        ghostCardContainer.position = eventData.position;
-        //rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        ghostCardContainer.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         canvasGroup.blocksRaycasts = true;
-        transform.SetParent(handZoneUI);
+        rectTransform.SetParent(handZoneUI);
     }
-    
-    public void OnDrop(PointerEventData eventData)
-    {
-        if(eventData.pointerDrag.TryGetComponent(out AltarDropZone droppedCard))
-        {
-            
-        }
-    }
+
     // public void OnPointerEnter(PointerEventData eventData)
     // {
     //     if (transform.parent.GetComponent<HandHandler>().cardsInHand.Contains(this))

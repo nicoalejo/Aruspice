@@ -59,7 +59,6 @@ public class UIManager : MonoBehaviour
         foreach (Card cardInDeck in deck)
         {
             CardHandler cardInContainer = Instantiate(cardPrefabDiscard, cardContainerUI.transform);
-            cardInContainer.SetCanvas(GetComponentInParent<Canvas>());
             cardInContainer.Initialize(cardInDeck);
         }
     }
@@ -117,7 +116,6 @@ public class UIManager : MonoBehaviour
         foreach (var tuple in top10CardsList)
         {
             CardHandler cardTop10 = Instantiate(cardPrefab, cardContainerUI.transform);
-            cardTop10.SetCanvas(GetComponentInParent<Canvas>());
             cardTop10.Initialize(tuple.Item1);
 
             if (tuple.Item2)
@@ -178,7 +176,6 @@ public class UIManager : MonoBehaviour
         foreach (Card card in top5Cardlist)
         {
             CardHandler cardTop5 = Instantiate(cardPrefab, cardContainerUI.transform);
-            cardTop5.SetCanvas(GetComponentInParent<Canvas>());
             cardTop5.Initialize(card);
         }
     }

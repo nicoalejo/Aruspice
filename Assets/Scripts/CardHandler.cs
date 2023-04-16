@@ -23,8 +23,4 @@ public class CardHandler : MonoBehaviour //, IPointerEnterHandler, IPointerExitH
         valueUI.text = CardData.Value.ToString();
     }
 
-    public void SetCanvas(Canvas _canvas)
-    {
-        //canvas = _canvas;
-    }
 }
