@@ -1,19 +1,30 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Round Values")] 
+    [SerializeField] private int numberOfRounds = 5;
+    [SerializeField] private int numberOfActionPerRound = 3;
+    [SerializeField] private int cardsToDealEachRound = 3;
+    [SerializeField] private int expectedValue = 50;
+
+    [Header("UI")]
     [SerializeField] private UIManager uiManager;
     [SerializeField] private RectTransform handZoneUI;
     [SerializeField] private RectTransform altarZoneUI;
     [SerializeField] private HandHandler handHandler;
+    
+    [Header("Handlers")]
+    [SerializeField] private TrickHandler trickHandler;
+    [SerializeField] private DeckHandler deckHandler;
 
     private CardDragHandler currentCardToDropAltar;
     private List<Card> cardsInAltar = new List<Card>();
     private int currentAltarValue = 0;
+    private int currentRound = 1;
+    private int actionsLeftThisRound;
 
     private Dictionary<CardSuit, CardSuit> cardMultiplicationDictionary = new Dictionary<CardSuit, CardSuit>();
     private Dictionary<CardSuit, CardSuit> cardSubtractDictionary = new Dictionary<CardSuit, CardSuit>();
@@ -22,6 +33,15 @@ public class GameManager : MonoBehaviour
     {
         InitMultiplicationDictionary();
         InitSubtractDictionary();
+
+        actionsLeftThisRound = numberOfActionPerRound;
+        uiManager.UpdateActionsValue(actionsLeftThisRound);
+        uiManager.UpdateRoundValue(currentRound);
+        uiManager.UpdateExpectedValue(expectedValue);
+        
+        //Cards to deal when starting game
+        //Deal cards at the start of game
+        deckHandler.DealCards(cardsToDealEachRound);
     }
     
     //Define multiplication interaction between suits
@@ -45,11 +65,13 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         AltarDropZone.onCardDropOnAltar += CardDropOnAltar;
+        TrickHandler.onActionTaken += ActionTaken;
     }
 
     private void OnDisable()
     {
         AltarDropZone.onCardDropOnAltar -= CardDropOnAltar;
+        TrickHandler.onActionTaken -= ActionTaken;
     }
 
     private void CardDropOnAltar(CardDragHandler cardDragHandler)
@@ -74,7 +96,55 @@ public class GameManager : MonoBehaviour
         uiManager.ActivateConfirmationPanel(false);     //Deactivate panel to confirm
         CalculateAltarValue();                          //Recalculate current altar value
         uiManager.UpdateAltarValue(currentAltarValue);  //Update UI for altar value
+
+        CheckExpectedValueReached();
     }
+
+    //TODO: Fix this, for know just reloads the first scene
+    public void ResetGame()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    private void CheckExpectedValueReached()
+    {
+        if (currentAltarValue == expectedValue)
+        {
+            Debug.Log("You Won");
+            HandleGameOver();
+        }
+        else
+        {
+            StartNewRound();    
+        }
+    }
+
+    //Actions for new round
+    private void StartNewRound()
+    {
+        currentRound++;
+        if (currentRound > numberOfRounds)
+        {
+            Debug.Log("You Lost");
+            HandleGameOver();
+        }
+        else
+        {
+            uiManager.UpdateRoundValue(currentRound);       //update UI current round
+            handHandler.ClearHand(true);                //Remove all cards in hand
+            actionsLeftThisRound = numberOfActionPerRound;    //Sets actions back to max
+            uiManager.UpdateActionsValue(actionsLeftThisRound); //Updates Action UI value
+            trickHandler.HasEnoughActionForTrick(actionsLeftThisRound); //Reactivates all tricks
+            deckHandler.DealCards(cardsToDealEachRound);        //Deals 3 cards for the new round
+        }
+    }
+
+    private void HandleGameOver()
+    {
+        uiManager.ActivateGameOverPanel(true);
+        uiManager.UpdateGameOverAltarValue(currentAltarValue);
+        uiManager.UpdateGameOverExpectedValue(expectedValue);
+    } 
 
     private void CalculateAltarValue()
     {
@@ -90,7 +160,7 @@ public class GameManager : MonoBehaviour
             cardMultiplicationDictionary.TryGetValue(tempCardHolder.Suit, out CardSuit previousCardSuit);
             if (previousCardSuit == cardsInAltar[i-1].Suit)
             {
-                Debug.Log("Multiplicación entre "+tempCardHolder.Suit+ " y " + cardsInAltar[i - 1].Suit);
+                //Debug.Log("Multiplicación entre "+tempCardHolder.Suit+ " y " + cardsInAltar[i - 1].Suit);
                 tempCardHolder.Value *= 2;
             }
            
@@ -117,7 +187,12 @@ public class GameManager : MonoBehaviour
         {
             currentAltarValue += tempCard.Value;
         }
-        
-        //cardsInAltar
+    }
+
+    private int ActionTaken(int numberOfActionsTaken)
+    {
+        actionsLeftThisRound -= numberOfActionsTaken;
+        uiManager.UpdateActionsValue(actionsLeftThisRound);
+        return actionsLeftThisRound;
     }
 }

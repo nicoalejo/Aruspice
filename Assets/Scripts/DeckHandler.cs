@@ -14,14 +14,13 @@ public class DeckHandler : MonoBehaviour
     public List<Card> Deck { get; private set; }
 
 
-    private void Start()
+    private void Awake()
     {
         handHandler.Init();
         
         InitializeDeck();
         ShuffleDeck();
         //PrintDeckConsole();
-        DealCards(3);
     }
 
     private void InitializeDeck()
@@ -45,7 +44,8 @@ public class DeckHandler : MonoBehaviour
             (Deck[i], Deck[randomIndex]) = (Deck[randomIndex], Deck[i]);
         }
     }
-
+    
+    //Deal a X number of cards to hand
     public void DealCards(int count)
     {
         for (int i = 0; i < count; i++)
@@ -99,13 +99,6 @@ public class DeckHandler : MonoBehaviour
     public void InsertCardAtTopDeck(Card card)
     {
         Deck.Insert(0, card);
-    }
-    public void InsertCardsAtTopDeck(List<Card> cards)
-    {
-        foreach (var card in cards)
-        {
-            Deck.Insert(0, card);
-        }
     }
 
     public void RemoveCards(List<Card> cardsRemove)

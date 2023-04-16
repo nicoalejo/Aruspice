@@ -41,10 +41,11 @@ public class HandHandler : MonoBehaviour
     
     public void ClearHand(bool discard)
     {
+        cardsInHand.Clear();
         //Moves all cards to discard pile previous destroying them from hand
         if (discard)
         {
-            
+            //TODO: move discard cards to discard pile
         }
         //Deletes all current items int hand
         foreach (Transform item in handUIContainer.transform)

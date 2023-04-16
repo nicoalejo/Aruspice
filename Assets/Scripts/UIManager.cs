@@ -6,11 +6,16 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private CardHandler cardPrefab;
-    [SerializeField] private CardHandler cardPrefabDiscard;
+    [SerializeField] private CardHandler cardPrefab;        //Prefab with drag integrated for hand zone
+    [SerializeField] private CardHandler cardPrefabDiscard; //Prefab without drag script to show on tricks
+    
+    [SerializeField] private TextMeshProUGUI actionsLeftTextUI; //Text for actions left this round 
+    [SerializeField] private TextMeshProUGUI currentRoundTextUI;//Text for current round
+    
     [SerializeField] private GameObject cardContainerUI;            //Container for cards in hand
     [SerializeField] private GameObject cardAltarContainerUI;       //Container for cards in altar
     [SerializeField] private TextMeshProUGUI altarValueTextUI;       //Altar value text
+    [SerializeField] private TextMeshProUGUI expectedValueUI;
     [SerializeField] private GameObject trickPanelUI;
     [SerializeField] private GameObject trickTop10SuitUI;
     [SerializeField] private GameObject buttonTrickTop10SuitUI;
@@ -20,7 +25,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject closePanelButtonUI;
     [SerializeField] private GameObject confirmationPanelUI;
     [SerializeField] private Dropdown dropDownSuitValue;
-
+    
+    [Header("Game Over Panel")]
+    [SerializeField] private GameObject gameoverPanelUI;
+    [SerializeField] private TextMeshProUGUI gameoverAltarValueUI;
+    [SerializeField] private TextMeshProUGUI gameoverExpectedValueUI;
+    
     private void Start()
     {
         ClearAltarContainer();
@@ -172,7 +182,35 @@ public class UIManager : MonoBehaviour
         ClearCardContainer();
     }
     
-    
+    public void UpdateRoundValue(int newValue)
+    {
+        currentRoundTextUI.text = "" + newValue;
+    }
+
+    public void UpdateActionsValue(int newValue)
+    {
+        actionsLeftTextUI.text = "" + newValue;
+    }
+
+    public void UpdateExpectedValue(int newValue)
+    {
+        expectedValueUI.text = "" + newValue;
+    }
+
+    public void ActivateGameOverPanel(bool isActive)
+    {
+        gameoverPanelUI.SetActive(isActive);
+    }
+
+    public void UpdateGameOverExpectedValue(int newValue)
+    {
+        gameoverExpectedValueUI.text = "" + newValue;
+    }
+
+    public void UpdateGameOverAltarValue(int newValue)
+    {
+        gameoverAltarValueUI.text = "" + newValue;
+    }
 
     #endregion
 
@@ -206,4 +244,6 @@ public class UIManager : MonoBehaviour
     }
 
     #endregion
+
+    
 }
