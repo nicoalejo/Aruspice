@@ -963,6 +963,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 114250055}
+  - component: {fileID: 114250059}
   - component: {fileID: 114250058}
   - component: {fileID: 114250057}
   - component: {fileID: 114250056}
@@ -1088,6 +1089,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 114250054}
   m_CullTransparentMesh: 1
+--- !u!114 &114250059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114250054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5faaf46bbc32b0f48b19d514074f330d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionCost: 1
+  descriptionInfo: Baraja el mazo.
 --- !u!1 &127254738
 GameObject:
   m_ObjectHideFlags: 0
@@ -2149,6 +2164,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 263803600}
+  - component: {fileID: 263803604}
   - component: {fileID: 263803603}
   - component: {fileID: 263803602}
   - component: {fileID: 263803601}
@@ -2286,6 +2302,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263803599}
   m_CullTransparentMesh: 1
+--- !u!114 &263803604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263803599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5faaf46bbc32b0f48b19d514074f330d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionCost: 1
+  descriptionInfo: Muestra las primeras 5 cartas del mazo.
 --- !u!1 &264808487
 GameObject:
   m_ObjectHideFlags: 0
@@ -2800,6 +2830,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 305423846}
+  - component: {fileID: 305423850}
   - component: {fileID: 305423849}
   - component: {fileID: 305423848}
   - component: {fileID: 305423847}
@@ -2925,6 +2956,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305423845}
   m_CullTransparentMesh: 1
+--- !u!114 &305423850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305423845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5faaf46bbc32b0f48b19d514074f330d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionCost: 1
+  descriptionInfo: Este truco te permite tomar la primera carta del mazo.
 --- !u!1 &319768372
 GameObject:
   m_ObjectHideFlags: 0
@@ -5085,6 +5130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 660024010}
+  - component: {fileID: 660024014}
   - component: {fileID: 660024013}
   - component: {fileID: 660024012}
   - component: {fileID: 660024011}
@@ -5210,6 +5256,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660024009}
   m_CullTransparentMesh: 1
+--- !u!114 &660024014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660024009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5faaf46bbc32b0f48b19d514074f330d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionCost: 1
+  descriptionInfo: Descarta todas las cartas del tipo seleccionado de las primeras
+    10 del mazo. Las cartas regresan en el mismo orden al mazo.
 --- !u!1 &662346974
 GameObject:
   m_ObjectHideFlags: 0
@@ -6434,6 +6495,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 850145091}
+  - component: {fileID: 850145095}
   - component: {fileID: 850145094}
   - component: {fileID: 850145093}
   - component: {fileID: 850145092}
@@ -6559,6 +6621,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 850145090}
   m_CullTransparentMesh: 1
+--- !u!114 &850145095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850145090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5faaf46bbc32b0f48b19d514074f330d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionCost: 1
+  descriptionInfo: Descarta todas las cartas menores o iguales al valor seleccionado
+    de las primeras 10 del mazo. Las cartas regresan en el mismo orden al mazo.
 --- !u!1 &859897725
 GameObject:
   m_ObjectHideFlags: 0
@@ -12411,6 +12488,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1857820109}
+  - component: {fileID: 1857820113}
   - component: {fileID: 1857820112}
   - component: {fileID: 1857820111}
   - component: {fileID: 1857820110}
@@ -12536,6 +12614,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1857820108}
   m_CullTransparentMesh: 1
+--- !u!114 &1857820113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857820108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5faaf46bbc32b0f48b19d514074f330d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionCost: 2
+  descriptionInfo: Muestra el mazo y se puede elegir hasta 4 cartas para descartar.
+    Luego se baraja el mazo.
 --- !u!1 &1867278431
 GameObject:
   m_ObjectHideFlags: 0
