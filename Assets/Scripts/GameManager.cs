@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,13 +24,14 @@ public class GameManager : MonoBehaviour
 
     private CardDragHandler currentCardToDropAltar;
     private List<Card> cardsInAltar = new List<Card>();
+    private List<CardLogCalculation> cardsInAltarWithHandler = new();
     private int currentAltarValue = 0;
     private int currentRound = 1;
     private int actionsLeftThisRound;
 
     private Dictionary<CardSuit, CardSuit> cardMultiplicationDictionary = new Dictionary<CardSuit, CardSuit>();
     private Dictionary<CardSuit, CardSuit> cardSubtractDictionary = new Dictionary<CardSuit, CardSuit>();
-
+    
     private void Start()
     {
         InitMultiplicationDictionary();
@@ -38,12 +41,11 @@ public class GameManager : MonoBehaviour
         uiManager.UpdateActionsValue(actionsLeftThisRound);
         uiManager.UpdateRoundValue(currentRound);
         uiManager.UpdateExpectedValue(expectedValue);
-
-        //Cards to deal when starting game
-        //Deal cards at the start of game
-        deckHandler.DealCards(cardsToDealEachRound);
-        //Update deck cards left after deal the cards
-        uiManager.UpdateDeckCardsLeftValue(deckHandler.Deck.Count);
+        
+        deckHandler.DealCards(cardsToDealEachRound); //Deal cards at the start of game
+        
+        uiManager.UpdateDeckCardsLeftValue(deckHandler.Deck.Count); //Update deck cards left after deal the cards
+        uiManager.ClearLogUI(); //Cleans the Log text
     }
     
     //Define multiplication interaction between suits
@@ -94,6 +96,8 @@ public class GameManager : MonoBehaviour
         CardHandler currentCardHandler = currentCardToDropAltar.GetComponent<CardHandler>();
         handHandler.RemoveCard(currentCardHandler);     //Remove from hand
         cardsInAltar.Add(currentCardHandler.CardData);  //Add to altar
+        //currentCardHandler.AddComponent<CardLogCalculation>(); //Adds the component to show the value calculation in Log
+        cardsInAltarWithHandler.Add(currentCardHandler.AddComponent<CardLogCalculation>()); //Adds the component to show the value calculation in Log
         Destroy(currentCardToDropAltar);                //Destroy script for dragging
         uiManager.ActivateConfirmationPanel(false);     //Deactivate panel to confirm
         CalculateAltarValue();                          //Recalculate current altar value
@@ -156,16 +160,19 @@ public class GameManager : MonoBehaviour
         
         //Add first card
         tempCalculationList.Add(new Card(cardsInAltar[0].Suit, cardsInAltar[0].Value));
-        
+        cardsInAltarWithHandler[0].SetInitialValueLog(cardsInAltar[0].Suit, cardsInAltar[0].Value);
+
         //First we multiply
         for (int i = 1; i < cardsInAltar.Count; i++)
         {
             Card tempCardHolder = new Card(cardsInAltar[i].Suit, cardsInAltar[i].Value);
+            cardsInAltarWithHandler[i].SetInitialValueLog(cardsInAltar[i].Suit, cardsInAltar[i].Value); //Init for the log
             cardMultiplicationDictionary.TryGetValue(tempCardHolder.Suit, out CardSuit previousCardSuit);
             if (previousCardSuit == cardsInAltar[i-1].Suit)
             {
                 //Debug.Log("Multiplicación entre "+tempCardHolder.Suit+ " y " + cardsInAltar[i - 1].Suit);
                 tempCardHolder.Value *= 2;
+                cardsInAltarWithHandler[i].SetMultiplyLogInfo(cardsInAltar[i-1].Suit, tempCardHolder.Value); //Sets multiplier for log
             }
            
             tempCalculationList.Add(tempCardHolder);
@@ -178,9 +185,15 @@ public class GameManager : MonoBehaviour
             if (nextCardSuit == tempCalculationList[i+1].Suit)
             {
                 if (tempCalculationList[i].Value > 0)
+                {
                     tempCalculationList[i].Value--;
+                    cardsInAltarWithHandler[i].SetSubtractLogInfo(tempCalculationList[i].Suit, tempCalculationList[i].Value, false);
+                }
                 if (tempCalculationList[i+1].Value > 0)
+                {
                     tempCalculationList[i+1].Value--;
+                    cardsInAltarWithHandler[i+1].SetSubtractLogInfo(tempCalculationList[i+1].Suit, tempCalculationList[i+1].Value, true);
+                }
             }
         }
         

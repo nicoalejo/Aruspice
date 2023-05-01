@@ -38,6 +38,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI gameoverAltarValueUI;
     [SerializeField] private TextMeshProUGUI gameoverExpectedValueUI;
     
+    [Header("Game Over Panel")]
+    [SerializeField] private TextMeshProUGUI titleLogUI;
+    [SerializeField] private TextMeshProUGUI explanationLogUI;
+    [SerializeField] private TextMeshProUGUI descriptionLogUI;
+    
     private void Start()
     {
         ClearAltarContainer();
@@ -60,6 +65,20 @@ public class UIManager : MonoBehaviour
         TrickHandler.onDiscard4 -= CloseTrickPanel;
         DiscardCardHandler.onDiscardCard -= ActivateDeactivateTrick4SelectButton;
         TrickHandler.onTop5 -= PopulateCardsContainerTop5;
+    }
+
+    public void ClearLogUI()
+    {
+        titleLogUI.text = "";
+        explanationLogUI.text = "";
+        descriptionLogUI.text = "";
+    }
+
+    public void FillLogUI(string title, string explanation, string description)
+    {
+        titleLogUI.text = title;
+        explanationLogUI.text = explanation;
+        descriptionLogUI.text = description;
     }
 
     #region Trick Discard 4

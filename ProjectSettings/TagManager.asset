@@ -7,6 +7,7 @@ TagManager:
   - TrickTop10Suit
   - TrickTop10Value
   - AltarZone
+  - UIManager
   layers:
   - Default
   - TransparentFX
