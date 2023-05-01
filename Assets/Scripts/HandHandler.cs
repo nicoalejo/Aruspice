@@ -11,8 +11,7 @@ public class HandHandler : MonoBehaviour
     [SerializeField] private RectTransform ghostCardHandler;
     [SerializeField] private Canvas canvas; 
     
-    [HideInInspector]
-    public List<CardHandler> cardsInHand = new List<CardHandler>();
+    private List<CardHandler> cardsInHand = new();
     
     public void AddCard(Card card)
     {

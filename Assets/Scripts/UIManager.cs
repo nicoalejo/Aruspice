@@ -6,16 +6,23 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("Cards Prefabs")]
     [SerializeField] private CardHandler cardPrefab;        //Prefab with drag integrated for hand zone
+    [SerializeField] private CardHandler cardPrefabNoDrag;  //Prefab with no drag for all the tricks
     [SerializeField] private CardHandler cardPrefabDiscard; //Prefab without drag script to show on tricks
     
+    [Header("Actions and Rounds")]
     [SerializeField] private TextMeshProUGUI actionsLeftTextUI; //Text for actions left this round 
     [SerializeField] private TextMeshProUGUI currentRoundTextUI;//Text for current round
     
+    [Header("Front UI")]
     [SerializeField] private GameObject cardContainerUI;            //Container for cards in hand
     [SerializeField] private GameObject cardAltarContainerUI;       //Container for cards in altar
     [SerializeField] private TextMeshProUGUI altarValueTextUI;       //Altar value text
     [SerializeField] private TextMeshProUGUI expectedValueUI;
+    [SerializeField] private TextMeshProUGUI deckCardsLeft;
+    
+    [Header("Tricks")]
     [SerializeField] private GameObject trickPanelUI;
     [SerializeField] private GameObject trickTop10SuitUI;
     [SerializeField] private GameObject buttonTrickTop10SuitUI;
@@ -77,6 +84,7 @@ public class UIManager : MonoBehaviour
         }
     }
     
+    //Activates/Deactivates the button for the discard 4 trick if the selected cards are > 0
     private void ActivateDeactivateTrick4SelectButton(int totalCardsSelected)
     {
         buttonTrickDiscard4UI.GetComponent<Button>().interactable = totalCardsSelected > 0;
@@ -105,6 +113,8 @@ public class UIManager : MonoBehaviour
         PopulateDropdownValue();
         buttonTrickTop10ValueUI.SetActive(true);
     }
+    
+    //Populates dropdown with values from 1 to 13, taking the DeckMaxValue
     private void PopulateDropdownValue()
     {
         dropDownSuitValue.ClearOptions();
@@ -129,7 +139,7 @@ public class UIManager : MonoBehaviour
         
         foreach (var tuple in top10CardsList)
         {
-            CardHandler cardTop10 = Instantiate(cardPrefab, cardContainerUI.transform);
+            CardHandler cardTop10 = Instantiate(cardPrefabNoDrag, cardContainerUI.transform);
             cardTop10.Initialize(tuple.Item1);
 
             if (tuple.Item2)
@@ -212,6 +222,11 @@ public class UIManager : MonoBehaviour
         gameoverAltarValueUI.text = "" + newValue;
     }
 
+    public void UpdateDeckCardsLeftValue(int cardsLeft)
+    {
+        deckCardsLeft.text = cardsLeft.ToString();
+    } 
+
     #endregion
 
     #region Trick Look Top 5
@@ -219,7 +234,7 @@ public class UIManager : MonoBehaviour
     {
         foreach (Card card in top5Cardlist)
         {
-            CardHandler cardTop5 = Instantiate(cardPrefab, cardContainerUI.transform);
+            CardHandler cardTop5 = Instantiate(cardPrefabNoDrag, cardContainerUI.transform);
             cardTop5.Initialize(card);
         }
     }

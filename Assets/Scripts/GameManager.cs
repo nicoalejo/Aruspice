@@ -38,10 +38,12 @@ public class GameManager : MonoBehaviour
         uiManager.UpdateActionsValue(actionsLeftThisRound);
         uiManager.UpdateRoundValue(currentRound);
         uiManager.UpdateExpectedValue(expectedValue);
-        
+
         //Cards to deal when starting game
         //Deal cards at the start of game
         deckHandler.DealCards(cardsToDealEachRound);
+        //Update deck cards left after deal the cards
+        uiManager.UpdateDeckCardsLeftValue(deckHandler.Deck.Count);
     }
     
     //Define multiplication interaction between suits
@@ -100,7 +102,7 @@ public class GameManager : MonoBehaviour
         CheckExpectedValueReached();
     }
 
-    //TODO: Fix this, for know just reloads the first scene
+    //TODO: Fix this, for now just reloads the first scene
     public void ResetGame()
     {
         SceneManager.LoadScene(0);
@@ -123,19 +125,21 @@ public class GameManager : MonoBehaviour
     private void StartNewRound()
     {
         currentRound++;
-        if (currentRound > numberOfRounds)
+        if (currentRound > numberOfRounds || deckHandler.Deck.Count == 0)
         {
             Debug.Log("You Lost");
             HandleGameOver();
         }
         else
         {
-            uiManager.UpdateRoundValue(currentRound);       //update UI current round
-            handHandler.ClearHand(true);                //Remove all cards in hand
-            actionsLeftThisRound = numberOfActionPerRound;    //Sets actions back to max
-            uiManager.UpdateActionsValue(actionsLeftThisRound); //Updates Action UI value
+            actionsLeftThisRound = numberOfActionPerRound;              //Sets actions back to max
+            uiManager.UpdateRoundValue(currentRound);                   //Update UI current round
+            uiManager.UpdateActionsValue(actionsLeftThisRound);         //Updates Action UI value
+            handHandler.ClearHand(true);                          //Remove all cards in hand
+            deckHandler.DealCards(cardsToDealEachRound);                //Deals 3 cards for the new round
             trickHandler.HasEnoughActionForTrick(actionsLeftThisRound); //Reactivates all tricks
-            deckHandler.DealCards(cardsToDealEachRound);        //Deals 3 cards for the new round
+            
+            uiManager.UpdateDeckCardsLeftValue(deckHandler.Deck.Count); //Updates UI for deck cards left
         }
     }
 
@@ -189,10 +193,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Calculates how many actions are taken based on the actions passed as parameter 
+    //This is linked to a delegate that is invoked everytime a trick is performed
+    //Also Updates the actions left and the cards left in deck.
     private int ActionTaken(int numberOfActionsTaken)
     {
         actionsLeftThisRound -= numberOfActionsTaken;
         uiManager.UpdateActionsValue(actionsLeftThisRound);
+        uiManager.UpdateDeckCardsLeftValue(deckHandler.Deck.Count);
         return actionsLeftThisRound;
     }
 }

@@ -20,7 +20,6 @@ public class DeckHandler : MonoBehaviour
         
         InitializeDeck();
         ShuffleDeck();
-        //PrintDeckConsole();
     }
 
     private void InitializeDeck()
@@ -74,6 +73,7 @@ public class DeckHandler : MonoBehaviour
         }
 
         List<Card> returnCards = new List<Card>();
+        numCards = Math.Min(numCards, Deck.Count);  //Gets the min between the cards requested and the current cards in deck
 
         if (removeFromDeck)
         {

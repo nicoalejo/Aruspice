@@ -115,7 +115,6 @@ public class TrickHandler : MonoBehaviour
     public void Discard4ShowDeck()
     {
         onDiscardshowDeck?.Invoke(deckHandler.Deck);
-        HasEnoughActionForTrick(onActionTaken?.Invoke(discardAction));
     }
 
     private void DiscardCardSelected(Card cardSelected, bool isSelected)
@@ -137,6 +136,7 @@ public class TrickHandler : MonoBehaviour
         Debug.Log("Deck Shuffled");
         DiscardCardHandler.cardsSelected = 0;
         onDiscard4?.Invoke();
+        HasEnoughActionForTrick(onActionTaken?.Invoke(shuffleAction));
     }
 
     public void ShuffleDeck()
@@ -154,13 +154,27 @@ public class TrickHandler : MonoBehaviour
 
     public void HasEnoughActionForTrick(int? actionsLeft)
     {
-        foreach (Tuple<Button,int> buttonsActions in trickButtonsActionsList)
+        //If deck has 0 cards it deactivates all buttons
+        if (deckHandler.Deck.Count == 0)
         {
-            if (buttonsActions.Item2 > actionsLeft)
+            foreach (Tuple<Button,int> buttonsActions in trickButtonsActionsList)
+            {
                 buttonsActions.Item1.interactable = false;
-            else
-                buttonsActions.Item1.interactable = true;
+            }
         }
+        else
+        {
+            //Checks if the button's action cost is less than the actions left
+            foreach (Tuple<Button,int> buttonsActions in trickButtonsActionsList)
+            {
+                if (buttonsActions.Item2 > actionsLeft)
+                    buttonsActions.Item1.interactable = false;
+                else
+                    buttonsActions.Item1.interactable = true;
+            }    
+        }
+        
+        
     }
     
 }
