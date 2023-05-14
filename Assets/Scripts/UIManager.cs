@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI altarValueTextUI;       //Altar value text
     [SerializeField] private TextMeshProUGUI expectedValueUI;
     [SerializeField] private TextMeshProUGUI deckCardsLeft;
+    [SerializeField] private GameObject panelSelectNumberAltarUI;   //Panel for selecting number for altar at the begging of the game
     
     [Header("Tricks")]
     [SerializeField] private GameObject trickPanelUI;
@@ -172,6 +173,10 @@ public class UIManager : MonoBehaviour
 
     #region General Functions
 
+    public void HideShowPanelSelectAltarNumber(bool show)
+    {
+        panelSelectNumberAltarUI.SetActive(show);
+    }
     private void ClearAltarContainer()
     {
         //Deletes all items in the card container

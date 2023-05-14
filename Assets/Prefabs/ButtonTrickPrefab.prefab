@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6145002306237950954}
   m_Layer: 5
-  m_Name: ButtonTrick
+  m_Name: ButtonTrickPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

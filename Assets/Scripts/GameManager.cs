@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RectTransform handZoneUI;
     [SerializeField] private RectTransform altarZoneUI;
     [SerializeField] private HandHandler handHandler;
+    [SerializeField] private GameObject currentValueGO;
     
     [Header("Handlers")]
     [SerializeField] private TrickHandler trickHandler;
@@ -39,8 +40,7 @@ public class GameManager : MonoBehaviour
         actionsLeftThisRound = numberOfActionPerRound;
         uiManager.UpdateActionsValue(actionsLeftThisRound);
         uiManager.UpdateRoundValue(currentRound);
-        uiManager.UpdateExpectedValue(expectedValue);
-        
+
         deckHandler.DealCards(cardsToDealEachRound); //Deal cards at the start of game
         
         uiManager.UpdateDeckCardsLeftValue(deckHandler.Deck.Count); //Update deck cards left after deal the cards
@@ -69,14 +69,25 @@ public class GameManager : MonoBehaviour
     {
         AltarDropZone.onCardDropOnAltar += CardDropOnAltar;
         TrickHandler.onActionTaken += ActionTaken;
+        PickNumberHandler.onNumberPicked += NumberExpectedSelected;
     }
 
     private void OnDisable()
     {
         AltarDropZone.onCardDropOnAltar -= CardDropOnAltar;
         TrickHandler.onActionTaken -= ActionTaken;
+        PickNumberHandler.onNumberPicked -= NumberExpectedSelected;
     }
 
+    //Sets the current number to expect in the altar
+    private void NumberExpectedSelected(int expectedNumber)
+    {
+        expectedValue = expectedNumber;                 //Set expected number in GameManager
+        uiManager.UpdateExpectedValue(expectedValue);   //Update value in UI
+        uiManager.HideShowPanelSelectAltarNumber(false); //Hide panel to choose numbers
+    }
+
+    //Activates the confirmation panel to drop card on altar and sets the currentCardToDropAltar
     private void CardDropOnAltar(CardDragHandler cardDragHandler)
     {
         uiManager.ActivateConfirmationPanel(true);
@@ -89,20 +100,29 @@ public class GameManager : MonoBehaviour
         currentCardToDropAltar.GetComponent<RectTransform>().SetParent(handZoneUI);
         uiManager.ActivateConfirmationPanel(false);
     }
-
+    
+    //If the player accepts the card dropped in the altar, sets that card as child of the altar GO
     public void AcceptDropAltar()
     {
         CardHandler currentCardHandler = currentCardToDropAltar.GetComponent<CardHandler>();
-        handHandler.RemoveCard(currentCardHandler);     //Remove from hand
-        cardsInAltar.Add(currentCardHandler.CardData);  //Add to altar
-        //currentCardHandler.AddComponent<CardLogCalculation>(); //Adds the component to show the value calculation in Log
+        handHandler.RemoveCard(currentCardHandler);     //Remove from hand card list
+        cardsInAltar.Add(currentCardHandler.CardData);  //Add to altar card list
+        
+        CreateCurrentValueGo(currentCardHandler);       //Creates new CurrentValueGO and adds it to the current card
+
         cardsInAltarWithHandler.Add(currentCardHandler.AddComponent<CardLogCalculation>()); //Adds the component to show the value calculation in Log
         Destroy(currentCardToDropAltar);                //Destroy script for dragging
         uiManager.ActivateConfirmationPanel(false);     //Deactivate panel to confirm
         CalculateAltarValue();                          //Recalculate current altar value
         uiManager.UpdateAltarValue(currentAltarValue);  //Update UI for altar value
 
-        CheckExpectedValueReached();
+        CheckExpectedValueReached();                    //Check if the expected value is reached
+    }
+    
+    //Creates new object to show the current value of the card, and sets it's position
+    private void CreateCurrentValueGo(CardHandler currentCardHandler)
+    {
+        Instantiate(currentValueGO, currentCardHandler.transform);
     }
 
     //TODO: Fix this, for now just reloads the first scene
@@ -159,8 +179,8 @@ public class GameManager : MonoBehaviour
         
         //Add first card
         tempCalculationList.Add(new Card(cardsInAltar[0].Suit, cardsInAltar[0].Value));
-        cardsInAltarWithHandler[0].SetInitialValueLog(cardsInAltar[0].Suit, cardsInAltar[0].Value);
-
+        cardsInAltarWithHandler[0].SetInitialValueLog(cardsInAltar[0].Suit, cardsInAltar[0].Value);     //Sets the initial log value 
+      
         //First we multiply
         for (int i = 1; i < cardsInAltar.Count; i++)
         {
@@ -173,7 +193,6 @@ public class GameManager : MonoBehaviour
                 tempCardHolder.Value *= 2;
                 cardsInAltarWithHandler[i].SetMultiplyLogInfo(cardsInAltar[i-1].Suit, tempCardHolder.Value); //Sets multiplier for log
             }
-           
             tempCalculationList.Add(tempCardHolder);
         }
 
@@ -186,22 +205,23 @@ public class GameManager : MonoBehaviour
                 if (tempCalculationList[i].Value > 0)
                 {
                     tempCalculationList[i].Value--;
-                    cardsInAltarWithHandler[i].SetSubtractLogInfo(tempCalculationList[i].Suit, tempCalculationList[i].Value, false);
+                    cardsInAltarWithHandler[i].SetSubtractLogInfo(tempCalculationList[i].Suit, tempCalculationList[i].Value, false);    //Sets subtract for log
                 }
                 if (tempCalculationList[i+1].Value > 0)
                 {
                     tempCalculationList[i+1].Value--;
-                    cardsInAltarWithHandler[i+1].SetSubtractLogInfo(tempCalculationList[i+1].Suit, tempCalculationList[i+1].Value, true);
+                    cardsInAltarWithHandler[i+1].SetSubtractLogInfo(tempCalculationList[i+1].Suit, tempCalculationList[i+1].Value, true); //Sets subtract of next card for log
                 }
             }
         }
         
         //Sum all values after calculations
         currentAltarValue = 0;
-        
-        foreach (Card tempCard in tempCalculationList)
+
+        for (int i = 0; i < tempCalculationList.Count; i++)
         {
-            currentAltarValue += tempCard.Value;
+            cardsInAltarWithHandler[i].GetComponentInChildren<CardCurrentValue>().UpdateCurrentValue(tempCalculationList[i].Value); //Sets the current value in the CardCurrentValue component of the card
+            currentAltarValue += tempCalculationList[i].Value;
         }
     }
 
