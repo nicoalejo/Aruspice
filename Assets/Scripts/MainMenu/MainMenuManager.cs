@@ -1,18 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public string SceneToLoad;
+    public Slider progressBar;
+    
+    
+    public void LoaderScene(){
+       StartCoroutine(LoadSceneAsync());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator LoadSceneAsync()
     {
-        
+        AsyncOperation operation = SceneManager.LoadSceneAsync(SceneToLoad);
+
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            progressBar.value = progress;
+            
+            yield return null;
+        }
     }
 }
