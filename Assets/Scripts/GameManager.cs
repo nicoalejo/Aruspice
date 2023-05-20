@@ -205,12 +205,12 @@ public class GameManager : MonoBehaviour
                 if (tempCalculationList[i].Value > 0)
                 {
                     tempCalculationList[i].Value--;
-                    cardsInAltarWithHandler[i].SetSubtractLogInfo(tempCalculationList[i].Suit, tempCalculationList[i].Value, false);    //Sets subtract for log
+                    cardsInAltarWithHandler[i].SetSubtractLogInfo(tempCalculationList[i+1].Suit, tempCalculationList[i].Value, false);    //Sets subtract for log
                 }
                 if (tempCalculationList[i+1].Value > 0)
                 {
                     tempCalculationList[i+1].Value--;
-                    cardsInAltarWithHandler[i+1].SetSubtractLogInfo(tempCalculationList[i+1].Suit, tempCalculationList[i+1].Value, true); //Sets subtract of next card for log
+                    cardsInAltarWithHandler[i+1].SetSubtractLogInfo(tempCalculationList[i].Suit, tempCalculationList[i+1].Value, true); //Sets subtract of next card for log
                 }
             }
         }

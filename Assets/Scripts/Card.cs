@@ -15,6 +15,8 @@ public class Card
 { 
     public CardSuit Suit { get; private set; }
     public int Value { get; set; }
+    
+    public Sprite CardArt { get; set; } 
 
     public Card(CardSuit suit, int value)
     {

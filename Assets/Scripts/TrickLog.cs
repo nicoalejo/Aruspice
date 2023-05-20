@@ -6,7 +6,6 @@ public class TrickLog : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private UIManager uiManager;
     
     private string titleInfo = "Truco\n";
-    private string explanationInfo = "Explicación del funcionamiento\n";
     [SerializeField] private int actionCost;
     [SerializeField] private string descriptionInfo = "";
      
@@ -20,7 +19,7 @@ public class TrickLog : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     
     public void OnPointerEnter(PointerEventData eventData)
     {
-        uiManager.FillLogUI(titleInfo, explanationInfo, descriptionInfo);
+        uiManager.FillLogUI(titleInfo, descriptionInfo);
     }
 
     public void OnPointerExit(PointerEventData eventData)

@@ -2,21 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public string SceneToLoad;
+    public string MainSceneToLoad;
     public Slider progressBar;
-    
-    
+
+    public void SimpleSceneLoader()
+    {
+        SceneManager.LoadScene(MainSceneToLoad);
+    }
     public void LoaderScene(){
        StartCoroutine(LoadSceneAsync());
     }
 
     IEnumerator LoadSceneAsync()
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(SceneToLoad);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(MainSceneToLoad);
 
         while (!operation.isDone)
         {

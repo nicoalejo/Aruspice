@@ -6,7 +6,6 @@ public class CardLogCalculation : MonoBehaviour, IPointerEnterHandler, IPointerE
     private UIManager uiManager;
     
     private string titleInfo = "Carta en Altar\n";
-    private string explanationInfo = "Explicación del valor actual\n";
     private string descriptionInfo = "";
     
     private CardSuit suit;
@@ -42,7 +41,7 @@ public class CardLogCalculation : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        uiManager.FillLogUI(titleInfo, explanationInfo, descriptionInfo);
+        uiManager.FillLogUI(titleInfo, descriptionInfo);
     }
 
     public void OnPointerExit(PointerEventData eventData)

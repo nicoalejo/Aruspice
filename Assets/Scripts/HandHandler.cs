@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HandHandler : MonoBehaviour
 {
@@ -19,7 +20,8 @@ public class HandHandler : MonoBehaviour
         {
             CardHandler newCard = Instantiate(cardPrefab, handUIContainer);
             newCard.Initialize(card);
-            newCard.gameObject.GetComponent<CardDragHandler>().Initialize(ghostCardHandler, handUIContainer, canvas);
+            newCard.GetComponent<CardDragHandler>().Initialize(ghostCardHandler, handUIContainer, canvas);
+            newCard.GetComponent<Image>().sprite = card.CardArt;
             cardsInHand.Add(newCard);
         }
         else

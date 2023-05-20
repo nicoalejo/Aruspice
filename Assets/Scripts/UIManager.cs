@@ -41,7 +41,6 @@ public class UIManager : MonoBehaviour
     
     [Header("Game Over Panel")]
     [SerializeField] private TextMeshProUGUI titleLogUI;
-    [SerializeField] private TextMeshProUGUI explanationLogUI;
     [SerializeField] private TextMeshProUGUI descriptionLogUI;
     
     private void Start()
@@ -71,14 +70,12 @@ public class UIManager : MonoBehaviour
     public void ClearLogUI()
     {
         titleLogUI.text = "";
-        explanationLogUI.text = "";
         descriptionLogUI.text = "";
     }
 
-    public void FillLogUI(string title, string explanation, string description)
+    public void FillLogUI(string title, string description)
     {
         titleLogUI.text = title;
-        explanationLogUI.text = explanation;
         descriptionLogUI.text = description;
     }
 
@@ -101,6 +98,7 @@ public class UIManager : MonoBehaviour
         {
             CardHandler cardInContainer = Instantiate(cardPrefabDiscard, cardContainerUI.transform);
             cardInContainer.Initialize(cardInDeck);
+            cardInContainer.GetComponent<Image>().sprite = cardInDeck.CardArt;
         }
     }
     
@@ -161,6 +159,7 @@ public class UIManager : MonoBehaviour
         {
             CardHandler cardTop10 = Instantiate(cardPrefabNoDrag, cardContainerUI.transform);
             cardTop10.Initialize(tuple.Item1);
+            cardTop10.GetComponent<Image>().sprite = tuple.Item1.CardArt;
 
             if (tuple.Item2)
             {
@@ -260,6 +259,8 @@ public class UIManager : MonoBehaviour
         {
             CardHandler cardTop5 = Instantiate(cardPrefabNoDrag, cardContainerUI.transform);
             cardTop5.Initialize(card);
+            cardTop5.GetComponent<Image>().sprite = card.CardArt;
+
         }
     }
 

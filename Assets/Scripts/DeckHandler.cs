@@ -27,9 +27,14 @@ public class DeckHandler : MonoBehaviour
         Deck = new List<Card>();
         foreach (CardSuit suit in System.Enum.GetValues(typeof(CardSuit)))
         {
+            String suitString = suit.ToString();
+            String pathCardArt = suitString + "/" + suitString[0];
+            
             for (int value = 1; value <= DeckMaxValue; value++)
             {
-                Deck.Add(new Card(suit, value));
+                Card newCard = new Card(suit, value);
+                newCard.CardArt = Resources.Load<Sprite>(pathCardArt + $"{value}");
+                Deck.Add(newCard);
             }
         }
     }

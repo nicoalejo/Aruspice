@@ -43,15 +43,6 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         {
             rectTransform.SetParent(HandZoneUI);
         }
-        
-        // if (eventData.pointerEnter == null)
-        // {
-        //     rectTransform.SetParent(HandZoneUI);
-        // }
-        // else if (!eventData.pointerEnter.gameObject.TryGetComponent(out AltarDropZone altarDropZone))
-        // {
-        //     rectTransform.SetParent(HandZoneUI);
-        // }
         canvasGroup.blocksRaycasts = true;
         
 
