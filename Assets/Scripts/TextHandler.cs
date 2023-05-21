@@ -13,10 +13,23 @@ public class TextHandler : MonoBehaviour
     [TextArea]
     [SerializeField] private string introText;
     [SerializeField] private int letterPerSecond;
-    [SerializeField] private Image[] imagesToShow; 
+    [SerializeField] private Image[] imagesToShow;
+
+    private bool isTextComplete = false;
+    private Coroutine introCoroutine;
     private void Start()
     {
         StartCoroutine(Intro());
+    }
+
+    private void OnEnable()
+    {
+        ControlsHandler.onEventLeftMouse += ContinueAll;
+    }
+
+    private void OnDisable()
+    {
+        ControlsHandler.onEventLeftMouse -= ContinueAll;
     }
 
     //Shows the intro screen and then load the first level
@@ -24,9 +37,10 @@ public class TextHandler : MonoBehaviour
     {
         if (shouldShow)
         {
-            yield return TypeDialog(introText);
+            introCoroutine = StartCoroutine(TypeDialog(introText));
+            yield return introCoroutine;
             yield return new WaitForSeconds(4f);
-         
+            //introPanelUI.SetActive(false);
         }
         else
         {
@@ -52,8 +66,17 @@ public class TextHandler : MonoBehaviour
 
     private void ContinueAll()
     {
-        StopCoroutine(Intro());
-        introPanelUI.SetActive(false);
+        if (!isTextComplete)
+        {
+            StopCoroutine(introCoroutine);
+            introTextUI.text = introText;
+            isTextComplete = true;
+        }
+        else
+        {
+            introPanelUI.SetActive(false);  
+        }
+
     }
     
 }

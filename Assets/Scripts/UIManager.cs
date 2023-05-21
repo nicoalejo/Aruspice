@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI expectedValueUI;
     [SerializeField] private TextMeshProUGUI deckCardsLeft;
     [SerializeField] private GameObject panelSelectNumberAltarUI;   //Panel for selecting number for altar at the begging of the game
+    [SerializeField] private GameObject panelInstructionsUI;
     
     [Header("Tricks")]
     [SerializeField] private GameObject trickPanelUI;
@@ -67,6 +68,16 @@ public class UIManager : MonoBehaviour
         TrickHandler.onTop5 -= PopulateCardsContainerTop5;
     }
 
+    public void OpenInstructions()
+    {
+        panelInstructionsUI.SetActive(true);
+    }
+
+    public void CloseInstructions()
+    {
+        panelInstructionsUI.SetActive(false);
+    }
+    
     public void ClearLogUI()
     {
         titleLogUI.text = "";
