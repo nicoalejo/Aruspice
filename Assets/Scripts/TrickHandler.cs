@@ -30,7 +30,7 @@ public class TrickHandler : MonoBehaviour
     [SerializeField] private int lookTop5Action = 1;
     
     [Header("Trick Buttons")]
-    [SerializeField] private Button drawButton;
+    //[SerializeField] private Button drawButton;
     [SerializeField] private Button top10SuitButton;
     [SerializeField] private Button top10ValueButton;
     [SerializeField] private Button discardButton;
@@ -42,7 +42,7 @@ public class TrickHandler : MonoBehaviour
 
     private void Start()
     {
-        trickButtonsActionsList.Add(new Tuple<Button, int>(drawButton,drawAction));
+        //trickButtonsActionsList.Add(new Tuple<Button, int>(drawButton,drawAction));
         trickButtonsActionsList.Add(new Tuple<Button, int>(top10SuitButton,top10SuitValueAction));
         trickButtonsActionsList.Add(new Tuple<Button, int>(top10ValueButton,top10SuitValueAction));
         trickButtonsActionsList.Add(new Tuple<Button, int>(discardButton,discardAction));
@@ -73,6 +73,8 @@ public class TrickHandler : MonoBehaviour
          List<Card> top10Cards = deckHandler.GetCards(10, true);
          List<Card> cardsToAddDeck = new List<Card>();
          List<Tuple<Card, bool>> cardsKeepDiscard = new List<Tuple<Card, bool>>();
+         
+         PlayBtnSFX();
 
          if (buttonPressed.CompareTag("TrickTop10Suit"))
          {
@@ -114,6 +116,7 @@ public class TrickHandler : MonoBehaviour
 
     public void Discard4ShowDeck()
     {
+        PlayBtnSFX();
         onDiscardshowDeck?.Invoke(deckHandler.Deck);
     }
 
@@ -133,14 +136,17 @@ public class TrickHandler : MonoBehaviour
     {
         deckHandler.RemoveCards(discard4List);
         deckHandler.ShuffleDeck();
+        //PlayBtnSFX();
+        PlayShuffleBtnSFX();
         Debug.Log("Deck Shuffled");
         DiscardCardHandler.cardsSelected = 0;
         onDiscard4?.Invoke();
-        HasEnoughActionForTrick(onActionTaken?.Invoke(shuffleAction));
+        HasEnoughActionForTrick(onActionTaken?.Invoke(discardAction));
     }
 
     public void ShuffleDeck()
     {
+        PlayShuffleBtnSFX();
         deckHandler.ShuffleDeck();
         HasEnoughActionForTrick(onActionTaken?.Invoke(shuffleAction));
         Debug.Log("Deck Shuffled");
@@ -168,13 +174,27 @@ public class TrickHandler : MonoBehaviour
             foreach (Tuple<Button,int> buttonsActions in trickButtonsActionsList)
             {
                 if (buttonsActions.Item2 > actionsLeft)
+                {
                     buttonsActions.Item1.interactable = false;
+                }
                 else
+                {
                     buttonsActions.Item1.interactable = true;
+                }
             }    
         }
         
         
+    }
+    
+    private void PlayShuffleBtnSFX()
+    {
+        AudioManager.instance.PlayOnShotByDictionary(AudioManager.Gamesound.cardShuffleSFX);
+    }
+    
+    private void PlayBtnSFX()
+    {
+        AudioManager.instance.PlayOnShotByDictionary(AudioManager.Gamesound.btnMainMenuSFX);
     }
     
 }

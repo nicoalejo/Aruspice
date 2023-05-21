@@ -33,6 +33,7 @@ public class DiscardCardHandler : MonoBehaviour
     {
         if (!hasBeenSelected && cardsSelected < 4)
         {
+            AudioManager.instance.PlayOnShotByDictionary(AudioManager.Gamesound.cardSelectSFX);
             cardImage.color = Color.red;
             hasBeenSelected = !hasBeenSelected;
             cardsSelected++;
@@ -41,7 +42,8 @@ public class DiscardCardHandler : MonoBehaviour
         }
         else if(hasBeenSelected)
         {
-            cardImage.color = Color.blue;
+            AudioManager.instance.PlayOnShotByDictionary(AudioManager.Gamesound.cardSelectSFX);
+            cardImage.color = Color.white;
             hasBeenSelected = !hasBeenSelected;
             cardsSelected--;
             onDiscardCardSelected?.Invoke(cardHandler.CardData, hasBeenSelected);

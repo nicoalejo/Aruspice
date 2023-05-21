@@ -19,9 +19,10 @@ public class HandHandler : MonoBehaviour
         if (cardsInHand.Count < maxCards)
         {
             CardHandler newCard = Instantiate(cardPrefab, handUIContainer);
-            newCard.Initialize(card);
-            newCard.GetComponent<CardDragHandler>().Initialize(ghostCardHandler, handUIContainer, canvas);
-            newCard.GetComponent<Image>().sprite = card.CardArt;
+            newCard.Initialize(card);                                                           //Initialize Card
+            newCard.GetComponent<CardDragHandler>().Initialize(ghostCardHandler, handUIContainer, canvas); //Set Card Handler Drag
+            newCard.GetComponent<Image>().sprite = card.CardArt;                                //Set card art
+            AudioManager.instance.PlayOnShotByDictionary(AudioManager.Gamesound.cardDealSFX);   //Play deal card sfx
             cardsInHand.Add(newCard);
         }
         else

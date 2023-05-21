@@ -83,6 +83,8 @@ public class UIManager : MonoBehaviour
     //Activates the UI for the Trick Discard 4
     public void Discard4()
     {
+        PlayTrickBtnSFX();
+        
         ActivatePanelCards();
         buttonTrickDiscard4ShowDeckUI.SetActive(true);
     }
@@ -102,7 +104,7 @@ public class UIManager : MonoBehaviour
         }
     }
     
-    //Activates/Deactivates the button for the discard 4 trick if the selected cards are > 0
+    //Activates/Deactivates the button for the discard 4 trick if the selected cards are > 0 or less than 1
     private void ActivateDeactivateTrick4SelectButton(int totalCardsSelected)
     {
         buttonTrickDiscard4UI.GetComponent<Button>().interactable = totalCardsSelected > 0;
@@ -115,6 +117,8 @@ public class UIManager : MonoBehaviour
     //Activates the UI for the Trick Top 10 Suit
     public void Top10TrickSuitUI()
     {
+        PlayTrickBtnSFX();
+        
         ActivatePanelCards();
         dropDownSuitValue.gameObject.SetActive(true);
         
@@ -125,6 +129,8 @@ public class UIManager : MonoBehaviour
     //Activates the UI for the Trick Top 10 Value
     public void Top10TrickValueUI()
     {
+        PlayTrickBtnSFX();
+        
         ActivatePanelCards();
         dropDownSuitValue.gameObject.SetActive(true);
         
@@ -195,6 +201,7 @@ public class UIManager : MonoBehaviour
 
     public void CloseTrickPanel()
     {
+        PlayTrickBtnSFX();
         trickPanelUI.SetActive(false);
     }
     
@@ -209,6 +216,7 @@ public class UIManager : MonoBehaviour
         buttonTrickTop10SuitUI.SetActive(false);
         buttonTrickTop10ValueUI.SetActive(false);
         buttonTrickDiscard4UI.SetActive(false);
+        buttonTrickDiscard4ShowDeckUI.SetActive(false);
         trickPanelUI.SetActive(true);
         trickTop10SuitUI.SetActive(true);
         closePanelButtonUI.SetActive(true);
@@ -266,6 +274,7 @@ public class UIManager : MonoBehaviour
 
     public void TrickTop5UI()
     {
+        PlayTrickBtnSFX();
         ActivatePanelCards();
     }
 
@@ -285,5 +294,11 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
+    private void PlayTrickBtnSFX()
+    {
+        AudioManager.instance.PlayOnShotByDictionary(AudioManager.Gamesound.btnMainMenuSFX);
+    }
     
+
+
 }

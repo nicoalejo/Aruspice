@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Scenes")] 
+    [SerializeField] private string mainMenuScene;
+    [SerializeField] private string currentScene;
+
     [Header("Round Values")] 
     [SerializeField] private int numberOfRounds = 5;
     [SerializeField] private int numberOfActionPerRound = 3;
@@ -36,7 +40,9 @@ public class GameManager : MonoBehaviour
     {
         InitMultiplicationDictionary();
         InitSubtractDictionary();
-
+        
+        AudioManager.instance.StartOnMainPlay(AudioManager.Gamesound.level01MainTheme);//Init the music
+        
         actionsLeftThisRound = numberOfActionPerRound;
         uiManager.UpdateActionsValue(actionsLeftThisRound);
         uiManager.UpdateRoundValue(currentRound);
@@ -99,11 +105,13 @@ public class GameManager : MonoBehaviour
     {
         currentCardToDropAltar.GetComponent<RectTransform>().SetParent(handZoneUI);
         uiManager.ActivateConfirmationPanel(false);
+        AudioManager.instance.PlayOnShotByDictionary(AudioManager.Gamesound.btnMainMenuSFX);
     }
     
     //If the player accepts the card dropped in the altar, sets that card as child of the altar GO
     public void AcceptDropAltar()
     {
+        AudioManager.instance.PlayOnShotByDictionary(AudioManager.Gamesound.cardAddAltar);  //SFX when adding card to altar
         CardHandler currentCardHandler = currentCardToDropAltar.GetComponent<CardHandler>();
         handHandler.RemoveCard(currentCardHandler);     //Remove from hand card list
         cardsInAltar.Add(currentCardHandler.CardData);  //Add to altar card list
@@ -124,11 +132,15 @@ public class GameManager : MonoBehaviour
     {
         Instantiate(currentValueGO, currentCardHandler.transform);
     }
-
-    //TODO: Fix this, for now just reloads the first scene
+    
     public void ResetGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(currentScene);
+    }
+    
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(mainMenuScene);
     }
 
     private void CheckExpectedValueReached()
