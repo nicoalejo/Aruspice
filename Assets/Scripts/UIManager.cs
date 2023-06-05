@@ -36,9 +36,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Dropdown dropDownSuitValue;
     
     [Header("Game Over Panel")]
-    [SerializeField] private GameObject gameoverPanelUI;
-    [SerializeField] private TextMeshProUGUI gameoverAltarValueUI;
-    [SerializeField] private TextMeshProUGUI gameoverExpectedValueUI;
+    [SerializeField] private GameObject winPanelUI;
+    [SerializeField] private GameObject losePanelUI;
+    // [SerializeField] private TextMeshProUGUI gameoverAltarValueUI;
+    // [SerializeField] private TextMeshProUGUI gameoverExpectedValueUI;
     
     [Header("Game Over Panel")]
     [SerializeField] private TextMeshProUGUI titleLogUI;
@@ -249,20 +250,25 @@ public class UIManager : MonoBehaviour
         expectedValueUI.text = "" + newValue;
     }
 
-    public void ActivateGameOverPanel(bool isActive)
+    public void ActivateWinPanel()
     {
-        gameoverPanelUI.SetActive(isActive);
+        winPanelUI.SetActive(true);
+    }
+    
+    public void ActivateLosePanel()
+    {
+        losePanelUI.SetActive(true);
     }
 
-    public void UpdateGameOverExpectedValue(int newValue)
-    {
-        gameoverExpectedValueUI.text = "" + newValue;
-    }
-
-    public void UpdateGameOverAltarValue(int newValue)
-    {
-        gameoverAltarValueUI.text = "" + newValue;
-    }
+    // public void UpdateGameOverExpectedValue(int newValue)
+    // {
+    //     gameoverExpectedValueUI.text = "" + newValue;
+    // }
+    //
+    // public void UpdateGameOverAltarValue(int newValue)
+    // {
+    //     gameoverAltarValueUI.text = "" + newValue;
+    // }
 
     public void UpdateDeckCardsLeftValue(int cardsLeft)
     {

@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     private int currentAltarValue = 0;
     private int currentRound = 1;
     private int actionsLeftThisRound;
+    private bool isWin = false;
 
     private Dictionary<CardSuit, CardSuit> cardMultiplicationDictionary = new Dictionary<CardSuit, CardSuit>();
     private Dictionary<CardSuit, CardSuit> cardSubtractDictionary = new Dictionary<CardSuit, CardSuit>();
@@ -124,7 +125,7 @@ public class GameManager : MonoBehaviour
         CalculateAltarValue();                          //Recalculate current altar value
         uiManager.UpdateAltarValue(currentAltarValue);  //Update UI for altar value
 
-        CheckExpectedValueReached();                    //Check if the expected value is reached
+        CheckWin();                    //Check if the expected value is reached
     }
     
     //Creates new object to show the current value of the card, and sets it's position
@@ -143,12 +144,13 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(mainMenuScene);
     }
 
-    private void CheckExpectedValueReached()
+    private void CheckWin()
     {
         if (currentAltarValue == expectedValue)
         {
             Debug.Log("You Won");
-            HandleGameOver();
+            isWin = true;
+            HandleGameOver(isWin);
         }
         else
         {
@@ -163,7 +165,8 @@ public class GameManager : MonoBehaviour
         if (currentRound > numberOfRounds || deckHandler.Deck.Count == 0)
         {
             Debug.Log("You Lost");
-            HandleGameOver();
+            isWin = false;
+            HandleGameOver(isWin);
         }
         else
         {
@@ -178,11 +181,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void HandleGameOver()
+    private void HandleGameOver(bool win)
     {
-        uiManager.ActivateGameOverPanel(true);
-        uiManager.UpdateGameOverAltarValue(currentAltarValue);
-        uiManager.UpdateGameOverExpectedValue(expectedValue);
+        if (win)
+        {
+            uiManager.ActivateWinPanel();    
+        }
+        else
+        {
+            uiManager.ActivateLosePanel();
+        }
+        
+        // uiManager.UpdateGameOverAltarValue(currentAltarValue);
+        // uiManager.UpdateGameOverExpectedValue(expectedValue);
     } 
 
     private void CalculateAltarValue()
