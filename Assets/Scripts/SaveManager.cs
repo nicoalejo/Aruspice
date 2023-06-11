@@ -39,7 +39,10 @@ public class SaveManager : MonoBehaviour
                 numbersCompleted = wrapper.items;
             }
         }
-        Debug.Log("Not save found");
+        else
+        {
+            Debug.Log("Not save found");    
+        }
     }
     
     public void Save(int numberCompleted)

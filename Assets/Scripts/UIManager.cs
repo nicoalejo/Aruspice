@@ -23,7 +23,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI expectedValueUI;
     [SerializeField] private TextMeshProUGUI deckCardsLeft;
     [SerializeField] private GameObject panelSelectNumberAltarUI;   //Panel for selecting number for altar at the begging of the game
-    [SerializeField] private GameObject panelInstructionsUI;
+    [SerializeField] private GameObject panelInstructionsUI;        //Panel for instructions
+    [SerializeField] private GameObject panelPauseUI;               //Panel for pause
     
     [Header("Tricks")]
     [SerializeField] private GameObject trickPanelUI;
@@ -61,6 +62,7 @@ public class UIManager : MonoBehaviour
         DiscardCardHandler.onDiscardCard += ActivateDeactivateTrick4SelectButton;
         TrickHandler.onTop5 += PopulateCardsContainerTop5;
         TextHandler.onTextComplete += ActivateWinPanelWithImages;
+        ControlsHandler.onEventEscape += EscapePause;
     }
 
     private void OnDisable()
@@ -71,6 +73,12 @@ public class UIManager : MonoBehaviour
         DiscardCardHandler.onDiscardCard -= ActivateDeactivateTrick4SelectButton;
         TrickHandler.onTop5 -= PopulateCardsContainerTop5;
         TextHandler.onTextComplete -= ActivateWinPanelWithImages;
+        ControlsHandler.onEventEscape -= EscapePause;
+    }
+    
+    private void EscapePause()
+    {
+        panelPauseUI.SetActive(!panelPauseUI.activeSelf);
     }
 
     public void OpenInstructions()

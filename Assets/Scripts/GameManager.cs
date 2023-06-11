@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
     {
         Instantiate(currentValueGO, currentCardHandler.transform);
     }
-    
+
     public void ResetGame()
     {
         SceneManager.LoadScene(currentScene);
