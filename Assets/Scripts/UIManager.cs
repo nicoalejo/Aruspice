@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
     
     [Header("Game Over Panel")]
     [SerializeField] private GameObject winPanelUI;
+    [SerializeField] private GameObject winImagesPanelUI;
     [SerializeField] private GameObject losePanelUI;
     // [SerializeField] private TextMeshProUGUI gameoverAltarValueUI;
     // [SerializeField] private TextMeshProUGUI gameoverExpectedValueUI;
@@ -253,22 +254,28 @@ public class UIManager : MonoBehaviour
     public void ActivateWinPanel()
     {
         winPanelUI.SetActive(true);
+        ActivateImagesWinPanel();
+    }
+
+    private void ActivateImagesWinPanel()
+    {
+        List<int> achievedNumbers = SaveManager.instance.GetCompletedNumbers();
+        foreach (Transform imageInWinPanel in winImagesPanelUI.GetComponentInChildren<Transform>())
+        {
+            //Parse the name of the image to int
+            int.TryParse(imageInWinPanel.name, out int nameNumberImage);
+            if (achievedNumbers.Contains(nameNumberImage))
+            {
+                imageInWinPanel.gameObject.SetActive(true);
+            }
+        }
+        
     }
     
     public void ActivateLosePanel()
     {
         losePanelUI.SetActive(true);
     }
-
-    // public void UpdateGameOverExpectedValue(int newValue)
-    // {
-    //     gameoverExpectedValueUI.text = "" + newValue;
-    // }
-    //
-    // public void UpdateGameOverAltarValue(int newValue)
-    // {
-    //     gameoverAltarValueUI.text = "" + newValue;
-    // }
 
     public void UpdateDeckCardsLeftValue(int cardsLeft)
     {

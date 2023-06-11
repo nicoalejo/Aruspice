@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -27,16 +28,21 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DeckHandler deckHandler;
 
     private CardDragHandler currentCardToDropAltar;
-    private List<Card> cardsInAltar = new List<Card>();
+    private List<Card> cardsInAltar = new ();
     private List<CardLogCalculation> cardsInAltarWithHandler = new();
     private int currentAltarValue = 0;
     private int currentRound = 1;
     private int actionsLeftThisRound;
     private bool isWin = false;
 
-    private Dictionary<CardSuit, CardSuit> cardMultiplicationDictionary = new Dictionary<CardSuit, CardSuit>();
-    private Dictionary<CardSuit, CardSuit> cardSubtractDictionary = new Dictionary<CardSuit, CardSuit>();
-    
+    private Dictionary<CardSuit, CardSuit> cardMultiplicationDictionary = new ();
+    private Dictionary<CardSuit, CardSuit> cardSubtractDictionary = new ();
+
+    private void Awake()
+    {
+        SaveManager.instance.Test();
+    }
+
     private void Start()
     {
         InitMultiplicationDictionary();
@@ -185,15 +191,13 @@ public class GameManager : MonoBehaviour
     {
         if (win)
         {
-            uiManager.ActivateWinPanel();    
+            SaveManager.instance.Save(expectedValue);
+            uiManager.ActivateWinPanel();
         }
         else
         {
             uiManager.ActivateLosePanel();
         }
-        
-        // uiManager.UpdateGameOverAltarValue(currentAltarValue);
-        // uiManager.UpdateGameOverExpectedValue(expectedValue);
     } 
 
     private void CalculateAltarValue()
