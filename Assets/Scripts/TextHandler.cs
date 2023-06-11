@@ -3,25 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class TextHandler : MonoBehaviour
 {
-    [SerializeField] private bool shouldShow = true;
-    [SerializeField] private GameObject introPanelUI;
-    [SerializeField] private TextMeshProUGUI introTextUI;
+    public static Action onTextComplete;
+    
+    [SerializeField] private TextMeshProUGUI textUI;
     [TextArea]
     [SerializeField] private string introText;
     [SerializeField] private int letterPerSecond;
     [SerializeField] private Image[] imagesToShow;
 
     private bool isTextComplete = false;
-    private Coroutine introCoroutine;
-    private void Start()
-    {
-        StartCoroutine(Intro());
-    }
-
+    private String currentText = "";
+    private Coroutine textCoroutine;
+    
+    
     private void OnEnable()
     {
         ControlsHandler.onEventLeftMouse += ContinueAll;
@@ -33,28 +32,21 @@ public class TextHandler : MonoBehaviour
     }
 
     //Shows the intro screen and then load the first level
-    IEnumerator Intro()
+    public IEnumerator Intro()
     {
-        if (shouldShow)
-        {
-            introCoroutine = StartCoroutine(TypeDialog(introText));
-            yield return introCoroutine;
-            yield return new WaitForSeconds(4f);
-            //introPanelUI.SetActive(false);
-        }
-        else
-        {
-            introPanelUI.SetActive(false);
-        }
+        currentText = introText;
+        textCoroutine = StartCoroutine(TypeDialog(currentText));
+        yield return textCoroutine;
+        yield return new WaitForSeconds(4f);
     }
 
-    //Shows text smoothly
-    public IEnumerator TypeDialog(string line)
+    //Recieves a textUI and a string and shows the text smoothly in the textUI
+    private IEnumerator TypeDialog(string line)
     {
-        introTextUI.text = "";
+        textUI.text = "";
         foreach (var letter in line.ToCharArray())
         {
-            introTextUI.text += letter;
+            textUI.text += letter;
             yield return new WaitForSeconds(1f / letterPerSecond);
         }
     }
@@ -68,15 +60,23 @@ public class TextHandler : MonoBehaviour
     {
         if (!isTextComplete)
         {
-            StopCoroutine(introCoroutine);
-            introTextUI.text = introText;
+            StopCoroutine(textCoroutine);
+            textUI.text = currentText;
             isTextComplete = true;
         }
         else
         {
-            introPanelUI.SetActive(false);  
+           onTextComplete?.Invoke();
         }
 
+    }
+    
+    public IEnumerator ShowTextInGO(string textToShow)
+    {
+        currentText = textToShow;
+        textCoroutine = StartCoroutine(TypeDialog(currentText));;
+        yield return textCoroutine;
+        yield return new WaitForSeconds(4f);
     }
     
 }

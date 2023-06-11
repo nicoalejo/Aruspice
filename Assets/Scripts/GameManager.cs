@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     [Header("Handlers")]
     [SerializeField] private TrickHandler trickHandler;
     [SerializeField] private DeckHandler deckHandler;
+    [SerializeField] private TextHandler textHandler;
 
     private CardDragHandler currentCardToDropAltar;
     private List<Card> cardsInAltar = new ();
@@ -34,15 +35,11 @@ public class GameManager : MonoBehaviour
     private int currentRound = 1;
     private int actionsLeftThisRound;
     private bool isWin = false;
+    private List<int> completedNumbers = new();
 
     private Dictionary<CardSuit, CardSuit> cardMultiplicationDictionary = new ();
     private Dictionary<CardSuit, CardSuit> cardSubtractDictionary = new ();
-
-    private void Awake()
-    {
-        SaveManager.instance.Test();
-    }
-
+    
     private void Start()
     {
         InitMultiplicationDictionary();
@@ -58,6 +55,17 @@ public class GameManager : MonoBehaviour
         
         uiManager.UpdateDeckCardsLeftValue(deckHandler.Deck.Count); //Update deck cards left after deal the cards
         uiManager.ClearLogUI(); //Cleans the Log text
+        
+        completedNumbers = SaveManager.instance.GetCompletedNumbers();
+        if (completedNumbers.Count == 0) //Shows intro text if the player has not completed any number
+        {
+            StartCoroutine(textHandler.Intro());    
+        }
+        else
+        {
+            uiManager.ActivateTextGameObject(false);
+        }
+        
     }
     
     //Define multiplication interaction between suits
@@ -192,7 +200,7 @@ public class GameManager : MonoBehaviour
         if (win)
         {
             SaveManager.instance.Save(expectedValue);
-            uiManager.ActivateWinPanel();
+            uiManager.ActivateWinPanel(expectedValue);
         }
         else
         {

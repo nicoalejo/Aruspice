@@ -24,9 +24,10 @@ public class SaveManager : MonoBehaviour
             Destroy(gameObject);
         
         savePath = Path.Combine(Application.persistentDataPath, "NumbersAchieved.json");
+        Load();
     }
     
-    public List<int> Load()
+    public void Load()
     {
         if (File.Exists(savePath))
         {
@@ -37,12 +38,8 @@ public class SaveManager : MonoBehaviour
             {
                 numbersCompleted = wrapper.items;
             }
-
-            return numbersCompleted;
         }
- 
         Debug.Log("Not save found");
-        return null;
     }
     
     public void Save(int numberCompleted)
@@ -60,12 +57,5 @@ public class SaveManager : MonoBehaviour
     {
         return numbersCompleted;
     }
-
-    //Activates some objects to test the save and load
-    public void Test()
-    {
-        // Save(11);
-        // Save(48);
-        // Save(71);
-    }
+    
 }

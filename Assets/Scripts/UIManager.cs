@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,10 +40,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject winPanelUI;
     [SerializeField] private GameObject winImagesPanelUI;
     [SerializeField] private GameObject losePanelUI;
-    // [SerializeField] private TextMeshProUGUI gameoverAltarValueUI;
-    // [SerializeField] private TextMeshProUGUI gameoverExpectedValueUI;
-    
-    [Header("Game Over Panel")]
+    [SerializeField] private GameObject textGameObjectUI;
+    [SerializeField] private TextHandler textHandler;
+
+    [Header("Log Panel")]
     [SerializeField] private TextMeshProUGUI titleLogUI;
     [SerializeField] private TextMeshProUGUI descriptionLogUI;
     
@@ -59,6 +60,7 @@ public class UIManager : MonoBehaviour
         TrickHandler.onDiscard4 += CloseTrickPanel;
         DiscardCardHandler.onDiscardCard += ActivateDeactivateTrick4SelectButton;
         TrickHandler.onTop5 += PopulateCardsContainerTop5;
+        TextHandler.onTextComplete += ActivateWinPanelWithImages;
     }
 
     private void OnDisable()
@@ -68,6 +70,7 @@ public class UIManager : MonoBehaviour
         TrickHandler.onDiscard4 -= CloseTrickPanel;
         DiscardCardHandler.onDiscardCard -= ActivateDeactivateTrick4SelectButton;
         TrickHandler.onTop5 -= PopulateCardsContainerTop5;
+        TextHandler.onTextComplete -= ActivateWinPanelWithImages;
     }
 
     public void OpenInstructions()
@@ -251,10 +254,17 @@ public class UIManager : MonoBehaviour
         expectedValueUI.text = "" + newValue;
     }
 
-    public void ActivateWinPanel()
+    public void ActivateWinPanel(int winValue)
     {
-        winPanelUI.SetActive(true);
-        ActivateImagesWinPanel();
+        StartCoroutine(ActivateWinPanelCoroutine(winValue));
+    }
+
+    private IEnumerator ActivateWinPanelCoroutine(int winValue)
+    {
+        ActivateTextGameObject(true);
+        yield return StartCoroutine(textHandler.ShowTextInGO(TextWinManager.instance.GetTextById(winValue)));
+        
+        ActivateWinPanelWithImages();
     }
 
     private void ActivateImagesWinPanel()
@@ -271,6 +281,13 @@ public class UIManager : MonoBehaviour
         }
         
     }
+
+    private void ActivateWinPanelWithImages()
+    {
+        ActivateTextGameObject(false);
+        winPanelUI.SetActive(true);
+        ActivateImagesWinPanel();
+    }
     
     public void ActivateLosePanel()
     {
@@ -281,6 +298,11 @@ public class UIManager : MonoBehaviour
     {
         deckCardsLeft.text = cardsLeft.ToString();
     } 
+    
+    public void ActivateTextGameObject(bool isActive)
+    {
+        textGameObjectUI.SetActive(isActive);
+    }
 
     #endregion
 

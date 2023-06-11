@@ -19,7 +19,7 @@ public class PickNumberHandler : MonoBehaviour
             Destroy(item.gameObject);
         }
 
-        List<int> numbersAchieved = SaveManager.instance.Load();
+        List<int> numbersAchieved = SaveManager.instance.GetCompletedNumbers();
 
         for (int i = 0; i < numbersToPickArray.Length; i++)
         {
