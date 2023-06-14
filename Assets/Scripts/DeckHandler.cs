@@ -11,20 +11,163 @@ public class DeckHandler : MonoBehaviour
     public const int DeckMaxValue = 13;
     
     [SerializeField] private HandHandler handHandler;
-    public List<Card> Deck { get; private set; }
+    public List<Card> Deck { get; private set; } = new ();
 
 
     private void Awake()
     {
         handHandler.Init();
-        
+
         InitializeDeck();
         ShuffleDeck();
+    }
+        
+
+    private void InitDeckTutorial()
+    {
+        Card newCard = new Card(CardSuit.Buho, 13);
+        newCard.CardArt = Resources.Load<Sprite>("Buho/B13");
+        Deck.Add(newCard);
+        
+        newCard = new Card(CardSuit.Lamassu, 4);
+        newCard.CardArt = Resources.Load<Sprite>("Lamassu/L4");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Buho, 6);
+        newCard.CardArt = Resources.Load<Sprite>("Buho/B6");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Puertas, 13);
+        newCard.CardArt = Resources.Load<Sprite>("Puertas/P13");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Frutas, 5);
+        newCard.CardArt = Resources.Load<Sprite>("Frutas/F5");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Puertas, 11);
+        newCard.CardArt = Resources.Load<Sprite>("Puertas/P11");
+        Deck.Add(newCard);
+        
+        newCard = new Card(CardSuit.Frutas, 11);
+        newCard.CardArt = Resources.Load<Sprite>("Frutas/F11");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Frutas, 6);
+        newCard.CardArt = Resources.Load<Sprite>("Frutas/F6");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Frutas, 3);
+        newCard.CardArt = Resources.Load<Sprite>("Frutas/F3");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Puertas, 7);
+        newCard.CardArt = Resources.Load<Sprite>("Puertas/P7");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Buho, 10);
+        newCard.CardArt = Resources.Load<Sprite>("Buho/B10");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Puertas, 1);
+        newCard.CardArt = Resources.Load<Sprite>("Puertas/P1");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Lamassu, 11);
+        newCard.CardArt = Resources.Load<Sprite>("Lamassu/L11");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Frutas, 8);
+        newCard.CardArt = Resources.Load<Sprite>("Frutas/F8");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Puertas, 12);
+        newCard.CardArt = Resources.Load<Sprite>("Puertas/P12");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Puertas, 6);
+        newCard.CardArt = Resources.Load<Sprite>("Puertas/P6");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Puertas, 5);
+        newCard.CardArt = Resources.Load<Sprite>("Puertas/P5");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Buho, 4);
+        newCard.CardArt = Resources.Load<Sprite>("Buho/B4");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Buho, 3);
+        newCard.CardArt = Resources.Load<Sprite>("Buho/B3");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Lamassu, 9);
+        newCard.CardArt = Resources.Load<Sprite>("Lamassu/L9");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Puertas, 8);
+        newCard.CardArt = Resources.Load<Sprite>("Puertas/P8");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Lamassu, 12);
+        newCard.CardArt = Resources.Load<Sprite>("Lamassu/L12");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Frutas, 10);
+        newCard.CardArt = Resources.Load<Sprite>("Frutas/F10");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Lamassu, 7);
+        newCard.CardArt = Resources.Load<Sprite>("Lamassu/L7");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Buho, 2);
+        newCard.CardArt = Resources.Load<Sprite>("Buho/B2");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Puertas, 4);
+        newCard.CardArt = Resources.Load<Sprite>("Puertas/P4");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Lamassu, 2);
+        newCard.CardArt = Resources.Load<Sprite>("Lamassu/L2");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Puertas, 10);
+        newCard.CardArt = Resources.Load<Sprite>("Puertas/P10");
+        Deck.Add(newCard);
+        
+        newCard = new Card(CardSuit.Lamassu, 13);
+        newCard.CardArt = Resources.Load<Sprite>("Lamassu/L13");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Puertas, 9);
+        newCard.CardArt = Resources.Load<Sprite>("Puertas/P9");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Buho, 11);
+        newCard.CardArt = Resources.Load<Sprite>("Buho/B11");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Lamassu, 3);
+        newCard.CardArt = Resources.Load<Sprite>("Lamassu/L3");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Frutas, 13);
+        newCard.CardArt = Resources.Load<Sprite>("Frutas/F13");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Buho, 8);
+        newCard.CardArt = Resources.Load<Sprite>("Buho/B8");
+        Deck.Add(newCard);
+
+        newCard = new Card(CardSuit.Lamassu, 5);
+        newCard.CardArt = Resources.Load<Sprite>("Lamassu/L5");
+        Deck.Add(newCard);
     }
 
     private void InitializeDeck()
     {
-        Deck = new List<Card>();
         foreach (CardSuit suit in System.Enum.GetValues(typeof(CardSuit)))
         {
             String suitString = suit.ToString();

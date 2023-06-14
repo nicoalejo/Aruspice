@@ -8,8 +8,9 @@ using UnityEngine.UI;
 
 public class TextHandler : MonoBehaviour
 {
-    public static Action onTextComplete;
-    
+    public delegate void OnTextComplete(bool isTextIntro);
+    public static OnTextComplete onTextComplete;
+
     [SerializeField] private TextMeshProUGUI textUI;
     [TextArea]
     [SerializeField] private string introText;
@@ -19,6 +20,7 @@ public class TextHandler : MonoBehaviour
     private bool isTextComplete = false;
     private String currentText = "";
     private Coroutine textCoroutine;
+    private bool isTextIntro = true;
     
     
     private void OnEnable()
@@ -34,6 +36,7 @@ public class TextHandler : MonoBehaviour
     //Shows the intro screen and then load the first level
     public IEnumerator Intro()
     {
+        isTextIntro = true;
         currentText = introText;
         textCoroutine = StartCoroutine(TypeDialog(currentText));
         yield return textCoroutine;
@@ -64,15 +67,15 @@ public class TextHandler : MonoBehaviour
             textUI.text = currentText;
             isTextComplete = true;
         }
-        else
+        else 
         {
-           onTextComplete?.Invoke();
+            onTextComplete?.Invoke(isTextIntro);
         }
-
     }
     
     public IEnumerator ShowTextInGO(string textToShow)
     {
+        isTextIntro = false;
         currentText = textToShow;
         textCoroutine = StartCoroutine(TypeDialog(currentText));;
         yield return textCoroutine;

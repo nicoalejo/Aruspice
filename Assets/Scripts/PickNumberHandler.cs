@@ -27,6 +27,7 @@ public class PickNumberHandler : MonoBehaviour
              currentNumberToPick.GetComponentInChildren<TextMeshProUGUI>().text = numbersToPickArray[i].ToString();
              var tempValue = i;         //Creates a temp value for i to send to the anonymous function
              currentNumberToPick.GetComponent<Button>().onClick.AddListener(() => onNumberPicked?.Invoke(numbersToPickArray[tempValue])) ;
+             //Change color of already completed numbers
              if (numbersAchieved != null && numbersAchieved.Contains(numbersToPickArray[i]))
              {
                  currentNumberToPick.GetComponent<Image>().color = new Color(209, 0, 20);

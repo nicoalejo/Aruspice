@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TrickHandler trickHandler;
     [SerializeField] private DeckHandler deckHandler;
     [SerializeField] private TextHandler textHandler;
-
+    
     private CardDragHandler currentCardToDropAltar;
     private List<Card> cardsInAltar = new ();
     private List<CardLogCalculation> cardsInAltarWithHandler = new();
@@ -39,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     private Dictionary<CardSuit, CardSuit> cardMultiplicationDictionary = new ();
     private Dictionary<CardSuit, CardSuit> cardSubtractDictionary = new ();
-    
+
     private void Start()
     {
         InitMultiplicationDictionary();
@@ -90,7 +91,8 @@ public class GameManager : MonoBehaviour
     {
         AltarDropZone.onCardDropOnAltar += CardDropOnAltar;
         TrickHandler.onActionTaken += ActionTaken;
-        PickNumberHandler.onNumberPicked += NumberExpectedSelected;
+        PickNumberHandler.onNumberPicked += NumberExpectedSelected;    
+
     }
 
     private void OnDisable()

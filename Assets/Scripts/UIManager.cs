@@ -61,7 +61,7 @@ public class UIManager : MonoBehaviour
         TrickHandler.onDiscard4 += CloseTrickPanel;
         DiscardCardHandler.onDiscardCard += ActivateDeactivateTrick4SelectButton;
         TrickHandler.onTop5 += PopulateCardsContainerTop5;
-        TextHandler.onTextComplete += ActivateWinPanelWithImages;
+        TextHandler.onTextComplete += StartActivateWinPanel;
         ControlsHandler.onEventEscape += EscapePause;
     }
 
@@ -72,7 +72,7 @@ public class UIManager : MonoBehaviour
         TrickHandler.onDiscard4 -= CloseTrickPanel;
         DiscardCardHandler.onDiscardCard -= ActivateDeactivateTrick4SelectButton;
         TrickHandler.onTop5 -= PopulateCardsContainerTop5;
-        TextHandler.onTextComplete -= ActivateWinPanelWithImages;
+        TextHandler.onTextComplete -= StartActivateWinPanel;
         ControlsHandler.onEventEscape -= EscapePause;
     }
     
@@ -272,7 +272,35 @@ public class UIManager : MonoBehaviour
         ActivateTextGameObject(true);
         yield return StartCoroutine(textHandler.ShowTextInGO(TextWinManager.instance.GetTextById(winValue)));
         
-        ActivateWinPanelWithImages();
+        ActivateWinPanelWithImages(false);
+    }
+    
+    private void StartActivateWinPanel(bool isTextIntro)
+    {
+        if (isTextIntro)
+        {
+            StartCoroutine(DelayAndActivate(0.5f, isTextIntro));    
+        }
+        else
+        {
+            ActivateWinPanelWithImages(isTextIntro);    
+        }
+    }
+
+    private IEnumerator DelayAndActivate(float timeToDelay, bool isTextIntro)
+    {
+        yield return new WaitForSeconds(timeToDelay);
+        ActivateWinPanelWithImages(isTextIntro);
+    }
+    
+    private void ActivateWinPanelWithImages(bool isTextIntro)
+    {
+        ActivateTextGameObject(false);
+        if (!isTextIntro)
+        {
+            winPanelUI.SetActive(true);
+            ActivateImagesWinPanel();    
+        }
     }
 
     private void ActivateImagesWinPanel()
@@ -290,12 +318,7 @@ public class UIManager : MonoBehaviour
         
     }
 
-    private void ActivateWinPanelWithImages()
-    {
-        ActivateTextGameObject(false);
-        winPanelUI.SetActive(true);
-        ActivateImagesWinPanel();
-    }
+    
     
     public void ActivateLosePanel()
     {
