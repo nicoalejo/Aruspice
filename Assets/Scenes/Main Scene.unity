@@ -3802,9 +3802,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '
-
-'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 00aa5ecffecc47e45bf8a28ec01632df, type: 2}
   m_sharedMaterial: {fileID: -7310228047004599541, guid: 00aa5ecffecc47e45bf8a28ec01632df, type: 2}
@@ -3831,12 +3829,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35
-  m_fontSizeBase: 35
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 40
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -3867,7 +3865,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -67.85327, y: 0, z: -57.468872, w: -64.960266}
+  m_margin: {x: -43.270935, y: -17.404785, z: -20.703003, w: -63.39612}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4077,6 +4075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ae5dcb81d43ad6428558afdb6b976f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  finalNumber: 60
   numbersToPickArray: 1e000000180000000b0000000c0000002d000000300000003d0000002300000035000000480000004700000025000000
   btnNumberToPick: {fileID: 5137450678327650953, guid: 4f8a96cdf472ba4468937814ee5b8d85, type: 3}
   panelNumbersToPick: {fileID: 166232909}
@@ -4114,7 +4113,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 442964485}
-  - component: {fileID: 442964486}
   m_Layer: 5
   m_Name: DeckUI
   m_TagString: Untagged
@@ -4143,18 +4141,6 @@ RectTransform:
   m_AnchoredPosition: {x: -837.53, y: -390.26}
   m_SizeDelta: {x: 213.6631, y: 279.52}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &442964486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 442964484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15e807c4b4a5acc469d498c97453f202, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &445294811
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11954,7 +11940,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 40.467}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 772, y: -235.30115}
+  m_AnchoredPosition: {x: 802, y: -235.30115}
   m_SizeDelta: {x: 214.4483, y: 250.5581}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1285430339
@@ -13626,7 +13612,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 772, y: 260.69885}
+  m_AnchoredPosition: {x: 790, y: 260.69885}
   m_SizeDelta: {x: 214.4483, y: 250.5581}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1505578644
@@ -17679,7 +17665,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -799.7379, y: 261}
+  m_AnchoredPosition: {x: -795, y: 261}
   m_SizeDelta: {x: 214.4483, y: 250.5581}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1993443690
@@ -17755,7 +17741,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 40.467}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -790, y: -235}
+  m_AnchoredPosition: {x: -815, y: -229}
   m_SizeDelta: {x: 214.4483, y: 250.5581}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2001942470
