@@ -212,10 +212,10 @@ public class GameManager : MonoBehaviour
 
     private void CalculateAltarValue()
     {
-        List<Card> tempCalculationList = new List<Card>();
-        
-        //Add first card
-        tempCalculationList.Add(new Card(cardsInAltar[0].Suit, cardsInAltar[0].Value));
+        List<Card> tempCalculationList = new List<Card> {
+            //Add first card
+            new Card(cardsInAltar[0].Suit, cardsInAltar[0].Value) };
+
         cardsInAltarWithHandler[0].SetInitialValueLog(cardsInAltar[0].Suit, cardsInAltar[0].Value);     //Sets the initial log value 
       
         //First we multiply
@@ -237,19 +237,19 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < tempCalculationList.Count-1; i++)
         {
             cardSubtractDictionary.TryGetValue(tempCalculationList[i].Suit, out CardSuit nextCardSuit);
-            if (nextCardSuit == tempCalculationList[i+1].Suit)
+            
+            if (nextCardSuit != tempCalculationList[i + 1].Suit) continue;
+            
+            if (tempCalculationList[i].Value > 0)
             {
-                if (tempCalculationList[i].Value > 0)
-                {
-                    tempCalculationList[i].Value--;
-                    cardsInAltarWithHandler[i].SetSubtractLogInfo(tempCalculationList[i+1].Suit, tempCalculationList[i].Value, false);    //Sets subtract for log
-                }
-                if (tempCalculationList[i+1].Value > 0)
-                {
-                    tempCalculationList[i+1].Value--;
-                    cardsInAltarWithHandler[i+1].SetSubtractLogInfo(tempCalculationList[i].Suit, tempCalculationList[i+1].Value, true); //Sets subtract of next card for log
-                }
+                tempCalculationList[i].Value--;
+                cardsInAltarWithHandler[i].SetSubtractLogInfo(tempCalculationList[i+1].Suit, tempCalculationList[i].Value, false);    //Sets subtract for log
             }
+
+            if (tempCalculationList[i + 1].Value <= 0) continue;
+                
+            tempCalculationList[i+1].Value--;
+            cardsInAltarWithHandler[i+1].SetSubtractLogInfo(tempCalculationList[i].Suit, tempCalculationList[i+1].Value, true); //Sets subtract of next card for log
         }
         
         //Sum all values after calculations

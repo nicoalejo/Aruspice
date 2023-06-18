@@ -136,7 +136,6 @@ public class TrickHandler : MonoBehaviour
     {
         deckHandler.RemoveCards(discard4List);
         deckHandler.ShuffleDeck();
-        //PlayBtnSFX();
         PlayShuffleBtnSFX();
         Debug.Log("Deck Shuffled");
         DiscardCardHandler.cardsSelected = 0;

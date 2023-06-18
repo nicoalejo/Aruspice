@@ -3999,7 +3999,6 @@ GameObject:
   m_Component:
   - component: {fileID: 439380673}
   - component: {fileID: 439380674}
-  - component: {fileID: 439380675}
   - component: {fileID: 439380676}
   - component: {fileID: 439380677}
   - component: {fileID: 439380678}
@@ -4051,18 +4050,6 @@ MonoBehaviour:
   trickHandler: {fileID: 848084284}
   deckHandler: {fileID: 1816509109}
   textHandler: {fileID: 1159522871}
---- !u!114 &439380675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 439380672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43ce4ed23bb51944ea3720874f61ff21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &439380676
 MonoBehaviour:
   m_ObjectHideFlags: 0

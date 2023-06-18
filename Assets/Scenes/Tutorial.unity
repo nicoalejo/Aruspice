@@ -16605,7 +16605,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5137450678327650958, guid: 4f8a96cdf472ba4468937814ee5b8d85, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5137450678327650958, guid: 4f8a96cdf472ba4468937814ee5b8d85, type: 3}
       propertyPath: m_AnchorMin.x
@@ -16613,15 +16613,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5137450678327650958, guid: 4f8a96cdf472ba4468937814ee5b8d85, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5137450678327650958, guid: 4f8a96cdf472ba4468937814ee5b8d85, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 200
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5137450678327650958, guid: 4f8a96cdf472ba4468937814ee5b8d85, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 150
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5137450678327650958, guid: 4f8a96cdf472ba4468937814ee5b8d85, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16653,11 +16653,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5137450678327650958, guid: 4f8a96cdf472ba4468937814ee5b8d85, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 200
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5137450678327650958, guid: 4f8a96cdf472ba4468937814ee5b8d85, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -225
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5137450678327650958, guid: 4f8a96cdf472ba4468937814ee5b8d85, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -23999,7 +23999,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1159522870
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32569,7 +32569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1607831943
 RectTransform:
   m_ObjectHideFlags: 0
@@ -39791,7 +39791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1977600482
 RectTransform:
   m_ObjectHideFlags: 0
