@@ -1,15 +1,19 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class CardDate : MonoBehaviour
 {
-    [Header("Card Data")]
-    [SerializeField] private SOCards card;
+    private SOCards card;
 
     [Header("Card Content")]
     [SerializeField] private Image portrait;
     [SerializeField] private TMP_Text flavorText;
+
+    [Header("Choice Buttons")]
+    [SerializeField] private Button acceptButton;
+    [SerializeField] private Button rejectButton;
 
     [Header("Stat Icons (same order as stat1..stat4)")]
     [SerializeField] private Image[] acceptedIcons = new Image[4];
@@ -38,6 +42,33 @@ public class CardDate : MonoBehaviour
     void Start()
     {
         if (card != null) SetCard(card);
+    }
+
+    // Called by the GameManager once, right after the card is instantiated.
+    // The buttons live inside the prefab, so they cannot reference the manager
+    // from the Inspector and have to be hooked up here instead.
+    public void BindChoiceButtons(UnityAction onAccept, UnityAction onReject)
+    {
+        if (acceptButton != null)
+        {
+            acceptButton.onClick.RemoveAllListeners();
+            acceptButton.onClick.AddListener(onAccept);
+        }
+        else Debug.LogWarning("[CardDate] Accept button (BtnOK) is not assigned.", this);
+
+        if (rejectButton != null)
+        {
+            rejectButton.onClick.RemoveAllListeners();
+            rejectButton.onClick.AddListener(onReject);
+        }
+        else Debug.LogWarning("[CardDate] Reject button (BtnReject) is not assigned.", this);
+    }
+
+    // Blocks input while the card is animating out / the next one is coming in.
+    public void SetButtonsInteractable(bool interactable)
+    {
+        if (acceptButton != null) acceptButton.interactable = interactable;
+        if (rejectButton != null) rejectButton.interactable = interactable;
     }
 
     public void SetCard(SOCards newCard)
