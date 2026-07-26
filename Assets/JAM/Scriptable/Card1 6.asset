@@ -32,3 +32,16 @@ MonoBehaviour:
     stat2: 0
     stat3: -2
     stat4: -3
+  endingText: "\"Salir con Cilindro es raro, es obvio que quien sea que le haya vendido
+    su modulador y simulador de emociones le instal\xF3 solamente la versi\xF3n de
+    prueba, el software debe ser excesivamente caro, entonces cada cierto tiempo
+    su conversaci\xF3n gira a un anuncio \"\xBFQuieres ir a comer? Conozco un lugar,
+    las hamburguesas de Rex Tyler son 100% carne cultivada y ahora est\xE1n con una
+    promoci\xF3n de 2x1 en tu primera compra.\" No te lo tomas personal, Cilindro
+    es la persona m\xE1s atenta con la que has estado.\"\r\n\r\n\"Es f\xEDsicamente
+    incapaz de olvidar algo sobre ti, tiene perfecta memoria de tus gustos, tu cumplea\xF1os,
+    tu horario, tus preferencias, puede con solo un vistazo medir tus niveles de
+    cortisol, en ese sentido, es perfecto. Ahora lo llevas como una sorpresa al registro
+    rob\xF3tico, lo m\xE1s cerca que puede haber del matrimonio entre un humano y
+    un robot, tu vida ha cambiado desde que lo conociste, pero solo para mejor.\""
+  endingImage: {fileID: 21300000, guid: 2715380998e5f1645827a6a0fbe10681, type: 3}

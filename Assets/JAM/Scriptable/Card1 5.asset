@@ -30,3 +30,19 @@ MonoBehaviour:
     stat2: -3
     stat3: 0
     stat4: 5
+  endingText: "\"Es una noche lenta frente el bar \"Que ser\xE1, ser\xE1\". Steeljaw
+    esta parado frente a las puertas met\xE1licas dobles, pero a diferencia de todas
+    las otras noches que los has venido a ver no hay nadie en la fila para entrar.
+    Te acercas y \xE9l, muy gru\xF1\xF3n, te indica que todav\xEDa esta trabajando
+    y que deber\xEDas esperar. Se da por vencido despu\xE9s de un poco de insistencia,
+    nadie va a llegar al bar esa noche. Ambos escapan por las calles de Neo Requiem,
+    los pesados pasos de Steeljaw apagando los tuyos.\"\r\n\r\n\"Se detienen sobre
+    una azotea, las interminables avenidas apiladas una encima de la otra dominan
+    el paisaje. \xC9l nunca fue de gestos rom\xE1nticos, te causa mucha impresi\xF3n
+    cuando ha dejado unos girasoles impresos en 3D exactamente en este lugar. A pesar
+    de que es dos veces m\xE1s ancho y tres veces m\xE1s alto que tu le das un abrazo,
+    que termina siendo poner tus brazos alrededor de su enorme bicep. Steeljaw te
+    recita \"Como dec\xEDa Garc\xEDa Lorca: La aurora de Nueva York tiene, cuatro
+    columnas de cieno, y un hurac\xE1n de negras palomas, que chapotean las aguas
+    podridas.\""
+  endingImage: {fileID: 21300000, guid: 6942913ece4275143aee5be1f72caa5a, type: 3}

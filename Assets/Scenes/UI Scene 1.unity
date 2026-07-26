@@ -3216,6 +3216,8 @@ MonoBehaviour:
   victoryPanel: {fileID: 43813820}
   gameOverText: {fileID: 142041474}
   victoryText: {fileID: 734831245}
+  gameOverImage: {fileID: 1845864766}
+  victoryImage: {fileID: 43813822}
   statNames:
   - "Cr\xE9ditos"
   - Tiempo
@@ -3223,17 +3225,27 @@ MonoBehaviour:
   - Estabilidad
   statEndings:
   - atMin: 
+    atMinImage: {fileID: 0}
     atMax: 
+    atMaxImage: {fileID: 0}
   - atMin: 
+    atMinImage: {fileID: 0}
     atMax: 
+    atMaxImage: {fileID: 0}
   - atMin: 
+    atMinImage: {fileID: 0}
     atMax: 
+    atMaxImage: {fileID: 0}
   - atMin: 
+    atMinImage: {fileID: 0}
     atMax: 
+    atMaxImage: {fileID: 0}
   loseByMinMessage: "{0} lleg\xF3 a cero. \xA1El altar te ha abandonado!"
   loseByMaxMessage: "{0} se desbord\xF3. \xA1El altar te ha consumido!"
   winByDatesMessage: "\xA1{0} es tu media naranja! El altar bendice su uni\xF3n."
   winBySurvivalMessage: "\xA1Sobreviviste a todas las citas! El altar queda satisfecho."
+  defaultLoseImage: {fileID: 0}
+  winBySurvivalImage: {fileID: 0}
   lowStatWarning: 3
   highStatWarning: 18
 --- !u!4 &914790837

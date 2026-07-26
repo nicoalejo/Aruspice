@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManagerJAM : MonoBehaviour
 {
@@ -39,6 +40,10 @@ public class GameManagerJAM : MonoBehaviour
     [SerializeField] private TMP_Text gameOverText;
     // The GameOverText inside VictoryPanelUI.
     [SerializeField] private TMP_Text victoryText;
+    // The Image inside LosePanelUI that shows the art of the bad ending.
+    [SerializeField] private Image gameOverImage;
+    // The Image inside VictoryPanelUI that shows the art of the good ending.
+    [SerializeField] private Image victoryImage;
 
     [Header("End Game Text")]
     // Names shown in the lose text, in stat1..stat4 order.
@@ -58,6 +63,13 @@ public class GameManagerJAM : MonoBehaviour
     private string winByDatesMessage = "¡{0} es tu media naranja! El altar bendice su unión.";
     [SerializeField]
     private string winBySurvivalMessage = "¡Sobreviviste a todas las citas! El altar queda satisfecho.";
+
+    [Header("End Game Art")]
+    // Used when the stat ending that closed the run has no art of its own.
+    [SerializeField] private Sprite defaultLoseImage;
+    // Shown when the run is won by surviving every card, so there is no character
+    // to take the ending art from.
+    [SerializeField] private Sprite winBySurvivalImage;
 
     [Header("Audio")]
     // The ring warns the player when a stat is close to ending the run.
@@ -286,22 +298,49 @@ public class GameManagerJAM : MonoBehaviour
 
         if (won)
         {
-            if (victoryText != null) victoryText.text = BuildVictoryMessage(dateWinner);
+            ShowEnding(victoryText, victoryImage, BuildVictoryMessage(dateWinner), GetVictoryImage(dateWinner));
             if (victoryPanel != null) victoryPanel.SetActive(true);
         }
         else
         {
-            if (gameOverText != null) gameOverText.text = BuildLoseMessage(failedStat);
+            ShowEnding(gameOverText, gameOverImage, BuildLoseMessage(failedStat), GetLoseImage(failedStat));
             if (losePanel != null) losePanel.SetActive(true);
         }
 
         OnGameOver?.Invoke(won);
     }
 
+    // Fills in the text and the art of an ending panel. Both references are
+    // optional, so a panel can show only one of the two.
+    private static void ShowEnding(TMP_Text label, Image image, string text, Sprite sprite)
+    {
+        if (label != null) label.text = text;
+        if (image == null) return;
+
+        image.sprite = sprite;
+        // Turned off rather than left showing an empty box when no art was assigned.
+        image.enabled = sprite != null;
+    }
+
     private string BuildVictoryMessage(SOCards dateWinner)
     {
         if (dateWinner == null) return winBySurvivalMessage;
-        return string.Format(winByDatesMessage, dateWinner.DisplayName);
+
+        string message = string.IsNullOrWhiteSpace(dateWinner.endingText)
+            ? winByDatesMessage
+            : dateWinner.endingText;
+
+        return Format(message, dateWinner.DisplayName);
+    }
+
+    // The art of the character the run was won with, or the survival art when the
+    // player won without settling on anyone.
+    private Sprite GetVictoryImage(SOCards dateWinner)
+    {
+        if (dateWinner == null) return winBySurvivalImage;
+
+        Sprite ending = dateWinner.EndingImage;
+        return ending != null ? ending : winBySurvivalImage;
     }
 
     private string BuildLoseMessage(int failedStat)
@@ -309,31 +348,54 @@ public class GameManagerJAM : MonoBehaviour
         if (failedStat < 0) return string.Empty;
 
         string statName = failedStat < statNames.Length ? statNames[failedStat] : $"Stat {failedStat + 1}";
-        bool hitMax = stats[failedStat] >= MaxStat;
+        bool hitMax = HitMax(failedStat);
 
-        string message = GetStatEnding(failedStat, hitMax);
+        StatEnding ending = GetStatEnding(failedStat);
+        string message = ending != null ? (hitMax ? ending.atMax : ending.atMin) : null;
         if (string.IsNullOrWhiteSpace(message)) message = hitMax ? loseByMaxMessage : loseByMinMessage;
 
-        // The bespoke endings rarely need it, but {0} still works inside them.
+        return Format(message, statName);
+    }
+
+    private Sprite GetLoseImage(int failedStat)
+    {
+        if (failedStat < 0) return defaultLoseImage;
+
+        StatEnding ending = GetStatEnding(failedStat);
+        if (ending == null) return defaultLoseImage;
+
+        Sprite image = HitMax(failedStat) ? ending.atMaxImage : ending.atMinImage;
+        return image != null ? image : defaultLoseImage;
+    }
+
+    // The bad endings written for this stat, if there are any.
+    private StatEnding GetStatEnding(int failedStat)
+    {
+        if (statEndings == null || failedStat < 0 || failedStat >= statEndings.Length) return null;
+        return statEndings[failedStat];
+    }
+
+    // Which of the two limits ended the run.
+    private bool HitMax(int failedStat)
+    {
+        if (failedStat < 0 || failedStat >= StatCount) return false;
+        return stats[failedStat] >= MaxStat;
+    }
+
+    // The bespoke endings rarely need it, but {0} still works inside them. Text
+    // with stray braces is shown as it was written instead of throwing.
+    private static string Format(string message, string argument)
+    {
+        if (string.IsNullOrEmpty(message)) return message;
+
         try
         {
-            return string.Format(message, statName);
+            return string.Format(message, argument);
         }
         catch (FormatException)
         {
             return message;
         }
-    }
-
-    // The bad ending written for this stat in this direction, if there is one.
-    private string GetStatEnding(int failedStat, bool hitMax)
-    {
-        if (statEndings == null || failedStat >= statEndings.Length) return null;
-
-        StatEnding ending = statEndings[failedStat];
-        if (ending == null) return null;
-
-        return hitMax ? ending.atMax : ending.atMin;
     }
 
     #endregion
@@ -418,9 +480,12 @@ public class GameManagerJAM : MonoBehaviour
 }
 
 // The two bad endings of a single stat: one for bottoming out, one for overflowing.
+// Each one can bring its own art; without it the default lose image is used.
 [Serializable]
 public class StatEnding
 {
     [TextArea] public string atMin;
+    public Sprite atMinImage;
     [TextArea] public string atMax;
+    public Sprite atMaxImage;
 }

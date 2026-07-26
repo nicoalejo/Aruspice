@@ -32,3 +32,18 @@ MonoBehaviour:
     stat2: 0
     stat3: 0
     stat4: 5
+  endingText: "\"La limosina de Ray flotaba sobre la autopista, no tocaba el suelo
+    al igual que \xE9l. Se sentaron en esquinas opuestas, \xE9l hablaba en su celular
+    interminablemente mientras t\xFA te aburr\xEDas m\xE1s all\xE1 de lo que pensabas
+    que un humano era capaz de aburrirse. Quedaba al menos una hora m\xE1s de viaje
+    antes de llegar a sus edificios, la congesti\xF3n en Neo Requiem era fatal.\"\r\n\r\n\"Pero
+    la pesadilla estaba por terminarse, un matrimonio por conveniencia firmado por
+    dos partes a beneficiarse, Ray porque tendr\xEDa alguien que le soporte temporalmente,
+    unas horas a la semana, y t\xFA porque no tendr\xE1s que seguirte preocupando
+    por encontrar a alguien que sea aprobado un\xE1nimemente por tus superiores.
+    Sin hablar de la inigualable fortuna que te esperaba al otro lado, por un momento
+    hasta te sientes tentado a dejar todo e irte con Ray. Hasta que recuerdas su
+    cabello brillante y endurecido por el Duragel TM, adem\xE1s de su inigualable
+    capacidad de ser insoportable en nuevas e innovadoras formas. Tendr\xE1s que
+    conformarte con una silenciosa y tranquila divisi\xF3n de bienes en unos a\xF1os.\""
+  endingImage: {fileID: 21300000, guid: 87e09366f8b005d4f8d7f62e70ebb9b7, type: 3}

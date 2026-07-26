@@ -31,3 +31,18 @@ MonoBehaviour:
     stat2: -1
     stat3: 5
     stat4: 0
+  endingText: "\"En su \xFAltima cita hab\xEDan pasado un largo rato paseando por
+    las coloridas planicies del aclamado MMORPG Shadow Collapse. Era hermoso, pod\xEDas
+    sentir tu coraz\xF3n latiendo fuerte a pesar de la distancia. Codex estaba en
+    su personaje de nivel m\xE1s alto, el guerrero nivel 100 llamado \"xXxTormentadesangrexXx\".
+    \"Oye\" te dice, \"te compr\xE9 algo, espero que no te enoje\", no sabes que
+    esperar, nunca sabes que esperar de Codex. Momentos despu\xE9s te llega una notificaci\xF3n
+    de entrega, tu propio sistema de realidad virtual ultra inmersivo.\"\r\n\r\n\"Al
+    entrar al lobby del mundo de realidad virtual te encuentras con una hermosa casa
+    en medio de una cordillera. Los nevados se divisan a trav\xE9s de las ventanas
+    de esta mansion de concepto abierto, Codex est\xE1 ahi en un avatar de \xE9l
+    mismo, flacucho y desali\xF1ado como siempre. No te molesta, has aprendido a
+    querer ese rostro aunque nunca le hayas visto en persona. Ahora entiendes que
+    debajo de toda la mugre, Codex es realmente una buena persona. Pasan un largo
+    rato en el mundo virtual.\""
+  endingImage: {fileID: 21300000, guid: c64ce9ec52732c941a4fb1d8a179daec, type: 3}

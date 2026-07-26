@@ -31,3 +31,19 @@ MonoBehaviour:
     stat2: 3
     stat3: 0
     stat4: -5
+  endingText: "\"El laboratorio de Zafir, si podr\xEDa llamarse as\xED, era una colecci\xF3n
+    de diferentes aparatos: c\xE1maras de enriquecimiento,  t\xFAneles P2P, ensambladoras
+    moleculares paneles de formaci\xF3n y aniquilaci\xF3n que colocan y retiran materiales
+    dentro de complicados sistemas. Te lleva a una mesita de t\xE9 pr\xE1cticamente
+    en la mitad de todo el caos. Retira una m\xE1quina de sobre la mesa y te invita
+    a sentarte.\"\r\n\r\n\"Es una velada maravillosa, aunque no entiendas la mitad
+    de las palabras que Zafir pronuncia, mientras la conversaci\xF3n se mueve de
+    una cosa a la otra terminan hablando acerca de la vida y la muerte, sus citas
+    siempre terminaban tocando temas serios. Se levanta para mostrarte algo, una
+    serie de c\xE1psulas de cristal, lo suficientemente altas para alojar una persona.
+    \"si me permites, he llegado a apreciarte mucho, no quiero perderte nunca.\"
+    C\xE1psulas de clonaci\xF3n, si mueres, tu consciencia ser\xE1 autom\xE1ticamente
+    respaldada y subida a un nuevo recipiente, como si nunca te hubiera pasado nada.
+    No sab\xEDas que a Zafir le fallaba tanto la cabeza, pero la idea de vivir para
+    siempre te agrada.\""
+  endingImage: {fileID: 21300000, guid: 4c4f4c07bdc896b4791416176547c0ce, type: 3}

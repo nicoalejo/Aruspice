@@ -30,3 +30,19 @@ MonoBehaviour:
     stat2: 5
     stat3: -5
     stat4: 0
+  endingText: "\"\xBFQu\xE9 significa realmente ir r\xE1pido? Ace es incapaz de vivir
+    una vida normal, que no sea una constante carrera para todo. No sabes si naci\xF3
+    as\xED, si es un fallo de su implante de cortex, un trauma de la ni\xF1ez o simplemente
+    es est\xFApido. Pero entre todo esto te hizo una propuesta que parec\xEDa bastante
+    interesante. Simular su relaci\xF3n a hiper velocidad, no de manera parcial o
+    ficticia, sino verdaderamente conectar sus cerebros a una supercomputadora que
+    correr\xE1 una simulaci\xF3n id\xE9ntica a la realidad donde, en menos de un
+    segundo, vivir\xE1n toda una vida juntos.\"\r\n\r\n\"Lo que resultaba bastante
+    repugnante si no fuera porque, de alguna manera extra\xF1a, Ace logr\xF3 conseguir
+    completa validez legal para su peque\xF1o experimento. En menos de un segundo
+    habr\xE1s conseguido todos los beneficios de una larga relaci\xF3n, incluso a
+    ojos de tus superiores, eso si no cuentas los setenta a\xF1os que pasar\xE1s
+    en la simulaci\xF3n. No sabes como te convenci\xF3, finalmente lo que qued\xF3
+    de la experiencia fueron demasiadas memorias de un hombre que se toma demasiado
+    en serio todo lo que hace.\""
+  endingImage: {fileID: 21300000, guid: 8fb7e48f52154d543a55d531152d905c, type: 3}

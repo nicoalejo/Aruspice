@@ -31,3 +31,20 @@ MonoBehaviour:
     stat2: 2
     stat3: -1
     stat4: -4
+  endingText: "\"El dep\xF3sito de chatarra estaba a reventar, cientos de personas
+    se hab\xEDan reunido a presenciar el  campeonato anual de levantamiento de chatarra
+    n\xFAmero 157.  Rebexa entra a la arena improvisada, hecha de puertas de automoviles
+    destartalados, te lleva sobre uno de sus hombros mientras carga un motor con
+    la otra mano. La multitud enloquece mientras saludan, solo su oponente, un hombre
+    corpulento de hombros anchos y barriga prominente gru\xF1e frente a ustedes,
+    descontento.\"\r\n\r\n\"Te deja bajar suavemente y te colocas a un lado de la
+    arena mientras Rebexa baja a la zona inferior. Desde lo alto una gr\xFAa baja
+    los restos irreconocibles de alg\xFAn tipo de veh\xEDculo frente a rostros de
+    asombro ante el enorme peso que ser\xE1 cargado. El oponente va primero seg\xFAn
+    indica la diminuta presentadora, a la cuenta de tres toma los restos y los alza
+    con dificultad sobre su cabeza sin ning\xFAn tipo de t\xE9cnica, aguanta 12 segundos
+    antes de tener que lanzarlos de nuevo. Rebexa se prepara para la misma tarea,
+    pero antes de hacerlo te regresa a ver con una enorme sonrisa y levanta un pulgar.
+    Toma la chatarra y la levanta con similar facilidad, 15 segundos, la multitud
+    estalla con gritos de j\xFAbilo.\""
+  endingImage: {fileID: 21300000, guid: d33dd03ede36ceb4b8f676cc134c76c7, type: 3}

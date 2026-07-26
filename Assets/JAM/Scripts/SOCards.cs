@@ -14,6 +14,17 @@ public class SOCards : ScriptableObject
     public CardChoiceStats accepted;
     public CardChoiceStats rejected;
 
+    // Shown on the victory panel when the run is won with this character. There is
+    // no bad ending per person: busting a stat uses the ending of that stat instead.
+    // Left empty, the generic win message is used. {0} is the name of the character.
+    [Header("Good Ending")]
+    [TextArea] public string endingText;
+    // Falls back to the portrait above, so a character without bespoke art still
+    // shows a face on the ending screen.
+    public Sprite endingImage;
+
+    public Sprite EndingImage => endingImage != null ? endingImage : image;
+
     // Characters fall back to the asset name so they are never nameless on screen.
     // A nameless event just shows nothing instead of leaking the asset name.
     public string DisplayName
