@@ -99,6 +99,7 @@ public class GameManagerJAM : MonoBehaviour
     public int CardsPlayed => cardsPlayed;
     public bool IsGameOver => gameOver;
 
+    
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -296,6 +297,10 @@ public class GameManagerJAM : MonoBehaviour
 
         PlaySound(won ? AudioManager.Gamesound.win : AudioManager.Gamesound.failure);
 
+        // Says which of the endings was picked, so a run that shows the generic
+        // text can be told apart from one that never reached the character win.
+        Debug.Log($"[GameManagerJAM] Ending: won={won}, character={(dateWinner != null ? dateWinner.DisplayName : "none")}, failedStat={failedStat}, cardsPlayed={cardsPlayed}", this);
+
         if (won)
         {
             ShowEnding(victoryText, victoryImage, BuildVictoryMessage(dateWinner), GetVictoryImage(dateWinner));
@@ -315,11 +320,12 @@ public class GameManagerJAM : MonoBehaviour
     private static void ShowEnding(TMP_Text label, Image image, string text, Sprite sprite)
     {
         if (label != null) label.text = text;
-        if (image == null) return;
+        // The art is the background of the panel itself, so an ending without its
+        // own image keeps the one the panel was designed with instead of going blank.
+        if (image == null || sprite == null) return;
 
         image.sprite = sprite;
-        // Turned off rather than left showing an empty box when no art was assigned.
-        image.enabled = sprite != null;
+        image.enabled = true;
     }
 
     private string BuildVictoryMessage(SOCards dateWinner)
