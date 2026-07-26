@@ -15,7 +15,9 @@ MonoBehaviour:
   isCharacter: 0
   characterName: "D\xEDa Libre"
   image: {fileID: 21300038, guid: 28a14b6acb252df4787e935cd4c43a6e, type: 3}
-  flavorText: 
+  flavorText: "\"\xBFCuando fue la \xFAltima vez que te tomaste un descanso? Tus
+    dos turnos de 14 y 4 horas te dejan con suficiente tiempo para dormir, un lujo
+    en Neo Requiem. Pero si te tomas el d\xEDa tus jefes no estar\xE1n contentos.\""
   accepted:
     stat1: -2
     stat2: 3

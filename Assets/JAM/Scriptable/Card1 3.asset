@@ -15,7 +15,11 @@ MonoBehaviour:
   isCharacter: 1
   characterName: Ace
   image: {fileID: 21300038, guid: 28a14b6acb252df4787e935cd4c43a6e, type: 3}
-  flavorText: 
+  flavorText: "\"Ve r\xE1pido o vete a casa, no hay tiempo para medias tintas. Busco
+    compromiso a largo plazo con alguien que pueda ir a mi ritmo. Escucha mi motor
+    rugir, de 0 a 100, nada de tibios.\"\r\n\r\nM\xE1s sobre m\xED:\r\n\r- El hombre
+    m\xE1s r\xE1pido de Neo Requiem.\r\n- Modific\xF3 su propio auto para quitarle
+    todas las seguridades.\r\n- Puede cocinar \"arroz de un minuto\" en 47 segundos."
   accepted:
     stat1: 0
     stat2: -5

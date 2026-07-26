@@ -15,7 +15,10 @@ MonoBehaviour:
   isCharacter: 0
   characterName: "Promoci\xF3n Laboral"
   image: {fileID: 21300038, guid: 28a14b6acb252df4787e935cd4c43a6e, type: 3}
-  flavorText: 
+  flavorText: '"Has sido designado para pasar de "oficial de manejo de rama nivel
+    23" a "oficial de manejo de rama senior nivel 24". Tus beneficios incluyen un
+    incremento de salario de 1.12%, 52 segundos extra para el almuerzo e incremento
+    de 32gb de almacenamiento en la nube. Gracias por tu compromiso"'
   accepted:
     stat1: 3
     stat2: -2

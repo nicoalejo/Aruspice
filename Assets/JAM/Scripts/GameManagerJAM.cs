@@ -18,7 +18,9 @@ public class GameManagerJAM : MonoBehaviour
     [SerializeField] private CardDate cardPrefab;
     [SerializeField] private Transform cardParent;
 
-    [Header("Deck (10 cards, all with the same probability)")]
+    // Pool of characters and events. Cards are never used up: every draw takes
+    // from the whole pool, minus the one on screen. Any size works.
+    [Header("Card Pool (equal chance, never runs out)")]
     [SerializeField] private SOCards[] deck = new SOCards[10];
 
     [Header("UI")]
@@ -42,6 +44,10 @@ public class GameManagerJAM : MonoBehaviour
     // Names shown in the lose text, in stat1..stat4 order.
     [SerializeField]
     private string[] statNames = { "Créditos", "Tiempo", "Puntaje Social", "Estabilidad" };
+    // One bad ending per stat and per direction, in the same order as statNames.
+    [SerializeField]
+    private StatEnding[] statEndings = new StatEnding[StatCount];
+    // Used when the matching bad ending above was left empty.
     // {0} is replaced with the name of the stat that ended the run.
     [SerializeField]
     private string loseByMinMessage = "{0} llegó a cero. ¡El altar te ha abandonado!";
@@ -53,6 +59,12 @@ public class GameManagerJAM : MonoBehaviour
     [SerializeField]
     private string winBySurvivalMessage = "¡Sobreviviste a todas las citas! El altar queda satisfecho.";
 
+    [Header("Audio")]
+    // The ring warns the player when a stat is close to ending the run.
+    // It sounds below the low mark or above the high one.
+    [SerializeField] private int lowStatWarning = 3;
+    [SerializeField] private int highStatWarning = 18;
+
     // Raised every time the stats change, so the UI can refresh itself.
     public event Action OnStatsChanged;
     // Raised when any stat reaches 0 or 100.
@@ -63,6 +75,8 @@ public class GameManagerJAM : MonoBehaviour
     private readonly int[] stats = new int[StatCount];
     // How many dates the player has had with each character so far.
     private readonly Dictionary<SOCards, int> dateCounts = new Dictionary<SOCards, int>();
+    // Reused by the draw so picking a card does not allocate every time.
+    private readonly List<int> candidateIndices = new List<int>();
     private CardDate currentCard;
     private SOCards currentCardData;
     private int lastCardIndex = -1;
@@ -185,6 +199,8 @@ public class GameManagerJAM : MonoBehaviour
     {
         if (gameOver || currentCardData == null) return;
 
+        PlaySound(accepted ? AudioManager.Gamesound.choose : AudioManager.Gamesound.discard);
+
         SOCards playedCard = currentCardData;
         int failedStat = ApplyStats(accepted ? playedCard.accepted : playedCard.rejected);
         cardsPlayed++;
@@ -209,7 +225,28 @@ public class GameManagerJAM : MonoBehaviour
             return;
         }
 
+        // Only warns while the run goes on: an ended run already has its own sound.
+        PlayStatWarning();
         DrawNextCard();
+    }
+
+    // Rings when any stat is close to one of the limits.
+    private void PlayStatWarning()
+    {
+        for (int i = 0; i < StatCount; i++)
+        {
+            if (stats[i] >= lowStatWarning && stats[i] <= highStatWarning) continue;
+
+            PlaySound(AudioManager.Gamesound.ring);
+            return;
+        }
+    }
+
+    // Quiet when there is no AudioManager in the scene.
+    private static void PlaySound(AudioManager.Gamesound sound)
+    {
+        if (AudioManager.instance == null) return;
+        AudioManager.instance.PlayOnShotByDictionary(sound);
     }
 
     // Returns how many dates the player has had with that character.
@@ -245,6 +282,8 @@ public class GameManagerJAM : MonoBehaviour
 
         if (currentCard != null) currentCard.SetButtonsInteractable(false);
 
+        PlaySound(won ? AudioManager.Gamesound.win : AudioManager.Gamesound.failure);
+
         if (won)
         {
             if (victoryText != null) victoryText.text = BuildVictoryMessage(dateWinner);
@@ -272,7 +311,29 @@ public class GameManagerJAM : MonoBehaviour
         string statName = failedStat < statNames.Length ? statNames[failedStat] : $"Stat {failedStat + 1}";
         bool hitMax = stats[failedStat] >= MaxStat;
 
-        return string.Format(hitMax ? loseByMaxMessage : loseByMinMessage, statName);
+        string message = GetStatEnding(failedStat, hitMax);
+        if (string.IsNullOrWhiteSpace(message)) message = hitMax ? loseByMaxMessage : loseByMinMessage;
+
+        // The bespoke endings rarely need it, but {0} still works inside them.
+        try
+        {
+            return string.Format(message, statName);
+        }
+        catch (FormatException)
+        {
+            return message;
+        }
+    }
+
+    // The bad ending written for this stat in this direction, if there is one.
+    private string GetStatEnding(int failedStat, bool hitMax)
+    {
+        if (statEndings == null || failedStat >= statEndings.Length) return null;
+
+        StatEnding ending = statEndings[failedStat];
+        if (ending == null) return null;
+
+        return hitMax ? ending.atMax : ending.atMin;
     }
 
     #endregion
@@ -281,7 +342,8 @@ public class GameManagerJAM : MonoBehaviour
 
     public void DrawNextCard()
     {
-        SOCards next = PickRandomCard();
+        // A run always opens with a person, never with an event.
+        SOCards next = PickRandomCard(cardsPlayed == 0);
         if (next == null)
         {
             Debug.LogWarning("[GameManagerJAM] The deck has no valid cards assigned.", this);
@@ -308,38 +370,57 @@ public class GameManagerJAM : MonoBehaviour
         currentCard.BindChoiceButtons(AcceptCard, RejectCard);
     }
 
-    // Every card has the same chance, except the one currently on screen,
-    // which cannot come out twice in a row.
-    private SOCards PickRandomCard()
+    private SOCards PickRandomCard(bool charactersOnly)
     {
-        int valid = 0;
-        for (int i = 0; i < deck.Length; i++)
+        SOCards picked = PickFrom(charactersOnly);
+
+        // Rather than showing nothing, take any card and let the designer know.
+        if (picked == null && charactersOnly)
         {
-            if (deck[i] != null) valid++;
+            Debug.LogWarning("[GameManagerJAM] The deck has no character cards for the opening draw, using any card instead.", this);
+            picked = PickFrom(false);
         }
-        if (valid == 0) return null;
 
-        // With a single usable card there is nothing else to draw, so repeat it.
-        bool avoidLast = valid > 1 && lastCardIndex >= 0;
+        return picked;
+    }
 
-        int candidates = avoidLast ? valid - 1 : valid;
-        int pick = UnityEngine.Random.Range(0, candidates);
+    // Every eligible card has the same chance, except the one currently on
+    // screen, which cannot come out twice in a row.
+    private SOCards PickFrom(bool charactersOnly)
+    {
+        candidateIndices.Clear();
 
         for (int i = 0; i < deck.Length; i++)
         {
             if (deck[i] == null) continue;
-            if (avoidLast && i == lastCardIndex) continue;
+            if (charactersOnly && !deck[i].isCharacter) continue;
+            if (i == lastCardIndex) continue;
 
-            if (pick == 0)
-            {
-                lastCardIndex = i;
-                return deck[i];
-            }
-            pick--;
+            candidateIndices.Add(i);
         }
 
-        return null;
+        // Nothing else to draw: repeat the card on screen if it still fits.
+        if (candidateIndices.Count == 0)
+        {
+            bool lastIsUsable = lastCardIndex >= 0
+                && deck[lastCardIndex] != null
+                && (!charactersOnly || deck[lastCardIndex].isCharacter);
+
+            return lastIsUsable ? deck[lastCardIndex] : null;
+        }
+
+        int index = candidateIndices[UnityEngine.Random.Range(0, candidateIndices.Count)];
+        lastCardIndex = index;
+        return deck[index];
     }
 
     #endregion
+}
+
+// The two bad endings of a single stat: one for bottoming out, one for overflowing.
+[Serializable]
+public class StatEnding
+{
+    [TextArea] public string atMin;
+    [TextArea] public string atMax;
 }
