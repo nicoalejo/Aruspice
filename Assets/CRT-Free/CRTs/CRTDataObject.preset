@@ -1,0 +1,143 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CRTDataObject
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 30f312d9f3f24cdb944c1453a1accefb, type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.pixelationAmount
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.maxColorChannels.red
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.maxColorChannels.green
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.maxColorChannels.blue
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.maxColorChannels.greyScale
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.dithering4
+    value: 0.026
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.dithering8
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.vignette
+    value: 0.129
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.innerCurve
+    value: 4.7
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.monitorCurve
+    value: 0.012
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.monitorInnerSize.width
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.monitorInnerSize.height
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.monitorOutterSize.width
+    value: 0.117
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.monitorOutterSize.height
+    value: 0.081
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.zoom
+    value: 1.17
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.monitorRoundness
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.monitorTexture
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.monitorColor.r
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.monitorColor.g
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.monitorColor.b
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.monitorColor.a
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.innerMonitorDarkness
+    value: 0.484
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.innerMonitorShine
+    value: 0.29
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.colorScans.greenChannelMultiplier
+    value: -0.278
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.colorScans.redBlueChannelMultiplier
+    value: -0.218
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.colorScans.sizeMultiplier
+    value: 3.36
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.innerMonitorShineRadius
+    value: -0.087
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: data.innerMonitorShineCurve
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: validationId
+    value: 19882ef4-7545-4a1b-a3d9-de47e56ad98e
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []
