@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCharacter: 0
   characterName: Ofertas de partes
-  image: {fileID: 21300038, guid: 28a14b6acb252df4787e935cd4c43a6e, type: 3}
+  image: {fileID: 21300000, guid: 755942feb22ff47e897f837ac4c775b0, type: 3}
   flavorText: "\"Recibes en tu mail un cup\xF3n para intercambiar componentes. A
     tus ojos mec\xE1nicos ya les hac\xEDa falta una alineaci\xF3n, tus rodillas met\xE1licas
     crujen y tus manos han perdido un 7% de precisi\xF3n. Pero un nuevo ojo te va
@@ -29,3 +29,5 @@ MonoBehaviour:
     stat2: 0
     stat3: 0
     stat4: -5
+  endingText: 
+  endingImage: {fileID: 0}
