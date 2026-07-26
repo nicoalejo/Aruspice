@@ -15,7 +15,12 @@ MonoBehaviour:
   isCharacter: 1
   characterName: Rebexa
   image: {fileID: 21300038, guid: 28a14b6acb252df4787e935cd4c43a6e, type: 3}
-  flavorText: 
+  flavorText: "\"Hola, soy Rebexa con x, si te gustan las chicas altas y los abdominales
+    de acero has llegado al lugar indicado. Estoy buscando alguien que quiera amar
+    primero y algo m\xE1s despu\xE9s\"\r\n\r\nM\xE1s sobre m\xED:\r\n- Campeona del
+    torneo anual levantamiento de autos chatarra de 2157\r\n- Est\xE1 convencida
+    de que puede boxear con un oso grizzly y ganar\r\n- Sus hobbies son el kick boxing,
+    el levantamiento de pesas y coleccionar peluches"
   accepted:
     stat1: -3
     stat2: -2

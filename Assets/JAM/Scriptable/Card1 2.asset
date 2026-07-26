@@ -15,7 +15,13 @@ MonoBehaviour:
   isCharacter: 1
   characterName: Ray
   image: {fileID: 21300038, guid: 28a14b6acb252df4787e935cd4c43a6e, type: 3}
-  flavorText: 
+  flavorText: "\"No acepto solicitudes de cualquiera, si quieres una cita conmigo
+    tienes que ser alguien de alto valor. Stakeholders primero, todo el resto despu\xE9s.
+    Rentabilidad en las calles, estabilidad en la cama.\"\r\n\nM\xE1s sobre m\xED:\r\n\r-
+    Su pap\xE1 es due\xF1o de la cadena m\xE1s grande de insumos para mascotas\r\n-
+    Tiene una startup que permite a los empleadores modificar los chips de personalidad
+    de sus empleados\r\n- Si bien a veces se cree el hombre m\xE1s hermoso de Neo
+    Requiem, otras veces se cree el hombre m\xE1s hermoso del mundo."
   accepted:
     stat1: 5
     stat2: 0

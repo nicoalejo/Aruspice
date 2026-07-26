@@ -67,7 +67,7 @@ public class TextHandler : MonoBehaviour
     {
         if (!isTextComplete)
         {
-            StopCoroutine(textCoroutine);
+            if (textCoroutine != null) StopCoroutine(textCoroutine);
             textUI.text = currentText;
             isTextComplete = true;
         }

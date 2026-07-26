@@ -18,7 +18,9 @@ public class GameManagerJAM : MonoBehaviour
     [SerializeField] private CardDate cardPrefab;
     [SerializeField] private Transform cardParent;
 
-    [Header("Deck (10 cards, all with the same probability)")]
+    // Pool of characters and events. Cards are never used up: every draw takes
+    // from the whole pool, minus the one on screen. Any size works.
+    [Header("Card Pool (equal chance, never runs out)")]
     [SerializeField] private SOCards[] deck = new SOCards[10];
 
     [Header("UI")]
@@ -63,6 +65,8 @@ public class GameManagerJAM : MonoBehaviour
     private readonly int[] stats = new int[StatCount];
     // How many dates the player has had with each character so far.
     private readonly Dictionary<SOCards, int> dateCounts = new Dictionary<SOCards, int>();
+    // Reused by the draw so picking a card does not allocate every time.
+    private readonly List<int> candidateIndices = new List<int>();
     private CardDate currentCard;
     private SOCards currentCardData;
     private int lastCardIndex = -1;
@@ -281,7 +285,8 @@ public class GameManagerJAM : MonoBehaviour
 
     public void DrawNextCard()
     {
-        SOCards next = PickRandomCard();
+        // A run always opens with a person, never with an event.
+        SOCards next = PickRandomCard(cardsPlayed == 0);
         if (next == null)
         {
             Debug.LogWarning("[GameManagerJAM] The deck has no valid cards assigned.", this);
@@ -308,37 +313,48 @@ public class GameManagerJAM : MonoBehaviour
         currentCard.BindChoiceButtons(AcceptCard, RejectCard);
     }
 
-    // Every card has the same chance, except the one currently on screen,
-    // which cannot come out twice in a row.
-    private SOCards PickRandomCard()
+    private SOCards PickRandomCard(bool charactersOnly)
     {
-        int valid = 0;
-        for (int i = 0; i < deck.Length; i++)
+        SOCards picked = PickFrom(charactersOnly);
+
+        // Rather than showing nothing, take any card and let the designer know.
+        if (picked == null && charactersOnly)
         {
-            if (deck[i] != null) valid++;
+            Debug.LogWarning("[GameManagerJAM] The deck has no character cards for the opening draw, using any card instead.", this);
+            picked = PickFrom(false);
         }
-        if (valid == 0) return null;
 
-        // With a single usable card there is nothing else to draw, so repeat it.
-        bool avoidLast = valid > 1 && lastCardIndex >= 0;
+        return picked;
+    }
 
-        int candidates = avoidLast ? valid - 1 : valid;
-        int pick = UnityEngine.Random.Range(0, candidates);
+    // Every eligible card has the same chance, except the one currently on
+    // screen, which cannot come out twice in a row.
+    private SOCards PickFrom(bool charactersOnly)
+    {
+        candidateIndices.Clear();
 
         for (int i = 0; i < deck.Length; i++)
         {
             if (deck[i] == null) continue;
-            if (avoidLast && i == lastCardIndex) continue;
+            if (charactersOnly && !deck[i].isCharacter) continue;
+            if (i == lastCardIndex) continue;
 
-            if (pick == 0)
-            {
-                lastCardIndex = i;
-                return deck[i];
-            }
-            pick--;
+            candidateIndices.Add(i);
         }
 
-        return null;
+        // Nothing else to draw: repeat the card on screen if it still fits.
+        if (candidateIndices.Count == 0)
+        {
+            bool lastIsUsable = lastCardIndex >= 0
+                && deck[lastCardIndex] != null
+                && (!charactersOnly || deck[lastCardIndex].isCharacter);
+
+            return lastIsUsable ? deck[lastCardIndex] : null;
+        }
+
+        int index = candidateIndices[UnityEngine.Random.Range(0, candidateIndices.Count)];
+        lastCardIndex = index;
+        return deck[index];
     }
 
     #endregion
