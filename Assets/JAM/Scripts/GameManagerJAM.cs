@@ -59,6 +59,12 @@ public class GameManagerJAM : MonoBehaviour
     [SerializeField]
     private string winBySurvivalMessage = "¡Sobreviviste a todas las citas! El altar queda satisfecho.";
 
+    [Header("Audio")]
+    // The ring warns the player when a stat is close to ending the run.
+    // It sounds below the low mark or above the high one.
+    [SerializeField] private int lowStatWarning = 3;
+    [SerializeField] private int highStatWarning = 18;
+
     // Raised every time the stats change, so the UI can refresh itself.
     public event Action OnStatsChanged;
     // Raised when any stat reaches 0 or 100.
@@ -193,6 +199,8 @@ public class GameManagerJAM : MonoBehaviour
     {
         if (gameOver || currentCardData == null) return;
 
+        PlaySound(accepted ? AudioManager.Gamesound.choose : AudioManager.Gamesound.discard);
+
         SOCards playedCard = currentCardData;
         int failedStat = ApplyStats(accepted ? playedCard.accepted : playedCard.rejected);
         cardsPlayed++;
@@ -217,7 +225,28 @@ public class GameManagerJAM : MonoBehaviour
             return;
         }
 
+        // Only warns while the run goes on: an ended run already has its own sound.
+        PlayStatWarning();
         DrawNextCard();
+    }
+
+    // Rings when any stat is close to one of the limits.
+    private void PlayStatWarning()
+    {
+        for (int i = 0; i < StatCount; i++)
+        {
+            if (stats[i] >= lowStatWarning && stats[i] <= highStatWarning) continue;
+
+            PlaySound(AudioManager.Gamesound.ring);
+            return;
+        }
+    }
+
+    // Quiet when there is no AudioManager in the scene.
+    private static void PlaySound(AudioManager.Gamesound sound)
+    {
+        if (AudioManager.instance == null) return;
+        AudioManager.instance.PlayOnShotByDictionary(sound);
     }
 
     // Returns how many dates the player has had with that character.
@@ -252,6 +281,8 @@ public class GameManagerJAM : MonoBehaviour
         gameOver = true;
 
         if (currentCard != null) currentCard.SetButtonsInteractable(false);
+
+        PlaySound(won ? AudioManager.Gamesound.win : AudioManager.Gamesound.failure);
 
         if (won)
         {
