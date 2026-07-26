@@ -13,6 +13,8 @@ public class GameManagerJAM : MonoBehaviour
     public static GameManagerJAM Instance { get; private set; }
 
     [Header("Card Spawning")]
+    // Leave off while the GameFlowHandler drives the intro, on to skip straight to the game.
+    [SerializeField] private bool startOnSceneLoad = false;
     [SerializeField] private CardDate cardPrefab;
     [SerializeField] private Transform cardParent;
 
@@ -39,7 +41,7 @@ public class GameManagerJAM : MonoBehaviour
     [Header("End Game Text")]
     // Names shown in the lose text, in stat1..stat4 order.
     [SerializeField]
-    private string[] statNames = { "Stat 1", "Stat 2", "Stat 3", "Stat 4" };
+    private string[] statNames = { "Créditos", "Tiempo", "Puntaje Social", "Estabilidad" };
     // {0} is replaced with the name of the stat that ended the run.
     [SerializeField]
     private string loseByMinMessage = "{0} llegó a cero. ¡El altar te ha abandonado!";
@@ -94,6 +96,24 @@ public class GameManagerJAM : MonoBehaviour
 
     void Start()
     {
+        // Off by default: the GameFlowHandler starts the run once the intro is over.
+        if (startOnSceneLoad) StartGame();
+    }
+
+    // Begins a run from scratch. Safe to call again to restart.
+    public void StartGame()
+    {
+        gameOver = false;
+        cardsPlayed = 0;
+        lastCardIndex = -1;
+        dateCounts.Clear();
+
+        if (losePanel != null) losePanel.SetActive(false);
+        if (victoryPanel != null) victoryPanel.SetActive(false);
+
+        ResetStats();
+
+        if (currentCard != null) currentCard.SetButtonsInteractable(true);
         DrawNextCard();
     }
 

@@ -29,10 +29,10 @@ public class SOCards : ScriptableObject
 [System.Serializable]
 public class CardChoiceStats
 {
-    public int stat1;
-    public int stat2;
-    public int stat3;
-    public int stat4;
+    [Tooltip("Créditos")] public int stat1;
+    [Tooltip("Tiempo")] public int stat2;
+    [Tooltip("Puntaje Social")] public int stat3;
+    [Tooltip("Estabilidad")] public int stat4;
 
     public int[] ToArray()
     {

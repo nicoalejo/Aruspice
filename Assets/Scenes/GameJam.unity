@@ -174,10 +174,10 @@ MonoBehaviour:
   gameOverText: {fileID: 538904482}
   victoryText: {fileID: 1342429772}
   statNames:
-  - Stat 1
-  - Stat 2
-  - Stat 3
-  - Stat 4
+  - "Cr\xE9ditos"
+  - Tiempo
+  - Puntaje Social
+  - Estabilidad
   loseByMinMessage: "{0} lleg\xF3 a cero. \xA1El altar te ha abandonado!"
   loseByMaxMessage: "{0} se desbord\xF3. \xA1El altar te ha consumido!"
   winByDatesMessage: "\xA1{0} es tu media naranja! El altar bendice su uni\xF3n."
