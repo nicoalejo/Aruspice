@@ -38,6 +38,13 @@ public class GameFlowHandler : MonoBehaviour
 
     void Start()
     {
+        // Started here and not in Awake: the AudioManager builds its sources in
+        // its own Awake, and the order between the two is not guaranteed.
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.StartOnMainPlay(AudioManager.Gamesound.introTheme);
+        }
+
         // Both steps are advanced by clicking, and the clicks come from here.
         if (FindObjectOfType<ControlsHandler>() == null)
         {
@@ -93,6 +100,14 @@ public class GameFlowHandler : MonoBehaviour
     private void BeginGame()
     {
         phase = Phase.Game;
+
+        // The intro song gives way to the one that plays for the whole run, with
+        // the ambience looping underneath it.
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.StartOnMainPlay(AudioManager.Gamesound.gameTheme);
+            AudioManager.instance.StartAmbience();
+        }
 
         if (showTextPanel != null) showTextPanel.SetActive(false);
         // Activated before the manager starts, so the stat bars can measure themselves.

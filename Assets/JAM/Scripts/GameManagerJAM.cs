@@ -419,6 +419,10 @@ public class GameManagerJAM : MonoBehaviour
         }
 
         currentCardData = next;
+
+        // Events are not people, so they announce themselves with their own sting.
+        if (!next.isCharacter) PlaySound(AudioManager.Gamesound.eventCard);
+
         SpawnCardIfNeeded();
         if (currentCard != null) currentCard.SetCard(currentCardData);
     }

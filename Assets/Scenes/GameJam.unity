@@ -1209,6 +1209,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614456709}
   m_CullTransparentMesh: 1
+--- !u!1 &770001001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 770001002}
+  - component: {fileID: 770001003}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &770001002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770001001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &770001003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770001001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba1af64014534a74da3426d257695799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ring: {fileID: 8300000, guid: 80ff8de0b11344641aa1bb9cf3a4af46, type: 3}
+  choose: {fileID: 8300000, guid: 6e699f9fae4f9474796579a0fc49f172, type: 3}
+  discard: {fileID: 8300000, guid: 43664d2b54c4ca541bb11a8c48221a19, type: 3}
+  win: {fileID: 8300000, guid: 6ad401193578f7d408789a6f5ed73eef, type: 3}
+  failure: {fileID: 8300000, guid: 83afb6e5375fe2e4bad0e322338e05db, type: 3}
+  eventCard: {fileID: 8300000, guid: a8f3b4a6520b7674a800e43c421a5542, type: 3}
+  introTheme: {fileID: 8300000, guid: 69c8d9d0102a5674d8d2ea326795a9d9, type: 3}
+  gameTheme: {fileID: 8300000, guid: 177a832253b544141b8d47f63b2ddbff, type: 3}
+  ambience: {fileID: 8300000, guid: 5b5f2e940a68a20488dac715afc18b31, type: 3}
+  startingVolume: 1
+  ambienceVolume: 0.3
 --- !u!1 &948931465
 GameObject:
   m_ObjectHideFlags: 0
@@ -1612,7 +1667,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3348468486992978794, guid: 0456120febb56844cbf8ec3584d38b03, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3351,6 +3406,7 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 770001002}
   - {fileID: 993772494}
   - {fileID: 83926737}
   - {fileID: 948931468}

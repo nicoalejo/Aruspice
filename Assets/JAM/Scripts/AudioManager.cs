@@ -11,6 +11,12 @@ public class AudioManager : MonoBehaviour
         discard,
         win,
         failure,
+        eventCard,
+
+        //Music and ambience in JAM/Sounds
+        introTheme,
+        gameTheme,
+        ambience,
 
         //Legacy sounds of the old project. Kept only so the older scripts still
         //compile, they have no clip and playing them does nothing.
@@ -44,10 +50,25 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip win;
     //sfx_failure
     [SerializeField] private AudioClip failure;
+    //sfx_evento, for the cards that are not people
+    [SerializeField] private AudioClip eventCard;
+
+    [Header("Music (JAM/Sounds)")]
+    //Intro_final, plays over the start panel and the intro text
+    [SerializeField] private AudioClip introTheme;
+    //Cancion_final, takes over once the run begins
+    [SerializeField] private AudioClip gameTheme;
+
+    [Header("Ambience (JAM/Sounds)")]
+    //sfx_ambiente, looped under the music once the run begins
+    [SerializeField] private AudioClip ambience;
 
     [Header("Mixing")]
     [Range(0f, 1f)]
     [SerializeField] private float startingVolume = 1.0f;
+    //How loud the ambience sits under the music and the sfx
+    [Range(0f, 1f)]
+    [SerializeField] private float ambienceVolume = 0.3f;
 
     private float masterVolume = 1.0f;
 
@@ -57,9 +78,11 @@ public class AudioManager : MonoBehaviour
         set => SetVolume(value);
     }
 
-    //Split in two so a one shot never cuts the music that is playing
+    //Split in three so a one shot never cuts the music that is playing and the
+    //ambience can keep its own, lower volume
     private AudioSource musicSource;
     private AudioSource sfxSource;
+    private AudioSource ambienceSource;
     private Dictionary<Gamesound, AudioClip> audioDictionary;
 
     //Create singleton for Audio Manager
@@ -96,6 +119,10 @@ public class AudioManager : MonoBehaviour
         sfxSource = gameObject.AddComponent<AudioSource>();
         sfxSource.playOnAwake = false;
         sfxSource.loop = false;
+
+        ambienceSource = gameObject.AddComponent<AudioSource>();
+        ambienceSource.playOnAwake = false;
+        ambienceSource.loop = true;
     }
 
     //Dictionary Creation
@@ -108,6 +135,10 @@ public class AudioManager : MonoBehaviour
         Register(Gamesound.discard, discard);
         Register(Gamesound.win, win);
         Register(Gamesound.failure, failure);
+        Register(Gamesound.eventCard, eventCard);
+        Register(Gamesound.introTheme, introTheme);
+        Register(Gamesound.gameTheme, gameTheme);
+        Register(Gamesound.ambience, ambience);
     }
 
     //Empty slots are skipped, so a missing clip is silence and not an error
@@ -117,13 +148,31 @@ public class AudioManager : MonoBehaviour
         audioDictionary[gamesound] = clip;
     }
 
-    //Continuous reproduction of a sound
+    //Continuous reproduction of a sound. Asking again for the track that is
+    //already playing does nothing, so the music is never restarted from the top.
     public void StartOnMainPlay(Gamesound gamesound)
     {
         if (!audioDictionary.TryGetValue(gamesound, out AudioClip audioClip)) return;
+        if (musicSource.clip == audioClip && musicSource.isPlaying) return;
 
         musicSource.clip = audioClip;
+        musicSource.loop = true;
         musicSource.Play();
+    }
+
+    //Loops the ambience under whatever the music is doing. Quiet and harmless
+    //when no ambience clip was assigned.
+    public void StartAmbience()
+    {
+        if (ambience == null || ambienceSource.isPlaying) return;
+
+        ambienceSource.clip = ambience;
+        ambienceSource.Play();
+    }
+
+    public void StopAmbience()
+    {
+        ambienceSource.Stop();
     }
 
     // Play one shot from dictionary
@@ -146,11 +195,14 @@ public class AudioManager : MonoBehaviour
         masterVolume = Mathf.Clamp01(newVolume);
         musicSource.volume = masterVolume;
         sfxSource.volume = masterVolume;
+        //Kept under the music, so the ambience never fights with the song
+        ambienceSource.volume = masterVolume * ambienceVolume;
     }
 
     public void StopAll()
     {
         musicSource.Stop();
         sfxSource.Stop();
+        ambienceSource.Stop();
     }
 }
