@@ -7,8 +7,8 @@ public class GameManagerJAM : MonoBehaviour
 {
     public const int StatCount = 4;
     public const int MinStat = 0;
-    public const int MaxStat = 100;
-    public const int StartingStat = 50;
+    public const int MaxStat = 20;
+    public const int StartingStat = 10;
 
     public static GameManagerJAM Instance { get; private set; }
 

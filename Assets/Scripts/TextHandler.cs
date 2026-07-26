@@ -46,12 +46,16 @@ public class TextHandler : MonoBehaviour
     //Recieves a textUI and a string and shows the text smoothly in the textUI
     private IEnumerator TypeDialog(string line)
     {
+        //Starts incomplete so the first click skips the typing instead of advancing
+        isTextComplete = false;
         textUI.text = "";
         foreach (var letter in line.ToCharArray())
         {
             textUI.text += letter;
             yield return new WaitForSeconds(1f / letterPerSecond);
         }
+        //Finished on its own, so a single click is enough to continue
+        isTextComplete = true;
     }
 
     public IEnumerator ShowImages()
