@@ -23,15 +23,15 @@ MonoBehaviour:
     de sus empleados\r\n- Si bien a veces se cree el hombre m\xE1s hermoso de Neo
     Requiem, otras veces se cree el hombre m\xE1s hermoso del mundo."
   accepted:
-    stat1: 5
-    stat2: 0
+    stat1: 4
+    stat2: 1
     stat3: 0
-    stat4: -5
+    stat4: -4
   rejected:
-    stat1: -5
-    stat2: 0
+    stat1: -4
+    stat2: -1
     stat3: 0
-    stat4: 5
+    stat4: 4
   endingText: "\"La limosina de Ray flotaba sobre la autopista, no tocaba el suelo
     al igual que \xE9l. Se sentaron en esquinas opuestas, \xE9l hablaba en su celular
     interminablemente mientras t\xFA te aburr\xEDas m\xE1s all\xE1 de lo que pensabas

@@ -22,15 +22,15 @@ MonoBehaviour:
     y la pol\xEDtica p\xFAblica de hace 3 d\xE9cadas\r\n- Al\xE9rgica a los gatos
     robots (no preguntes)."
   accepted:
-    stat1: -2
-    stat2: -3
-    stat3: 0
-    stat4: 5
-  rejected:
-    stat1: 2
+    stat1: -3
     stat2: 3
-    stat3: 0
-    stat4: -5
+    stat3: 1
+    stat4: -2
+  rejected:
+    stat1: 3
+    stat2: -3
+    stat3: -1
+    stat4: 2
   endingText: "\"El laboratorio de Zafir, si podr\xEDa llamarse as\xED, era una colecci\xF3n
     de diferentes aparatos: c\xE1maras de enriquecimiento,  t\xFAneles P2P, ensambladoras
     moleculares paneles de formaci\xF3n y aniquilaci\xF3n que colocan y retiran materiales

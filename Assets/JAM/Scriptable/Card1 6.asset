@@ -23,12 +23,12 @@ MonoBehaviour:
     Es tu propio punto de anclaje de wifi, radiador, cargador y ojiva termonuclear,
     todo en uno. "
   accepted:
-    stat1: -5
+    stat1: -4
     stat2: 0
     stat3: 2
     stat4: 3
   rejected:
-    stat1: 5
+    stat1: 4
     stat2: 0
     stat3: -2
     stat4: -3

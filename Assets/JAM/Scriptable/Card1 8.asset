@@ -21,13 +21,13 @@ MonoBehaviour:
     de 32gb de almacenamiento en la nube. Gracias por tu compromiso"'
   accepted:
     stat1: 3
-    stat2: -2
+    stat2: -4
     stat3: 2
-    stat4: -3
+    stat4: 1
   rejected:
     stat1: -3
-    stat2: 2
+    stat2: 4
     stat3: -2
-    stat4: 3
+    stat4: -1
   endingText: 
   endingImage: {fileID: 0}

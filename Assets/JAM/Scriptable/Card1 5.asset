@@ -21,15 +21,15 @@ MonoBehaviour:
     Votado en el colegio como \"m\xE1s probable para quedarse desempleado\"\r\n-
     \xC1vido lector del \"Ulises\" de James Joyce"
   accepted:
-    stat1: 2
-    stat2: 3
-    stat3: 0
-    stat4: -5
+    stat1: 3
+    stat2: 1
+    stat3: -4
+    stat4: -1
   rejected:
-    stat1: -2
-    stat2: -3
-    stat3: 0
-    stat4: 5
+    stat1: -3
+    stat2: -1
+    stat3: 4
+    stat4: 1
   endingText: "\"Es una noche lenta frente el bar \"Que ser\xE1, ser\xE1\". Steeljaw
     esta parado frente a las puertas met\xE1licas dobles, pero a diferencia de todas
     las otras noches que los has venido a ver no hay nadie en la fila para entrar.

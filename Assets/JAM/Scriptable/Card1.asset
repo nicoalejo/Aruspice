@@ -22,15 +22,15 @@ MonoBehaviour:
     horas\r\n- Con \xE9l nunca te faltar\xE1 nada (excepto contacto f\xEDsico)\r\n-
     Le gustan los largos paseos por la playa (de Minecraft)"
   accepted:
-    stat1: 4
-    stat2: 1
-    stat3: -5
-    stat4: 0
+    stat1: 2
+    stat2: 2
+    stat3: -3
+    stat4: 2
   rejected:
-    stat1: -4
-    stat2: -1
-    stat3: 5
-    stat4: 0
+    stat1: -2
+    stat2: -2
+    stat3: 3
+    stat4: -2
   endingText: "\"En su \xFAltima cita hab\xEDan pasado un largo rato paseando por
     las coloridas planicies del aclamado MMORPG Shadow Collapse. Era hermoso, pod\xEDas
     sentir tu coraz\xF3n latiendo fuerte a pesar de la distancia. Codex estaba en

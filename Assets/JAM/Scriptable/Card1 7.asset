@@ -20,13 +20,13 @@ MonoBehaviour:
     en Neo Requiem. Pero si te tomas el d\xEDa tus jefes no estar\xE1n contentos.\""
   accepted:
     stat1: -2
-    stat2: 3
-    stat3: -3
-    stat4: 2
+    stat2: 4
+    stat3: -1
+    stat4: -2
   rejected:
     stat1: 2
-    stat2: -3
-    stat3: 3
-    stat4: -2
+    stat2: -4
+    stat3: 1
+    stat4: 2
   endingText: 
   endingImage: {fileID: 0}

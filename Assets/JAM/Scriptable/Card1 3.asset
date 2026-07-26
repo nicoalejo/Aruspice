@@ -21,15 +21,15 @@ MonoBehaviour:
     m\xE1s r\xE1pido de Neo Requiem.\r\n- Modific\xF3 su propio auto para quitarle
     todas las seguridades.\r\n- Puede cocinar \"arroz de un minuto\" en 47 segundos."
   accepted:
-    stat1: 0
-    stat2: -5
-    stat3: 5
-    stat4: 0
+    stat1: -2
+    stat2: -3
+    stat3: 4
+    stat4: 1
   rejected:
-    stat1: 0
-    stat2: 5
-    stat3: -5
-    stat4: 0
+    stat1: 2
+    stat2: 3
+    stat3: -4
+    stat4: -1
   endingText: "\"\xBFQu\xE9 significa realmente ir r\xE1pido? Ace es incapaz de vivir
     una vida normal, que no sea una constante carrera para todo. No sabes si naci\xF3
     as\xED, si es un fallo de su implante de cortex, un trauma de la ni\xF1ez o simplemente

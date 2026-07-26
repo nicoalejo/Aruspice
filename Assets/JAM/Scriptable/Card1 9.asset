@@ -20,14 +20,14 @@ MonoBehaviour:
     crujen y tus manos han perdido un 7% de precisi\xF3n. Pero un nuevo ojo te va
     a costar un ojo de la cara, figurativamente.\""
   accepted:
-    stat1: -5
-    stat2: 0
-    stat3: 0
-    stat4: 5
+    stat1: 1
+    stat2: -2
+    stat3: -3
+    stat4: 0
   rejected:
-    stat1: 5
-    stat2: 0
-    stat3: 0
-    stat4: -5
+    stat1: -1
+    stat2: 2
+    stat3: 3
+    stat4: 0
   endingText: 
   endingImage: {fileID: 0}

@@ -22,15 +22,15 @@ MonoBehaviour:
     de que puede boxear con un oso grizzly y ganar\r\n- Sus hobbies son el kick boxing,
     el levantamiento de pesas y coleccionar peluches"
   accepted:
-    stat1: -3
+    stat1: -2
     stat2: -2
-    stat3: 1
-    stat4: 4
+    stat3: 4
+    stat4: 2
   rejected:
-    stat1: 3
+    stat1: 2
     stat2: 2
-    stat3: -1
-    stat4: -4
+    stat3: -4
+    stat4: -2
   endingText: "\"El dep\xF3sito de chatarra estaba a reventar, cientos de personas
     se hab\xEDan reunido a presenciar el  campeonato anual de levantamiento de chatarra
     n\xFAmero 157.  Rebexa entra a la arena improvisada, hecha de puertas de automoviles
