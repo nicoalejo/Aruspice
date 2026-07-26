@@ -21,6 +21,8 @@ MonoBehaviour:
     sobre m\xED:\r\n\r- Ha salido de su cuarto 0 veces en las \xFAltimas 99999999
     horas\r\n- Con \xE9l nunca te faltar\xE1 nada (excepto contacto f\xEDsico)\r\n-
     Le gustan los largos paseos por la playa (de Minecraft)"
+  image: {fileID: 21300000, guid: dd1817654a7504457b9063570fc69ccb, type: 3}
+  flavorText: 
   accepted:
     stat1: 4
     stat2: 1

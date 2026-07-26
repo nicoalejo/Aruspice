@@ -21,6 +21,8 @@ MonoBehaviour:
     Duragel TM, fijador para nanocabello\r\n- Obsesionada con los trenes, los comics
     y la pol\xEDtica p\xFAblica de hace 3 d\xE9cadas\r\n- Al\xE9rgica a los gatos
     robots (no preguntes)."
+  image: {fileID: 21300000, guid: fa228e3f54b344a7680e1e43c1363603, type: 3}
+  flavorText: 
   accepted:
     stat1: -2
     stat2: -3

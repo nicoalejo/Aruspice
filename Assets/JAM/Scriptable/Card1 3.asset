@@ -20,6 +20,8 @@ MonoBehaviour:
     rugir, de 0 a 100, nada de tibios.\"\r\n\r\nM\xE1s sobre m\xED:\r\n\r- El hombre
     m\xE1s r\xE1pido de Neo Requiem.\r\n- Modific\xF3 su propio auto para quitarle
     todas las seguridades.\r\n- Puede cocinar \"arroz de un minuto\" en 47 segundos."
+  image: {fileID: 21300000, guid: 1ed8c172be56b478980c55a2f018c8ec, type: 3}
+  flavorText: 
   accepted:
     stat1: 0
     stat2: -5

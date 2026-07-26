@@ -22,6 +22,8 @@ MonoBehaviour:
     Tiene una startup que permite a los empleadores modificar los chips de personalidad
     de sus empleados\r\n- Si bien a veces se cree el hombre m\xE1s hermoso de Neo
     Requiem, otras veces se cree el hombre m\xE1s hermoso del mundo."
+  image: {fileID: 21300000, guid: fdb942ed728654860982b4b53dd70185, type: 3}
+  flavorText: 
   accepted:
     stat1: 5
     stat2: 0
