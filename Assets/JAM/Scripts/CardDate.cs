@@ -17,8 +17,12 @@ public class CardDate : MonoBehaviour
     [SerializeField] private Button rejectButton;
 
     [Header("Stat Icons (same order as stat1..stat4)")]
-    [SerializeField] private Image[] acceptedIcons = new Image[4];
-    [SerializeField] private Image[] rejectedIcons = new Image[4];
+    [SerializeField] private GameObject[] acceptedIcons = new GameObject[4];
+    [SerializeField] private GameObject[] rejectedIcons = new GameObject[4];
+
+    [Header("Arrow Prefabs")]
+    [SerializeField] private GameObject upArrowPrefab;
+    [SerializeField] private GameObject downArrowPrefab;
 
     [Header("Tint Colors")]
     [SerializeField] private Color positiveColor = new Color(0.24f, 0.85f, 0.31f);
@@ -85,19 +89,30 @@ public class CardDate : MonoBehaviour
 
         TintIcons(acceptedIcons, acceptedBaseColors, card.accepted);
         TintIcons(rejectedIcons, rejectedBaseColors, card.rejected);
+
+        AddArrows(acceptedIcons, card.accepted);
+        AddArrows(rejectedIcons, card.rejected);
     }
 
-    private Color[] CacheColors(Image[] icons)
+    private Color[] CacheColors(GameObject[] icons)
     {
         var colors = new Color[icons.Length];
         for (int i = 0; i < icons.Length; i++)
         {
-            colors[i] = icons[i] != null ? icons[i].color : Color.white;
+            if (icons[i] != null)
+            {
+                var image = icons[i].GetComponent<Image>();
+                colors[i] = image != null ? image.color : Color.white;
+            }
+            else
+            {
+                colors[i] = Color.white;
+            }
         }
         return colors;
     }
 
-    private void TintIcons(Image[] icons, Color[] baseColors, CardChoiceStats stats)
+    private void TintIcons(GameObject[] icons, Color[] baseColors, CardChoiceStats stats)
     {
         int[] values = stats.ToArray();
 
@@ -105,9 +120,61 @@ public class CardDate : MonoBehaviour
         {
             if (icons[i] == null) continue;
 
-            if (values[i] > 0) icons[i].color = positiveColor;
-            else if (values[i] < 0) icons[i].color = negativeColor;
-            else icons[i].color = baseColors[i];
+            Color targetColor;
+            if (values[i] > 0) targetColor = positiveColor;
+            else if (values[i] < 0) targetColor = negativeColor;
+            else targetColor = baseColors[i];
+
+            // Tint all Image components except arrow instances
+            var images = icons[i].GetComponentsInChildren<Image>();
+            foreach (var image in images)
+            {
+                // Skip arrow instances
+                if (image.transform.name == "Arrow_Instance") continue;
+                
+                image.color = targetColor;
+            }
+        }
+    }
+
+    private void AddArrows(GameObject[] icons, CardChoiceStats stats)
+    {
+        int[] values = stats.ToArray();
+
+        for (int i = 0; i < icons.Length && i < values.Length; i++)
+        {
+            if (icons[i] == null) continue;
+
+            ClearArrows(icons[i]);
+
+            if (values[i] > 0)
+            {
+                if (upArrowPrefab != null)
+                {
+                    GameObject arrow = Instantiate(upArrowPrefab, icons[i].transform);
+                    arrow.name = "Arrow_Instance";
+                }
+            }
+            else if (values[i] < 0)
+            {
+                if (downArrowPrefab != null)
+                {
+                    GameObject arrow = Instantiate(downArrowPrefab, icons[i].transform);
+                    arrow.name = "Arrow_Instance";
+                }
+            }
+        }
+    }
+
+    private void ClearArrows(GameObject iconParent)
+    {
+        for (int i = iconParent.transform.childCount - 1; i >= 0; i--)
+        {
+            Transform child = iconParent.transform.GetChild(i);
+            if (child.name == "Arrow_Instance")
+            {
+                Destroy(child.gameObject);
+            }
         }
     }
 }

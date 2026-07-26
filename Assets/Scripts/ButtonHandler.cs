@@ -40,11 +40,20 @@ public class ButtonHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [Tooltip("Tint color applied to character image when hovered")]
     public Color hoveredTintColor = Color.white;
 
+    [Header("Top Movement Settings")]
+    [Tooltip("GameObject that moves up when hovered")]
+    public GameObject topMoveObject;
+    
+    [Tooltip("Distance the object moves upward on hover")]
+    public float topMoveDistance = 30f;
+
     private bool isHovered = false;
     private Vector2 innerObjectOriginalPosition;
     private Quaternion innerObjectOriginalRotation;
     private Color originalCharacterColor;
     private RectTransform innerRectTransform;
+    private Vector2 topMoveOriginalPosition;
+    private RectTransform topMoveRectTransform;
 
     void Start()
     {
@@ -67,12 +76,23 @@ public class ButtonHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             tempColor.a = normalOpacity;
             characterImage.color = tempColor;
         }
+
+        if (topMoveObject != null)
+        {
+            topMoveRectTransform = topMoveObject.GetComponent<RectTransform>();
+            
+            if (topMoveRectTransform != null)
+            {
+                topMoveOriginalPosition = topMoveRectTransform.anchoredPosition;
+            }
+        }
     }
 
     void Update()
     {
         AnimateInnerObject();
         AnimateCharacterOpacity();
+        AnimateTopMoveObject();
     }
 
     void AnimateInnerObject()
@@ -108,6 +128,20 @@ public class ButtonHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         currentColor.a = Mathf.Lerp(currentColor.a, targetAlpha, Time.deltaTime * animationSpeed);
         
         characterImage.color = currentColor;
+    }
+
+    void AnimateTopMoveObject()
+    {
+        if (topMoveObject == null || topMoveRectTransform == null) return;
+
+        Vector2 targetPosition = topMoveOriginalPosition;
+
+        if (isHovered)
+        {
+            targetPosition += new Vector2(0, topMoveDistance);
+        }
+
+        topMoveRectTransform.anchoredPosition = Vector2.Lerp(topMoveRectTransform.anchoredPosition, targetPosition, Time.deltaTime * animationSpeed);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
