@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fb8ce719898b8345b5e8612b18754a7, type: 3}
-  m_Name: TestCard 1
+  m_Name: Card1 1
   m_EditorClassIdentifier: 
   isCharacter: 1
-  characterName: Claud.IA
-  image: {fileID: 21300016, guid: 28a14b6acb252df4787e935cd4c43a6e, type: 3}
-  flavorText: Card 2
+  characterName: Rebexa
+  image: {fileID: 21300038, guid: 28a14b6acb252df4787e935cd4c43a6e, type: 3}
+  flavorText: 
   accepted:
-    stat1: -10
-    stat2: -10
-    stat3: -10
-    stat4: -10
+    stat1: -3
+    stat2: -2
+    stat3: 1
+    stat4: 4
   rejected:
-    stat1: 10
-    stat2: 10
-    stat3: 10
-    stat4: 10
+    stat1: 3
+    stat2: 2
+    stat3: -1
+    stat4: -4

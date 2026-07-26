@@ -9,6 +9,7 @@ public class CardDate : MonoBehaviour
 
     [Header("Card Content")]
     [SerializeField] private Image portrait;
+    [SerializeField] private TMP_Text characterName;
     [SerializeField] private TMP_Text flavorText;
 
     [Header("Choice Buttons")]
@@ -79,6 +80,7 @@ public class CardDate : MonoBehaviour
         CacheBaseColors();
 
         if (portrait != null) portrait.sprite = card.image;
+        if (characterName != null) characterName.text = card.DisplayName;
         if (flavorText != null) flavorText.text = card.flavorText;
 
         TintIcons(acceptedIcons, acceptedBaseColors, card.accepted);
