@@ -2184,6 +2184,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 83afb6e5375fe2e4bad0e322338e05db, type: 3}
     - target: {fileID: 3348468486992978793, guid: 0456120febb56844cbf8ec3584d38b03, type: 3}
+      propertyPath: ambience
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b5f2e940a68a20488dac715afc18b31, type: 3}
+    - target: {fileID: 3348468486992978793, guid: 0456120febb56844cbf8ec3584d38b03, type: 3}
+      propertyPath: eventCard
+      value: 
+      objectReference: {fileID: 8300000, guid: a8f3b4a6520b7674a800e43c421a5542, type: 3}
+    - target: {fileID: 3348468486992978793, guid: 0456120febb56844cbf8ec3584d38b03, type: 3}
+      propertyPath: gameTheme
+      value: 
+      objectReference: {fileID: 8300000, guid: 177a832253b544141b8d47f63b2ddbff, type: 3}
+    - target: {fileID: 3348468486992978793, guid: 0456120febb56844cbf8ec3584d38b03, type: 3}
+      propertyPath: introTheme
+      value: 
+      objectReference: {fileID: 8300000, guid: 69c8d9d0102a5674d8d2ea326795a9d9, type: 3}
+    - target: {fileID: 3348468486992978793, guid: 0456120febb56844cbf8ec3584d38b03, type: 3}
+      propertyPath: ambienceVolume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3348468486992978793, guid: 0456120febb56844cbf8ec3584d38b03, type: 3}
       propertyPath: startingVolume
       value: 0.5
       objectReference: {fileID: 0}
@@ -3950,8 +3970,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0b65b816dce6c734a904139f8b41e004, type: 2}
   - {fileID: 11400000, guid: 0ce4f68eead77a346993daa7fe2caea9, type: 2}
   statsBar: {fileID: 700126048}
-  cardsToWin: 15
-  datesToWin: 2
+  cardsToWin: 10
+  datesToWin: 3
   onlyAcceptedCardsAreDates: 1
   losePanel: {fileID: 1845864764}
   victoryPanel: {fileID: 1176884447}
@@ -4021,7 +4041,13 @@ MonoBehaviour:
   loseByMinMessage: "{0} lleg\xF3 a cero. \xA1El altar te ha abandonado!"
   loseByMaxMessage: "{0} se desbord\xF3. \xA1El altar te ha consumido!"
   winByDatesMessage: "\xA1{0} es tu media naranja! El altar bendice su uni\xF3n."
-  winBySurvivalMessage: "\xA1Sobreviviste a todas las citas! El altar queda satisfecho."
+  winBySurvivalMessage: "\"No importa lo que hagas el amor huye de ti. Pero no te
+    preocupes, tus jefes se han dado cuenta de que realmente has hecho todo lo posible
+    y que algunas personas simplemente no sirven para el amor. Decidieron elegir
+    por ti, han arreglado un matrimonio con una persona tan mediocre que literalmente
+    se llama John Smith. Es el candidato perfecto, no tiene gustos, aficiones, ni
+    personalidad, literalmente ser\xEDa como estar casado con una piedra. Pero tiene
+    buen cr\xE9dito social y un trabajo estable. La vida podr\xEDa ser peor.\""
   defaultLoseImage: {fileID: 0}
   winBySurvivalImage: {fileID: 21300000, guid: c585d7244d61a4949a38fb8cb4f97fb8, type: 3}
   lowStatWarning: 3
@@ -4583,7 +4609,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1073266614
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4817,7 +4843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.92156863, g: 0.023529412, b: 0.2784314, a: 1}
+  m_Color: {r: 1, g: 0.7201257, b: 0.8002467, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5984,7 +6010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1882353, g: 0.23529412, b: 0.7137255, a: 1}
+  m_Color: {r: 0.71383643, g: 0.7394629, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
