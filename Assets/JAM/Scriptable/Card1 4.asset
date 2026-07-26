@@ -14,15 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCharacter: 1
   characterName: Zafir
-  image: {fileID: 21300038, guid: 28a14b6acb252df4787e935cd4c43a6e, type: 3}
+  image: {fileID: 21300000, guid: fa228e3f54b344a7680e1e43c1363603, type: 3}
   flavorText: "\"Es mi primera vez usando apps de citas \xBFQu\xE9 se tiene que poner
     aqu\xED? Soy una persona t\xEDmida e introvertida, pero si me das una oportunidad
     har\xE9 mi mejor esfuerzo.\"\r\n\r\nM\xE1s sobre m\xED:\r\n\r- Creadora del legendario
     Duragel TM, fijador para nanocabello\r\n- Obsesionada con los trenes, los comics
     y la pol\xEDtica p\xFAblica de hace 3 d\xE9cadas\r\n- Al\xE9rgica a los gatos
     robots (no preguntes)."
-  image: {fileID: 21300000, guid: fa228e3f54b344a7680e1e43c1363603, type: 3}
-  flavorText: 
   accepted:
     stat1: -2
     stat2: -3

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCharacter: 1
   characterName: Ray
-  image: {fileID: 21300038, guid: 28a14b6acb252df4787e935cd4c43a6e, type: 3}
+  image: {fileID: 21300000, guid: fdb942ed728654860982b4b53dd70185, type: 3}
   flavorText: "\"No acepto solicitudes de cualquiera, si quieres una cita conmigo
     tienes que ser alguien de alto valor. Stakeholders primero, todo el resto despu\xE9s.
     Rentabilidad en las calles, estabilidad en la cama.\"\r\n\nM\xE1s sobre m\xED:\r\n\r-
@@ -22,8 +22,6 @@ MonoBehaviour:
     Tiene una startup que permite a los empleadores modificar los chips de personalidad
     de sus empleados\r\n- Si bien a veces se cree el hombre m\xE1s hermoso de Neo
     Requiem, otras veces se cree el hombre m\xE1s hermoso del mundo."
-  image: {fileID: 21300000, guid: fdb942ed728654860982b4b53dd70185, type: 3}
-  flavorText: 
   accepted:
     stat1: 5
     stat2: 0

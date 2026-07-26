@@ -14,14 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCharacter: 1
   characterName: Steeljaw
-  image: {fileID: 21300038, guid: 28a14b6acb252df4787e935cd4c43a6e, type: 3}
+  image: {fileID: 21300000, guid: 1aa1c17430c8545268da19235b0a7c06, type: 3}
   flavorText: "\"Busco persona de bonitos sentimientos para compartir el rato. Vive
     momento a momento, nunca sabes que va a pasar.\"\r\n\r\nM\xE1s sobre m\xED:\r\n-
     Mide 3 metros de alto y casi lo mismo de ancho. Es la envidia de todas las refrigeradoras.\r\n-
     Votado en el colegio como \"m\xE1s probable para quedarse desempleado\"\r\n-
     \xC1vido lector del \"Ulises\" de James Joyce"
-  image: {fileID: 21300000, guid: 1aa1c17430c8545268da19235b0a7c06, type: 3}
-  flavorText: 
   accepted:
     stat1: 2
     stat2: 3

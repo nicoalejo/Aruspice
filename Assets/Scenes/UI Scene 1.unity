@@ -3221,10 +3221,21 @@ MonoBehaviour:
   - Tiempo
   - Puntaje Social
   - Estabilidad
+  statEndings:
+  - atMin: 
+    atMax: 
+  - atMin: 
+    atMax: 
+  - atMin: 
+    atMax: 
+  - atMin: 
+    atMax: 
   loseByMinMessage: "{0} lleg\xF3 a cero. \xA1El altar te ha abandonado!"
   loseByMaxMessage: "{0} se desbord\xF3. \xA1El altar te ha consumido!"
   winByDatesMessage: "\xA1{0} es tu media naranja! El altar bendice su uni\xF3n."
   winBySurvivalMessage: "\xA1Sobreviviste a todas las citas! El altar queda satisfecho."
+  lowStatWarning: 3
+  highStatWarning: 18
 --- !u!4 &914790837
 Transform:
   m_ObjectHideFlags: 0
