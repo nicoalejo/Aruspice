@@ -13,33 +13,33 @@ MonoBehaviour:
   m_Name: Subtle
   m_EditorClassIdentifier: 
   data:
-    pixelationAmount: 0
+    pixelationAmount: 1
     maxColorChannels:
       red: 0
       green: 0
       blue: 0
       greyScale: 0
-    dithering4: 0
+    dithering4: 0.026
     dithering8: 0
-    vignette: 0.292
-    innerCurve: 20
-    monitorCurve: 0.038
+    vignette: 0.129
+    innerCurve: 4.7
+    monitorCurve: 0.012
     monitorInnerSize:
       width: 0
       height: 0
     monitorOutterSize:
-      width: 0.1
-      height: 0.1
-    zoom: 1.19
+      width: 0.117
+      height: 0.081
+    zoom: 1.17
     monitorRoundness: 0.2
     monitorTexture: {fileID: 0}
-    monitorColor: {r: 0.121796034, g: 0.12775578, b: 0.16037738, a: 1}
-    innerMonitorDarkness: 0.215
-    innerMonitorShine: 0.01
+    monitorColor: {r: 0, g: 0, b: 0, a: 1}
+    innerMonitorDarkness: 0.484
+    innerMonitorShine: 0.29
     colorScans:
-      greenChannelMultiplier: -0.355
-      redBlueChannelMultiplier: -0.334
-      sizeMultiplier: 3.06
+      greenChannelMultiplier: -0.278
+      redBlueChannelMultiplier: -0.218
+      sizeMultiplier: 3.36
     innerMonitorShineRadius: -0.087
     innerMonitorShineCurve: 10
-  validationId: 5ebd2245-8259-4fa8-8937-dddc3392b4b8
+  validationId: a5487153-2d5f-443e-a78b-62b7678ce6c2
