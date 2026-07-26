@@ -44,6 +44,10 @@ public class GameManagerJAM : MonoBehaviour
     // Names shown in the lose text, in stat1..stat4 order.
     [SerializeField]
     private string[] statNames = { "Créditos", "Tiempo", "Puntaje Social", "Estabilidad" };
+    // One bad ending per stat and per direction, in the same order as statNames.
+    [SerializeField]
+    private StatEnding[] statEndings = new StatEnding[StatCount];
+    // Used when the matching bad ending above was left empty.
     // {0} is replaced with the name of the stat that ended the run.
     [SerializeField]
     private string loseByMinMessage = "{0} llegó a cero. ¡El altar te ha abandonado!";
@@ -276,7 +280,29 @@ public class GameManagerJAM : MonoBehaviour
         string statName = failedStat < statNames.Length ? statNames[failedStat] : $"Stat {failedStat + 1}";
         bool hitMax = stats[failedStat] >= MaxStat;
 
-        return string.Format(hitMax ? loseByMaxMessage : loseByMinMessage, statName);
+        string message = GetStatEnding(failedStat, hitMax);
+        if (string.IsNullOrWhiteSpace(message)) message = hitMax ? loseByMaxMessage : loseByMinMessage;
+
+        // The bespoke endings rarely need it, but {0} still works inside them.
+        try
+        {
+            return string.Format(message, statName);
+        }
+        catch (FormatException)
+        {
+            return message;
+        }
+    }
+
+    // The bad ending written for this stat in this direction, if there is one.
+    private string GetStatEnding(int failedStat, bool hitMax)
+    {
+        if (statEndings == null || failedStat >= statEndings.Length) return null;
+
+        StatEnding ending = statEndings[failedStat];
+        if (ending == null) return null;
+
+        return hitMax ? ending.atMax : ending.atMin;
     }
 
     #endregion
@@ -358,4 +384,12 @@ public class GameManagerJAM : MonoBehaviour
     }
 
     #endregion
+}
+
+// The two bad endings of a single stat: one for bottoming out, one for overflowing.
+[Serializable]
+public class StatEnding
+{
+    [TextArea] public string atMin;
+    [TextArea] public string atMax;
 }

@@ -179,8 +179,54 @@ MonoBehaviour:
   - Tiempo
   - Puntaje Social
   - Estabilidad
-  loseByMinMessage: "{0} lleg\xF3 a cero. \xA1El altar te ha abandonado!"
-  loseByMaxMessage: "{0} se desbord\xF3. \xA1El altar te ha consumido!"
+  statEndings:
+  - atMin: "\"Qui\xE9n dir\xEDa que buscar pareja ser\xEDa tan costoso, hab\xEDas
+      empezado esto para conseguir un ascenso y mejorar tus ingresos, ahora tienes
+      una deuda tan alta que ya ni puedes pagar tu apartamento. Los recolectores
+      te llaman incesantemente, tu jefes est\xE1n considerando despedirte y tus anteriores
+      conquistas ahora te est\xE1n ghosteando. El amor te ha arruinado la vida.\""
+    atMax: "\"\xBFCitas? \xBFAmor? Quien necesita esas tonter\xEDas, tus jefes se
+      equivocan, todos se equivocan, para lo \xFAnico que est\xE1s aqu\xED es para
+      maximizar tu valor. Y la \xFAnica manera de hacer eso es dejando ir todo, tus
+      amigos, tu familia, tu tiempo, tu libre albedr\xEDo. Te entregas por completo
+      a la empresa y por un momento, por unos gloriosos instantes, generas infinita
+      riqueza.\""
+  - atMin: "\"Tus jefes te hab\xEDan pedido que intentaras encontrar pareja, no que
+      dedicaras tu vida entera a tener decenas de citas todas las semanas. El primer
+      d\xEDa que llegas tarde a la oficina te dan una advertencia, pero el segundo
+      te echan a patadas a la calle. Sin importar cuanto intentes explicar que ellos
+      mismos te hab\xEDa pedido que te dedicaras a esto.\""
+    atMax: "\"Desobedecer a tus jefes tiene graves consecuencias. Te hab\xEDan pedido
+      que hagas algo en espec\xEDfico, encontrar una pareja, y ahora has pasado m\xE1s
+      tiempo en la oficina que antes. Si bien est\xE1n contentos con tu desempe\xF1o
+      laboral, no es lo mismo con tu desobediencia y en unos d\xEDas te encuentras
+      en la calle despu\xE9s de que vaciaron tu oficina sin decirte nada.\""
+  - atMin: "\"Salir tantas veces con los rechazados sociales y los parias han reducido
+      tu Cr\xE9dito Social m\xE1s all\xE1 del m\xEDnimo aceptable. Ahora la gente
+      se tapa la nariz cuando pasas por la calle, las tiendas se niegan a atenderte
+      y en la oficina te han empezado a quitar responsabilidades poco a poco hasta
+      que no te queda m\xE1s opci\xF3n que renunciar. Al menos tus nuevas amistades
+      te han guardado un recoveco en el callej\xF3n donde se reunen.\""
+    atMax: "\"Nunca te hab\xEDas sentido as\xED, no pisas el suelo cuando caminas,
+      tus compa\xF1eros de trabajo jam\xE1s hab\xEDan sido tan condescendientes contigo.
+      Hasta te has ganado el respeto de tus superiores. Dejas tu horrible trabajo
+      por uno mejor, uno en el gobierno, donde extraen tu consciencia y la suben
+      a un sistema de vigilancia que mantendr\xE1 a Neo Requiem dentro de los par\xE1metros
+      estrictamente requeridos. La vida es buena.\""
+  - atMin: "\"Al despertar sientes como todos tus implantes neuronales se encienden
+      a la vez, ERROR, ERROR, ERROR, aparece repetidamente frente a tus ojos. Caminas
+      hasta el ba\xF1o y regresas a ver, algo est\xE1 muy mal, te lavas la cara y
+      al levantar la mirada el mundo te da vueltas. Lo \xFAltimo que ves antes de
+      desmayarte es un pantallazo azul\""
+    atMax: "\"Recibes una notificaci\xF3n en tu implante retinal \"has sido seleccionado
+      para probarla nueva version del sistema operativo personal\" no te extra\xF1a,
+      sientes que \xFAltimamente has estado cuidando mucho de tu salud mental. Evitando
+      el estr\xE9s y viviendo una vida relajada sin nadie que te saque de quicio.
+      Sin pensarlo mucho le das al bot\xF3n de aceptar, y una barra de carga cubre
+      tu visi\xF3n, esperas veinte minutos, esperas dos horas, esperas tres d\xEDas,
+      nunca m\xE1s recuperas control de tu cuerpo.\""
+  loseByMinMessage: "{0} lleg\xF3 a cero."
+  loseByMaxMessage: "{0} se desbord\xF3."
   winByDatesMessage: "\xA1{0} es tu media naranja! El altar bendice su uni\xF3n."
   winBySurvivalMessage: "No importa lo que hagas el amor huye de ti. Pero no te preocupes,
     tus jefes se han dado cuenta de que realmente has hecho todo lo posible y que
@@ -1793,10 +1839,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textUI: {fileID: 1288393708}
-  introText: 'Este es una prueba del tinder date
-
-
-    Click  para continuar....'
+  introText: "En la ultramoderna ciudad de Neo Requiem todo est\xE1 optimizado: tu
+    trabajo, tu horario,  tu alimentaci\xF3n, tus conexiones, incluso tu vida amorosa.
+    Ahora que estas ascendiendo la escalera corporativa tu vida se ha puesto bajo
+    intenso escrutinio, tus superiores exigen que encuentres una pareja adecuada
+    para traer m\xE1s beneficios a tus stakeholders e incrementar tu valor personal.
+    Tienes miedo de que esta situaci\xF3n va a consumirte por completo. Todo \"In
+    the Business of Love.\n\nClick para continuar...."
   letterPerSecond: 20
   imagesToShow:
   - {fileID: 2085939908}
